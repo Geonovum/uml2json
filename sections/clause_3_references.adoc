@@ -1,0 +1,20 @@
+[bibliography]
+== References
+
+/////
+Insert References here. If there are no references, leave this section empty.
+
+References are to follow the Springer LNCS style, with the exception that optional information may be appended to references: DOIs are added after the date and web resource references may include an access date at the end of the reference in parentheses. See examples from Springer and OGC below.
+
+See https://www.metanorma.org/author/ogc/authoring-guide/bibliographic-references/ for details on how to define bibliographic entries in metanorma asciidoc. Using a special syntax, metanorma can automatically produce correct details for standards-based references (e.g., from IETF, OGC, and ISO). Thus, no need to worry about the details for such references in the following list. Just add sufficient details for asciidoc source code readers to know what a given reference is about.
+/////
+
+* [[[ref_json,IETF RFC 8259]]]IETF RFC 8259, The JavaScript Object Notation (JSON) Data Interchange Format
+* [[[ref_geojson,IETF RFC 7946]]]IETF RFC 7946, The GeoJSON Format
+* [[[ref_jsonschema_02,IETF I-D.draft-handrews-json-schema-02]]]Internet Engineering Task Force (IETF). Draft draft-handrews-json-schema-02: **JSON Schema: A Media Type for Describing JSON Documents** [online]. Edited by A. Wright, H. Andrews, B. Hutton, and G. Dennis. 2019 [viewed 2020-04-20]. Available at https://tools.ietf.org/html/draft-handrews-json-schema-02
+* [[[ref_jsonschema_02_validation,IETF I-D.draft-handrews-json-schema-validation-02]]]Internet Engineering Task Force (IETF). Draft draft-handrews-json-schema-validation-02: **JSON Schema Validation: A Vocabulary for Structural Validation of JSON** [online]. Edited by A. Wright, H. Andrews, and B. Hutton. 2019 [viewed 2020-04-20]. Available at https://tools.ietf.org/html/draft-handrews-json-schema-validation-02
+* [[[ref_iso8601_2,ISO 8601-2:2019]]]ISO 8601-2:2019, Date and time — Representations for information interchange — Part 1: Extensions
+* [[[ref_iso19103,ISO 19103:2015]]]ISO 19103:2015, Geographic information – Conceptual schema language
+* [[[ref_iso19109,ISO 19109:2015]]]ISO 19109:2015, Geographic information – Rules for application schema
+* [[[ref_ogcapi_features_part1,OGC 17-069r3]]]OGC 17-069r3, OGC API - Features - Part 1: Core, Version 1.0.0
+* [[[OGC06121r9,OGC 06-121r9]]], OGC Web Service Common Implementation Specification

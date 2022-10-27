@@ -1,0 +1,94 @@
+== Terms, definitions and abbreviated terms
+
+=== Terms and definitions
+
+==== linked data
+
+Linked data is the data format that supports the Semantic Web. The basic rules for linked data are defined as:
+
+ * Use Uniform Resource Identifiers (URIs) to identify things;
+ * Use HTTP URIs so that these things can be referred to and looked up ("dereferenced") by people and user agents;
+ * Provide useful information about the thing when its URI is dereferenced, using standard formats such as RDF/XML; and
+ * Include links to other, related URIs in the exposed data to improve discovery of other related information on the Web.
+
+Source: https://www.w3.org/2001/sw/wiki/Semantic_Web_terminology#linked_data[W3C Semantic Web Wiki]
+
+==== feature type
+
+A feature type as defined by the General Feature Model (see <<ref_iso19109>>). In an application schema, a feature type is typically modeled using stereotype \<<featureType>>, or a stereotype that maps to that stereotype.
+
+==== object type
+
+An object type is a standard class, instances are plain objects with identity. An object type is not a feature type. In an application schema, an object type has no stereotype, or has stereotype \<<type>>, or has a stereotype that maps to one of these two options.
+
+==== data type
+
+As defined by <<ref_iso19103>>, section 6.10, a data type is a class with stereotype \<<dataType>> (or a stereotype that maps to that stereotype), which is a set of properties that lacks identity.
+
+===	Abbreviated terms
+
+API:: Application Programming Interface
+ASCII:: American Standard Code for Information Interchange
+CRS:: Coordinate Reference System
+DDL:: Data Definition Language
+EAP:: Enterprise Architect Project
+ECMA:: European association for standardizing information and communication systems
+EPSG:: European Petroleum Survey Group
+ER:: Engineering Report
+GFM:: General Feature Model
+GML:: Geography Markup Language
+GML-SF:: GML Simple Features
+GUI:: Graphical User Interface
+HTML:: Hypertext Markup Language
+HTTP:: Hypertext Transfer Protocol
+IETF:: Internet Engineering Task Force
+IP :: Innovation Program
+IRI:: Internationalized Resource Identifier
+ISO:: International Organization for Standardization
+JSON:: JavaScript Object Notation
+JSON-LD:: JSON for Linked Data
+MDA:: Model Driven Architecture
+MDE:: Model Driven Engineering
+MDG:: Model Driven Generation
+MSL:: Mean Sea Level
+OAI:: OpenAPI Initiative
+OCL:: Object Constraint Language
+OGC:: Open Geospatial Consortium
+PSM:: Platform Specific Model
+RDB:: Relational Databases
+SQL:: Structured Query Language
+SSI:: System Security Interoperability
+SWE:: Sensor Web Enablement
+SWG:: Standards Working Group
+TC:: Technical Committee
+UCUM:: The Unified Code for Units of Measure
+UGAS:: UML to GML Application Schema
+UML:: Unified Modeling Language
+URI:: Uniform Resource Identifier
+URL:: Unform Resource Locator
+W3C:: World Wide Web Consortium
+WGS:: World Geodetic System
+XML:: Extensible Markup Language
+XPath:: XML Path Language
+XQuery:: XML Query Language
+XSD:: XML Schema
+YAML:: YAML Ain't Markup Language
+
+/////
+
+Note to self for future documents: You can find acronyms by generating the document as HTML, saving it as XHTML, and then running the following XQuery:
+
+let $acronyms :=
+  for $text in //text()[fn:string-length() > 0]
+  let $tokens := fn:tokenize($text,'\W')
+  return
+    for $token in $tokens
+    return
+    if(matches($token,'^[A-Z][A-Z0-9]+')) then $token else ()
+
+return sort(distinct-values($acronyms))
+
+
+You'll have to throw away a couple of false-positives but in general this has been useful.
+
+/////
