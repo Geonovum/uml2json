@@ -1,4 +1,15 @@
-.Preface
+[abstract]
+== Abstract
+
+<Insert Abstract Text here>
+
+== Preface
+
+////
+*Geonovum Declaration*
+////
+
+*IMPORTANT* This working document is developed and maintained by Geonovum. It is intended for presentation to OGC later on, and will potentially be put forward into the OGC process.
 
 [NOTE]
 ====
@@ -27,8 +38,9 @@ The main task of technical committees is to prepare International Standards. Dra
 Attention is drawn to the possibility that some of the elements of this document may be the subject of patent rights. ISO shall not be held responsible for identifying any or all such patent rights.
 ////
 
-[abstract]
-== Abstract
 
-<Insert Abstract Text here>
+== Security Considerations
+
+No security considerations have been made for this document.
+
 
