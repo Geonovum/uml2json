@@ -37,7 +37,60 @@ The following subsections describe a number of conversion rules, which define ho
 
 NOTE: An encoding rule consists of a set of conversion rules – as required by a community. The <<jsonschema_encodingrules>> section describes two such rules - one for a GeoJSON compliant encoding, and one for a plain JSON encoding.
 
-#TODO JE# Document the UML profile, i.e., stereotypes from ISO 19103:2015 and ISO 19109:2015, plus additional ones - as well as the tagged values that are relevant for the JSON Schema encoding rules.
+[#table_umlprofile_stereotypes,reftext='{table-caption} {counter:table-num}']
+.Stereotypes relevant for JSON Schema conversion rules
+[width="90%",options="header"]
+|===
+| Stereotype | Model element | Description
+|applicationSchema |Package |A conceptual schema for data required by one or more applications. Source: <<ref_iso19109>>, especially chapter 8.2. 
+|schema |Package |This stereotype is typically used in abstract schemas defined by ISO TC 211. For further details on abstract schemas, see <<ref_iso19103>>, chapter 6.2 and figure 4. An abstract schema and an application schema are both conceptual schemas, but they are on different levels of abstraction.
+|featureType |Class |A feature type as defined by <<ref_iso19109>>.
+|interface - for backwards-compatibility to UML 1 schemas (that comply with earlier versions of <<ref_iso19103>>) also: type |Class |An abstract classifier with operations, attributes and associations, which can only inherit from or be inherited by other interfaces. Other classifiers may realize an interface by implementing its operations and supporting its attributes and associations (at least through derivation). Source: <<ref_iso19103>> This stereotype is typically used in conceptual schemas from ISO TC 211. It should not be used in application schemas, as these are on a different conceptual level than classifiers with this stereotype.
+|dataType |Class |A set of properties that lack identity (independent existence and the possibility of side effects). A data type is a classifier with no operations, whose primary purpose is to hold information. Source: <<ref_iso19103>>
+|union |Class |A structured data type without identity where exactly one of the properties of the type is present in an instance. <<ref_iso19103>> #TBD#: This is from the INSPIRE UML profile. A different use would be as type discriminator union, which is what <<ref_iso19103>> defines.
+|enumeration |Class |A fixed list of valid identifiers of named literal values. Attributes of an enumerated type may only take values from this list. Source: <<ref_iso19103>>
+|codeList |Class |A flexible enumeration that uses string values for expressing a list of potential values. Source: <<ref_iso19103>>
+|property |Property (attribute [not of an enumeration or code list] or association role) |A property of a schema type which is not an enumeration or code list.
+|voidable |Property (attribute [not of an enumeration or code list] or association role) |#TODO#
+|identifier |Attribute (not of an enumeration or code list) |#TODO#
+|enum |Attribute of an enumeration |#TODO#
+
+|===
+
+NOTE: Communities may use aliases for the stereotypes listed above.
+
+NOTE: Some conceptual schemas and application schemas do not make use of the stereotypes \<<property>> and \<<enum>>, but still attach certain tagged values to according properties in their UML model. That approach is supported by some UML modeling tools, even though tagged values typically belong to a certain stereotype. For the purposes of this specification, the stereotypes \<<property>> and \<<enum>> are assumed to be applied in schemas that shall be converted from UML to JSON Schema. Nevertheless, it is allowed for schemas to omit the stereotypes, and just use the associated tagged values (see below) on according model elements. This kind of use implies the presence of an ad-hoc stereotype, which is considered to represent the \<<property>> or \<<enum>> stereotypes.
+
+Tagged values relevant for the JSON Schema conversion rules, per stereotype:
+
+#TODO JE# Remove stereotypes from this list, if at the end no specific tagged values are defined for them. Furthermore, omit stereotype \<<enum>> in the UML profile if no tag is defined for it.
+
+* \<<applicationSchema>> and \<<schema>>:
+** jsonId - #to be documented#
+** jsonDocument - #to be documented#
+* \<<featureType>>
+* \<<interface>> and \<<type>>
+* \<<dataType>>
+* \<<union>>
+* \<<enumeration>>
+** literalEncodingType -  #to be documented#
+* \<<codeList>>
+** literalEncodingType - #to be documented#
+* \<<property>>
+** defaultGeometry - #to be documented#
+** inlineOrByReference
+** jsonFormat - #to be documented#; for basic types
+** jsonPattern - #to be documented#; for basic types
+** length, maxLength, size - #to be documented#; for basic types ... we should choose a single TV
+** rangeMinimum - #to be documented#; for basic types
+** rangeMaximum - #to be documented#; for basic types
+** sequenceNumber
+* \<<voidable>>
+* \<<identifier>>
+* \<<enum>> 
+
+#TBD# ... do we need to define tagged value _jsonEncodingRule_? ... Looks like an implementation detail to me.
+
 
 [[jsonschema_schemaconversionrules_documentation]]
 ==== Documentation
@@ -77,7 +130,7 @@ A UML application schema and its classes SHALL be converted into one or more so-
 
 NOTE: In the JSON Schema specification draft, version 07, the keyword of the definitions section was "definitions". In JSON Schema specification draft, version 2019-09, the keyword was changed to "$defs."
 
-#TBD#: We can simplify the rule - and any encoder implementation - considerably, by restricting ourselves to creating a single definitions schema per application schema. Right now, we allow a split into multiple definitions schemas using tag _jsonDocument_ on subpackages. The question is: Do we want to keep this option? Are there good reasons for doing so? Reducing download size is a bit of a weak argument, in light of caching schemas, and potential cross-referencing between definitions schemas (which can complicate validation). Furthermore, not every encoder implementation should have to support splitting into subdocuments. -> ii recommends to remove splitting into multiple definitions schemas. -> Telcon 10.11.2022: agreed, we simplify the rule
+#TBD#: We can simplify the rule - and any encoder implementation - considerably, by restricting ourselves to creating a single definitions schema per application schema. Right now, we allow a split into multiple definitions schemas using tag _jsonDocument_ on subpackages. The question is: Do we want to keep this option? Are there good reasons for doing so? Reducing download size is a bit of a weak argument, in light of caching schemas, and potential cross-referencing between definitions schemas (which can complicate validation). Furthermore, not every encoder implementation should have to support splitting into subdocuments. -> ii recommends to remove splitting into multiple definitions schemas. -> Telcon 10.11.2022: agreed, we simplify the rule. An additional argument for just having a single JSON Schema file per application schema: easier to reference from external schemas (including ad-hoc generated ones by an OGC features API), because otherwise a mapping to a specific JSON Schema file per class from the application schema would be needed. With just a single JSON Schema file per application schema, applications would reference that one file for all external uses of the schema.
 
 The "$defs" keyword SHALL have a JSON object as value, with each member representing the JSON Schema definition of a class from the application schema.
 
@@ -208,6 +261,61 @@ Whenever an external type is used, its JSON Schema definition is needed. Either 
 How the details about the JSON Schema encoding of external types is conveyed to the encoding process is implementation specific.
 
 #TODO JE# Provide a mapping table for basic external types here, using the map entry files from ShapeChange as a starting point. It would be benefitial to have common JSON Schema implementations for core ISO 19103, 19107 and 19108 types.
+
+[#table_externaltypes_iso19103,reftext='{table-caption} {counter:table-num}']
+.JSON Schema implementation of types defined by ISO 19103
+[width="90%",options="header"]
+|===
+| UML class | JSON Schema simple type | JSON Schema keywords
+|Boolean |boolean |
+|CharacterString |string |
+|Date |string |format=date
+|DateTime |string |format=date-time
+|Decimal |number |
+|Integer |integer |
+|Length |number |
+|Number |number |
+|Measure |number |
+|Real |number |
+|Time |string |format=time
+|URI |string |format=uri
+|===
+
+#TBD# Should we omit the measure types, since the encoding as just real might be a bit restrictive (omitting any uom information). If not, we should probably list them all.
+
+#TODO# Define these tables per JSON encoding rule, as necessary
+
+[#table_externaltypes_iso19107_geojson,reftext='{table-caption} {counter:table-num}']
+.JSON Schema implementation of types defined by ISO 19107 - using GeoJSON schemas
+[width="90%",options="header"]
+|===
+| UML class | JSON Schema reference
+|GM_Curve |https://geojson.org/schema/LineString.json
+|GM_MultiCurve |https://geojson.org/schema/MultiLineString.json
+|GM_MultiPoint |https://geojson.org/schema/MultiPoint.json
+|GM_MultiSurface |https://geojson.org/schema/MultiPolygon.json
+|GM_Object |https://geojson.org/schema/Geometry.json
+|GM_Point |https://geojson.org/schema/Point.json
+|GM_Surface |https://geojson.org/schema/Polygon.json
+|===
+
+#TODO# What are the intended final file locations for the JSON-FG JSON Schema files- the URLs with "beta." removed?
+
+[#table_externaltypes_iso19107_jsonfg,reftext='{table-caption} {counter:table-num}']
+.JSON Schema implementation of types defined by ISO 19107 - using JSON-FG schema definitions
+[width="90%",options="header"]
+|===
+| UML class | JSON Schema reference
+|GM_Curve |https://beta.schemas.opengis.net/json-fg/geometry-objects.json#/$defs/LineString
+|GM_MultiCurve |https://beta.schemas.opengis.net/json-fg/geometry-objects.json#/$defs/MultiLineString.json
+|GM_MultiPoint |https://beta.schemas.opengis.net/json-fg/geometry-objects.json#/$defs/MultiPoint.json
+|GM_MultiSolid |https://beta.schemas.opengis.net/json-fg/geometry-objects.json#/$defs/MultiPolyhedron
+|GM_MultiSurface |https://beta.schemas.opengis.net/json-fg/geometry-objects.json#/$defs/MultiPolygon.json
+|GM_Object |https://beta.schemas.opengis.net/json-fg/geometry.json
+|GM_Point |https://beta.schemas.opengis.net/json-fg/geometry-objects.json#/$defs/Point.json
+|GM_Solid |https://beta.schemas.opengis.net/json-fg/geometry-objects.json#/$defs/Polyhedron
+|GM_Surface |https://beta.schemas.opengis.net/json-fg/geometry-objects.json#/$defs/Polygon.json
+|===
 
 
 [[jsonschema_schemaconversionrules_types_classname]]
