@@ -1,6 +1,9 @@
 [appendix]
 == Conformance Class Abstract Test Suite (Normative)
 
+NOTE: Conformance classes can be defined when this specification moves on in the OGC standardization process.
+
+////
 [NOTE]
 Ensure that there is a conformance class for each requirements class and a test for each requirement (identified by requirement name and number)
 
@@ -20,3 +23,4 @@ Test method:: Inspect...
 =====
 
 ==== Requirement 2
+////

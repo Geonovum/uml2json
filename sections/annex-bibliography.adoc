@@ -24,3 +24,4 @@
 // * [[[OGC2015,OGCTB12]]], _OGC: OGC Testbed 12 Annex B: Architecture_ (2015).
 
 * [[[ref_gml322,OGC 07-036r1]]]Open Geospatial Consortium (OGC). OGC 07-036r1: OpenGIS Geography Markup Language (GML) Encoding Standard, Version 3.2.2
+* [[[ref_ugas2020,OGC 20-012]]]Open Geospatial Consortium (OGC). OGC 20-012: UML-to-GML Application Schema Pilot (UGAS-2020) Engineering Report

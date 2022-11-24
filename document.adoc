@@ -3,8 +3,8 @@
 :abbrev: uml-to-json-encoding-rules
 :doctype: best-practice
 :docsubtype: encoding
-:status: draft
-:draft: 0.1
+//:status: draft
+//:draft: 0.1
 :edition: 1.0
 :keywords: ogcdoc, OGC document, UML, JSON, encoding rules
 :committee: technical
@@ -24,6 +24,7 @@
 :published-date: 2029-03-30
 :mn-document-class: ogc
 :mn-output-extensions: xml,html,doc,pdf
+:modspec-identifier-base: http://www.opengis.net/spec/uml2json/1.0
 :local-cache-only:
 :pdf-uri: ./document.pdf
 :xml-uri: ./document.xml
@@ -31,6 +32,10 @@
 :language: en
 :htmltoclevels: 5
 // :toclevels: 5
+
+// listing caption does not appear to have any effect
+:listing-caption: Listing
+
 
 ////
 Make sure to complete each included document

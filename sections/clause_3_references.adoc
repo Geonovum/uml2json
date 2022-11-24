@@ -15,6 +15,7 @@ See https://www.metanorma.org/author/ogc/authoring-guide/bibliographic-reference
 * [[[ref_jsonschema_02_validation,IETF I-D.draft-handrews-json-schema-validation-02]]]Internet Engineering Task Force (IETF). Draft draft-handrews-json-schema-validation-02: **JSON Schema Validation: A Vocabulary for Structural Validation of JSON** [online]. Edited by A. Wright, H. Andrews, and B. Hutton. 2019 [viewed 2020-04-20]. Available at https://tools.ietf.org/html/draft-handrews-json-schema-validation-02
 * [[[ref_iso8601_2,ISO 8601-2:2019]]]ISO 8601-2:2019, Date and time — Representations for information interchange — Part 1: Extensions
 * [[[ref_iso19103,ISO 19103:2015]]]ISO 19103:2015, Geographic information – Conceptual schema language
+* [[[ref_iso19107,ISO 19107:2003]]]ISO 19107:2003, Geographic information – Spatial schema
 * [[[ref_iso19109,ISO 19109:2015]]]ISO 19109:2015, Geographic information – Rules for application schema
 * [[[ref_ogcapi_features_part1,OGC 17-069r3]]]OGC 17-069r3, OGC API - Features - Part 1: Core, Version 1.0.0
 * [[[OGC06121r9,OGC 06-121r9]]], OGC Web Service Common Implementation Specification
