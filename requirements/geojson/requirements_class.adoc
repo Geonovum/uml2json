@@ -1,0 +1,8 @@
+[requirements_class]
+====
+[%metadata]
+identifier:: http://www.opengis.net/spec/uml2json/1.0/req/geojson
+target:: JSON (Schema) Encoding
+inherit:: http://www.opengis.net/spec/uml2json/1.0/req/geojson-formats
+requirement:: http://www.opengis.net/spec/uml2json/1.0/req/geojson/common-base
+====

@@ -1,0 +1,10 @@
+[requirements_class]
+====
+[%metadata]
+identifier:: http://www.opengis.net/spec/uml2json/1.0/req/codelists-basic
+target:: JSON (Schema) Encoding
+inherit:: http://www.opengis.net/spec/uml2json/1.0/req/core
+requirement:: http://www.opengis.net/spec/uml2json/1.0/req/codelists-basic/schema-definition
+requirement:: http://www.opengis.net/spec/uml2json/1.0/req/codelists-basic/codelist-tag
+
+====

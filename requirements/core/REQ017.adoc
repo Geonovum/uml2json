@@ -1,0 +1,20 @@
+[requirement]
+====
+[%metadata]
+identifier:: http://www.opengis.net/spec/uml2json/1.0/req/core/property-initial-value
+statement:: A UML attribute that has an initial value, is owned by a type with identity or a \<<dataType>>, and whose value type is encoded as one of the simple JSON Schema types "string", "number", "integer", or "boolean", SHALL be encoded as follows:
+
+[.component,class=part]
+--
+The JSON Schema definition of the UML attribute SHALL include the "default" annotation with the initial value as value.
+--
+
+[.component,class=part]
+--
+The value of the annotation can have any JSON value type. The initial value SHALL be encoded accordingly: 
+
+* quoted, if the JSON Schema type is "string";
+* unquoted if the JSON Schema type is "number" or "integer"; and 
+* true if the JSON Schema type is "boolean" and the initial value is equal to, ignoring case, "true"; otherwise the value is false.
+--
+====

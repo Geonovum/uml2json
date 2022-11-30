@@ -1,0 +1,7 @@
+[requirement]
+====
+[%metadata]
+identifier:: http://www.opengis.net/spec/uml2json/1.0/req/geojson-formats/iso19107-types-for-geometry-member
+statement:: If a UML property is encoded in JSON Schema, in the "geometry" top-level member of a JSON object that represents a type width identity, and the value type is one of the ISO 19107 geometry types listed in the first column of <<table_iso19107_types_geometry_member>>, then the JSON schema definition in the second column of that table shall be used in the JSON Schema definition of the property.
+
+====

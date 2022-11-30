@@ -1,0 +1,9 @@
+[requirements_class]
+====
+[%metadata]
+identifier:: http://www.opengis.net/spec/uml2json/1.0/req/by-reference-link-object
+target:: JSON (Schema) Encoding
+inherit:: http://www.opengis.net/spec/uml2json/1.0/req/by-reference-basic
+requirement:: http://www.opengis.net/spec/uml2json/1.0/req/by-reference-link-object/encoding
+
+====

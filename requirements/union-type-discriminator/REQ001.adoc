@@ -1,0 +1,14 @@
+[requirement]
+====
+[%metadata]
+identifier:: http://www.opengis.net/spec/uml2json/1.0/req/union-type-discriminator/encoding
+
+A \<<union>> shall be encoded as a JSON Schema definition that represents a choice between the value types of the union properties:
+
+* If the value types are only simple, without a specific format definition or other restrictions defined by JSON Schema keywords, then the JSON Schema shall only contain a "type" member, with an array of the simple types.
+* Otherwise, a "oneOf" member shall be added to the JSON Schema definition, with:
+** one "$ref" per non-simple type,
+** one "type" for all simple types without specific keywords, and
+** one "type" per simple type with specific keywords.
+
+====

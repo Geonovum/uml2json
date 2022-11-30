@@ -1,0 +1,7 @@
+[recommendation]
+====
+[%metadata]
+identifier:: http://www.opengis.net/spec/uml2json/1.0/req/core/format-and-pattern
+statement:: Whenever an external type is implemented by a simple JSON Schema type with specific "format", it is recommended that the type definition be accompanied by a "pattern" member, whose value should contain a regular expression that is sufficient to represent the intended format.
+
+====

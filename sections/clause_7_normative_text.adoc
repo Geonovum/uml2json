@@ -1,65 +1,13 @@
 [[jsonschema]]
-== UML to JSON Schema Encoding Rules
+== UML to JSON Schema Encoding
 
+////
 [[jsonschema_schemaconversionrules]]
 === Schema Conversion Rules
 
 The following subsections describe a number of conversion rules, which define how the content of an application schema, represented using UML as the conceptual schema language, is converted to JSON Schema.
 
 NOTE: An encoding rule consists of a set of conversion rules – as required by a community. The <<jsonschema_encodingrules>> section describes two such rules - one for a GeoJSON compliant encoding, and one for a plain JSON encoding.
-
-[#table_umlprofile_stereotypes,reftext='{table-caption} {counter:table-num}']
-.Stereotypes relevant for JSON Schema conversion rules
-[width="90%",options="header"]
-|===
-| Stereotype | Model element | Description
-|applicationSchema |Package |A conceptual schema for data required by one or more applications. Source: <<ref_iso19109>>, especially chapter 8.2. 
-|schema |Package |This stereotype is typically used in abstract schemas defined by ISO TC 211. For further details on abstract schemas, see <<ref_iso19103>>, chapter 6.2 and figure 4. An abstract schema and an application schema are both conceptual schemas, but they are on different levels of abstraction.
-|featureType |Class |A feature type as defined by <<ref_iso19109>>.
-|interface - for backwards-compatibility to UML 1 schemas (that comply with earlier versions of <<ref_iso19103>>) also: type |Class |An abstract classifier with operations, attributes and associations, which can only inherit from or be inherited by other interfaces. Other classifiers may realize an interface by implementing its operations and supporting its attributes and associations (at least through derivation). Source: <<ref_iso19103>> This stereotype is typically used in conceptual schemas from ISO TC 211. It should not be used in application schemas, as these are on a different conceptual level than classifiers with this stereotype.
-|dataType |Class |A set of properties that lack identity (independent existence and the possibility of side effects). A data type is a classifier with no operations, whose primary purpose is to hold information. Source: <<ref_iso19103>>
-|union |Class |A structured data type without identity where exactly one of the properties of the type is present in an instance. <<ref_iso19103>> #TBD#: This is from the INSPIRE UML profile. A different use would be as type discriminator union, which is what <<ref_iso19103>> defines.
-|enumeration |Class |A fixed list of valid identifiers of named literal values. Attributes of an enumerated type may only take values from this list. Source: <<ref_iso19103>>
-|codeList |Class |A flexible enumeration that uses string values for expressing a list of potential values. Source: <<ref_iso19103>>
-|property |Property (attribute [not of an enumeration or code list] or association role) |A property of a schema type which is not an enumeration or code list.
-|voidable |Property (attribute [not of an enumeration or code list] or association role) |#TODO#
-|identifier |Attribute (not of an enumeration or code list) |#TODO#
-|enum |Attribute of an enumeration |#TODO#
-
-|===
-
-NOTE: Communities may use aliases for the stereotypes listed above.
-
-NOTE: Some conceptual schemas and application schemas do not make use of the stereotypes \<<property>> and \<<enum>>, but still attach certain tagged values to according properties in their UML model. That approach is supported by some UML modeling tools, even though tagged values typically belong to a certain stereotype. For the purposes of this specification, the stereotypes \<<property>> and \<<enum>> are assumed to be applied in schemas that shall be converted from UML to JSON Schema. Nevertheless, it is allowed for schemas to omit the stereotypes, and just use the associated tagged values (see below) on according model elements. This kind of use implies the presence of an ad-hoc stereotype, which is considered to represent the \<<property>> or \<<enum>> stereotypes.
-
-Tagged values relevant for the JSON Schema conversion rules, per stereotype:
-
-#TODO JE# Remove stereotypes from this list, if at the end no specific tagged values are defined for them. Furthermore, omit stereotype \<<enum>> in the UML profile if no tag is defined for it.
-
-* \<<applicationSchema>> and \<<schema>>:
-** jsonId - #to be documented#
-** jsonDocument - #to be documented#
-* \<<featureType>>
-* \<<interface>> and \<<type>>
-* \<<dataType>>
-* \<<union>>
-* \<<enumeration>>
-** literalEncodingType -  #to be documented#
-* \<<codeList>>
-** literalEncodingType - #to be documented#
-* \<<property>>
-** defaultGeometry - #to be documented#
-** inlineOrByReference
-** jsonFormat - #to be documented#; for basic types
-** jsonPattern - #to be documented#; for basic types
-** length, maxLength, size - #to be documented#; for basic types ... we should choose a single TV
-** rangeMinimum - #to be documented#; for basic types
-** rangeMaximum - #to be documented#; for basic types
-** sequenceNumber
-* \<<voidable>>
-* \<<enum>> 
-
-#TBD# ... do we need to define tagged value _jsonEncodingRule_? ... Looks like an implementation detail to me.
 
 
 [[jsonschema_schemaconversionrules_documentation]]
@@ -146,17 +94,17 @@ If the encoding process does not add any actual definitions to a definitions sch
 
 [#img_json_schema_structure_uml_example,reftext='{figure-caption} {counter:figure-num}']
 .Example of a UML application schema with tagged value jsonDocument set
-image::images/uml_for_definitions_schema_example.png[align="center"]
+image::figures/uml_for_definitions_schema_example.png[align="center"]
 
 [#img_json_schema_structure,reftext='{figure-caption} {counter:figure-num}']
 .Deriving JSON Schemas from an application schema
-image::images/definitions_schemas.png[align="center"]
+image::figures/definitions_schemas.png[align="center"]
 
 References from types of the application schema to other types - within the same or within an external schema - SHALL be converted as references to the according definitions schemas, using the JSON Schema keyword "$ref" - see <<img_json_schema_references_between_definitions_schemas>>.
 
 [#img_json_schema_references_between_definitions_schemas,reftext='{figure-caption} {counter:figure-num}']
 .References between JSON Schemas using $ref
-image::images/references_between_definitions_schemas.png[align="center"]
+image::figures/references_between_definitions_schemas.png[align="center"]
 
 A link to a particular definition within a definitions schema requires the use of a JSON Pointer or an anchor in the fragment identifier of the link URL.
 
@@ -218,10 +166,8 @@ Example: With _jsonBaseUri_ = `https://example.org`, _jsonDirectory_ = `json/sch
 NOTE: The "$id" of the definitions schema is not included in other examples within this chapter, because declaring an absolute, non-existent URL in these examples often prevents JSON Pointers from these examples from working when testing the examples, for instance on https://www.jsonschemavalidator.net/ (which is a useful tool for testing JSON Schema).
 
 
-
 [[jsonschema_schemaconversionrules_types]]
 ==== Types
-
 
 
 [[jsonschema_schemaconversionrules_types_mappings]]
@@ -340,35 +286,6 @@ NOTE: The "$anchor" keyword was added in JSON Schema draft 2019-09. It replaces 
 ----
 
 
-////
-
-draft -07 specific 
-
-If the ShapeChange target parameter _jsonSchemaVersion_ (see <<jsonschema_schemaconversionrules_schemapackage_schemaversion>>) is set to "draft-07," then __rule-json-cls-name-as-anchor__ results in the creation of the "$id" keyword, instead of the "$anchor" keyword.
-
-NOTE: JSON Schema draft 07 requires the value of "$id" to start with "\#", thus when producing a JSON Schema compliant to JSON Schema draft 07, the combination of "#" and the class name is used as value of the "$id" key.
-
-[#example_jsonschema_types_classname_anchor_draft07,reftext='{listing-caption} {counter:listing-num}']
-.JSON Schema (draft 07) example of location independent schema identifiers
-[source,json,linenumbers]
-----
-{
-  "$schema": "http://json-schema.org/draft/2019-09/schema",
-  "$defs": {
-    "TypeA": {
-      "$id": "#TypeA",
-      "...": "..."
-    },
-    "TypeB": {
-      "$id": "#TypeB",
-      "...": "..."
-    }
-  }
-}
-----
-////
-
-
 [[jsonschema_schemaconversionrules_types_classname_typeidentification]]
 ====== Type Identification
 
@@ -442,7 +359,7 @@ The generalization relationship of a subtype to its supertype is converted by co
 
 [#img_json_schema_inheritance_generalization_example,reftext='{figure-caption} {counter:figure-num}']
 .Example of type inheritance
-image::images/Generalization_example.png[align="center"]
+image::figures/Generalization_example.png[align="center"]
 
 [#example_jsonschema_types_inheritance_generalization,reftext='{listing-caption} {counter:listing-num}']
 .JSON Schema example for realizing generalization using "allOf"
@@ -565,7 +482,7 @@ The resulting JSON Schema looks for an "entityType" match. If one is found, the 
 
 [#img_jsonschema_valuetype_uml,reftext='{figure-caption} {counter:figure-num}']
 .Example of a value type being a supertype
-image::images/Specialization_example.png[align="center"]
+image::figures/Specialization_example.png[align="center"]
 
 [#example_jsonschema_types_inheritance_specialization,reftext='{listing-caption} {counter:listing-num}']
 .JSON Schema example of a value type definition for a supertype
@@ -834,7 +751,7 @@ An `"additionalProperties": false` SHALL be used to prevent any undefined proper
 
 [#img_jsonschema_union_example,reftext='{figure-caption} {counter:figure-num}']
 .\<<union>> example
-image::images/Union_example.png[align="center"]
+image::figures/Union_example.png[align="center"]
 
 [#example_jsonschema_union_minMaxProperties,reftext='{listing-caption} {counter:listing-num}']
 .Example of a JSON Schema for a \<<union>> class, representing the property choice using "minProperties" and "maxProperites"
@@ -897,7 +814,7 @@ The result of applying the rule to the union from <<img_jsonschema_type_discrimi
 
 [#img_jsonschema_type_discriminator_union_example,reftext='{figure-caption} {counter:figure-num}']
 .Example of type discriminator unions
-image::images/type_discriminator_unions.png[align="center"]
+image::figures/type_discriminator_unions.png[align="center"]
 
 [#example_jsonschema_union_type_discriminator,reftext='{listing-caption} {counter:listing-num}']
 .Example of a JSON Schema for unions, encoding them as type discriminators
@@ -968,7 +885,7 @@ The enumeration values will be encoded accordingly.
 
 [#img_jsonschema_enumeration_example,reftext='{figure-caption} {counter:figure-num}']
 .\<<enumeration>> example
-image::images/Enumeration_example.png[align="center"]
+image::figures/Enumeration_example.png[align="center"]
 
 [#example_jsonschema_enumeration,reftext='{listing-caption} {counter:listing-num}']
 .Example of enumerations encoded in JSON Schema
@@ -1010,7 +927,7 @@ NOTE: The URL to the JSON Schema of the "Link" object (as shown in <<example_jso
 
 [[example_jsonschema_link_object]]
 .JSON Schema of the "Link" object
-[source,json,linenumbers,options="unnumbered"]
+[source,json,linenumbers]
 ----
 include::../code/link.json[]
 ----
@@ -1019,11 +936,11 @@ In <<img_jsonschema_codelist_example>>, the encoding rule for code list "Codelis
 
 [#img_jsonschema_codelist_example,reftext='{figure-caption} {counter:figure-num}']
 .\<<codeList>> example
-image::images/Codelist_example.png[align="center"]
+image::figures/Codelist_example.png[align="center"]
 
 [[example_jsonschema_codelist]]
 .Example of code lists encoded in JSON Schema
-[source,json,linenumbers,options="unnumbered"]
+[source,json,linenumbers]
 ----
 {
   "$schema": "http://json-schema.org/draft/2019-09/schema",
@@ -1046,7 +963,6 @@ image::images/Codelist_example.png[align="center"]
 ----
 
 NOTE: A string based code list conversion is better suited for a subsequent mapping of JSON encoded code values to RDF using JSON-LD. 
-
 
 [[jsonschema_schemaconversionrules_types_basictype]]
 ===== Basic Type
@@ -1088,7 +1004,7 @@ There are a number of cases which need to be considered when encoding a basic ty
 
 [#img_jsonschema_basictypes_example,reftext='{figure-caption} {counter:figure-num}']
 .Basic types example
-image::images/basic_types_example.png[align="center"]
+image::figures/basic_types_example.png[align="center"]
 
 [#example_jsonschema_basictypes,reftext='{listing-caption} {counter:listing-num}']
 .Example of basic types encoded in JSON Schema
@@ -1213,7 +1129,6 @@ NOTE: Additional geometry properties are encoded like all other UML properties (
 
 NOTE: In some application schemas, the geometry of a feature type is not defined directly, i.e., not via a property that has an ISO 19107 type as value type. For example, consider REF img_jsonschema_value_type_options_example, where property "place" indirectly defines the geometry of a feature type, through a complex _PlaceSpecification_. The place is either given by a point, a curve, a surface, or by some location identifier. Such a feature model, where the geometry of a feature can be one of several geometry and non-geometry types, is not suited for the conversion rules documented in this section.
 
-
 [[jsonschema_schemaconversionrules_properties]]
 ==== Properties
 
@@ -1227,7 +1142,7 @@ The following figure and listing provide an example: <<img_jsonschema_properties
 
 [#img_jsonschema_properties_example,reftext='{figure-caption} {counter:figure-num}']
 .UML type used to exemplify JSON Schema encoding of UML properties
-image::images/Properties_example.png[align="center"]
+image::figures/Properties_example.png[align="center"]
 
 [#example_jsonschema_properties_general,reftext='{listing-caption} {counter:listing-num}']
 .Encoding UML properties in JSON Schema
@@ -1249,6 +1164,7 @@ image::images/Properties_example.png[align="center"]
 }
 ----
 
+
 [[jsonschema_schemaconversionrules_properties_valuetype]]
 ===== Value Type
 
@@ -1265,15 +1181,6 @@ Examples:
 * using JSON Pointer:
 ** For a draft 07 JSON Schema: https://example.org/schemaA/schema_definitions.json#/definitions/TypeX
 ** For a 2019-09 JSON Schema: https://example.org/schemaA/schema_definitions.json#/$defs/TypeX
-
-////
-
-#TBD# This is so very specific that I doubt it makes sense to put this in the Best Practice specification. It could be moved to an Annex, but even that would be more confusing than helpful to the interested reader.
-
-[[jsonschema_schemaconversionrules_properties_valuetype_valuetypeoptions]]
-A specific rule has been added to support value type restrictions for UML properties, which in the NAS are defined using OCL constraints (for further details - and especially an example, see section <<jsonschema_schemaconversionrules_constraint>>): __rule-json-cls-valueTypeOptions__. This rule looks for tagged value __valueTypeOptions__ on a class. If the tag exists and has a value, it defines which types are allowed as value type for a given UML property. Note that this UML property can be directly defined on the class but also be inherited from a supertype. The property can also originally have been an association role that belonged to an association class. The conversion rule ensures that instead of the actual value type of the property, only one of the allowed types is encoded as type definition in the JSON Schema. The conversion also takes into account that the property may have been a role of an association class. The restriction to a set of allowed types uses an if-then-else construct, which depends on the presence of a type identifying member (see section <<jsonschema_schemaconversionrules_types_classname_typeidentification>>) in property values, and thus __rule-json-cls-valueTypeOptions__ should always be used in combination with __rule-json-cls-name-as-entityType__. Note that value type restrictions (defined on a subtype) of inherited UML properties will result in these properties being explicitly defined in the JSON Schema definition of the subtype. The JSON Schema types of the allowed (UML) types are determined as described before. Further details on how the tagged value __valueTypeOptions__ is structured and how it can be derived from OCL constraints are given in section <<jsonschema_transformationrules_valuetyperestrictionocl>>.
-
-////
 
 [[jsonschema_schemaconversionrules_properties_inlineOrByReference]]
 The behavior described so far covers the case of an inline encoding of the property value. In some cases, particularly if the value type is a type with identity, it can be preferable and maybe even necessary to encode the value by reference. In other cases, both options should be offered. That is similar to what the GML Application Schema encoding rules support (for further details, see OGC 07-036r1, Annex E, section E.2.4.11).
@@ -1322,7 +1229,7 @@ In addition, if the maximum cardinality of the property is greater than 1, then 
 
 [#img_jsonschema_properties_multiplicity_example,reftext='{figure-caption} {counter:figure-num}']
 .UML type used to exemplify JSON Schema encoding of multiplicity
-image::images/Multiplicity_example.png[align="center"]
+image::figures/Multiplicity_example.png[align="center"]
 
 [#example_jsonschema_properties_multiplicity,reftext='{listing-caption} {counter:listing-num}']
 .Example for encoding multiplicity in JSON Schema
@@ -1386,7 +1293,7 @@ The JSON Schema of a UML property with stereotype \<<voidable>>, or with tagged 
 
 [#img_jsonschema_properties_voidable_example,reftext='{figure-caption} {counter:figure-num}']
 .Example for JSON Schema encoding of a voidable property with max multiplicity 1
-image::images/Voidable_example.png[align="center"]
+image::figures/Voidable_example.png[align="center"]
 
 [#example_jsonschema_properties_voidable_maxmult1,reftext='{listing-caption} {counter:listing-num}']
 .Encoding a voidable UML property with max multiplicity 1 in JSON Schema
@@ -1701,6 +1608,7 @@ NOTE: The example shows that the tagged value may contain a qualifier - _associa
 
 NOTE: Configuration parameter __valueTypeRepresentationTypes__ can also define an alias for the name of an allowed type. For example: `PlaceSpecification{PointPositionSpecification=P, CurvePositionSpecification=C, SurfacePositionSpecification=S, LocationSpecification=L}`. The alias is used when constructing tagged value _valueTypeOptions_. That can be useful in case that the names of UML types contained in the model are flattened, i.e., replaced by a short name or code, by a subsequent model transformation. Processes that convert such a flattened model and use the information from tagged value _valueTypeOptions_ then have the correct names of allowed value types.
 
+
 [[jsonschema_encodingrules]]
 === Encoding Rules
 
@@ -1757,7 +1665,7 @@ The feature type illustrated in <<img_jsonschema_encrule_geojson_uml>> is used a
 
 [#img_jsonschema_encrule_geojson_uml,reftext='{figure-caption} {counter:figure-num}']
 .Example of a feature type in UML, which will be converted to a GeoJSON feature
-image::images/GeoJSON_example.png[align="center"]
+image::figures/GeoJSON_example.png[align="center"]
 
 [#example_jsonschema_encrule_geojson,reftext='{listing-caption} {counter:listing-num}']
 .JSON Schema example of a feature type that is converted using the default GeoJSON encoding rule
@@ -1839,7 +1747,7 @@ This JSON object is invalid against the schema from <<example_jsonschema_encrule
   }
 }
 ----
-
+ 
 [[jsonschema_encodingrules_plainjson]]
 ==== Plain JSON Schema Encoding Rule
 
@@ -1903,19 +1811,122 @@ This JSON object is valid against the schema from <<example_jsonschema_encrule_p
 }
 ----
 
-#TODO JE:#
+////
 
-* Introduction to the content of this specification: three encoding rules, plus a couple of additional requirements classes for special model constructs (briefly introduce them).
-* Tabular overview of requirements classes ... maybe with short comment / overview.
-* Diagram of requirements classes that shows the dependencies between them
+
+[[jsonschema_introduction]]
+=== Introduction
+
+The following chapters define requirements classes for the encoding of application schemas in UML as JSON Schema, and likewise for the encoding of application schema data as JSON data. 
+
+The remainder of this chapter provides a summary of the relevant UML profile - stereotypes and their tagged values - (<<jsonschema_introduction_uml_profile>>), as well as an overview of the requirements classes defined in this specification (<<jsonschema_introduction_req_classes>>).
+
+
+[[jsonschema_introduction_uml_profile]]
+==== UML profile
+
+The stereotypes as well as tagged values that are relevant for JSON Schema encodings are listed in <<table_umlprofile_stereotypes>> and <<table_umlprofile_tagged_values>>.
+
+[[table_umlprofile_stereotypes]]
+.Stereotypes relevant for JSON Schema encodings
+[width="90%",options="header"]
+|===
+| Stereotype | Model element | Description
+|applicationSchema |Package |A conceptual schema for data required by one or more applications. Source: <<ref_iso19109>>, especially chapter 8.2. 
+|schema |Package |This stereotype is typically used in abstract schemas defined by ISO TC 211. For further details on abstract schemas, see <<ref_iso19103>>, chapter 6.2 and figure 4. An abstract schema and an application schema are both conceptual schemas, but they are on different levels of abstraction.
+|featureType |Class |A feature type as defined by <<ref_iso19109>>.
+|interface - for backwards-compatibility to UML 1 schemas (that comply with earlier versions of <<ref_iso19103>>) also: type |Class |An abstract classifier with operations, attributes and associations, which can only inherit from or be inherited by other interfaces. Other classifiers may realize an interface by implementing its operations and supporting its attributes and associations (at least through derivation). Source: <<ref_iso19103>> This stereotype is typically used in conceptual schemas from ISO TC 211. It should not be used in application schemas, as these are on a different conceptual level than classifiers with this stereotype.
+|dataType |Class |A set of properties that lack identity (independent existence and the possibility of side effects). A data type is a classifier with no operations, whose primary purpose is to hold information. Source: <<ref_iso19103>>
+|union |Class | Either used as __A structured data type without identity where exactly one of the properties of the type is present in an instance__ (property choice) or __type consisting of one and only one of several alternative datatypes__ (type discriminator; source: <<ref_iso19103>>) - in both cases the options are listed as member attributes.
+|enumeration |Class |A fixed list of valid identifiers of named literal values. Attributes of an enumerated type may only take values from this list. Source: <<ref_iso19103>>
+|codeList |Class |A flexible enumeration that uses string values for expressing a list of potential values. Source: <<ref_iso19103>>
+|property |Property (attribute [not of an enumeration or code list] or association role) |A property of a schema type which is not an enumeration or code list.
+|#voidable# |Property (attribute [not of an enumeration or code list] or association role) |#TODO#
+
+|===
+
+NOTE: Communities may use aliases for the stereotypes listed above.
+
+NOTE: Some conceptual schemas and application schemas do not make use of the stereotypes \<<property>>, but still attach certain tagged values to according properties in their UML model. That approach is supported by some UML modeling tools, even though tagged values typically belong to a certain stereotype. For the purposes of this specification, the stereotype \<<property>> is assumed to be applied in schemas that shall be converted from UML to JSON Schema. Nevertheless, it is allowed for schemas to omit the stereotypes, and just use the associated tagged values (see below) on according model elements. This kind of use implies the presence of an ad-hoc stereotype, which is considered to represent the \<<property>> stereotype.
+
+<<table_umlprofile_tagged_values>> lists the tagged values relevant for the JSON Schema encodings, together with the stereotype(s) they apply to, as well as relevant requirements class(es).
+
+[[table_umlprofile_tagged_values]]
+.Tagged values relevant for JSON Schema encodings
+[width="90%",options="header"]
+|===
+| Applicable stereotype(s) | Tagged value | Relevant requirements class(es) | Comment
+.2+| \<<applicationSchema>> and \<<schema>> | jsonDocument | xref:http://www.opengis.net/spec/uml2json/1.0/req/core[style=id%] | see <<jsonschema_req_core_definitionsschema>>
+| jsonId  | xref:http://www.opengis.net/spec/uml2json/1.0/req/core[style=id%] | see <<jsonschema_req_core_definitionsschema>>
+| \<<enumeration>> and \<<codeList>> | literalEncodingType |xref:http://www.opengis.net/spec/uml2json/1.0/req/core[style=id%] and xref:http://www.opengis.net/spec/uml2json/1.0/req/codelists-literal[style=id%] | see <<jsonschema_req_core_types_enumeration>> and <<jsonschema_codelists_req_literal>>
+.12+| \<<property>> | inlineOrByReference | xref:http://www.opengis.net/spec/uml2json/1.0/req/core[style=id%] | see <<jsonschema_byreference_req_basic>> and <<jsonschema_req_core_properties_valuetype>>
+| jsonPrimaryGeometry | xref:http://www.opengis.net/spec/uml2json/1.0/req/geojson-formats[style=id%] | see <<jsonschema_req_geojson_formats_primary_geometry>>
+| jsonPrimaryInstant | xref:http://www.opengis.net/spec/uml2json/1.0/req/jsonfg[style=id%] .2+| see <<jsonschema_req_jsonfg_primary_time>>
+| jsonPrimaryInterval | xref:http://www.opengis.net/spec/uml2json/1.0/req/jsonfg[style=id%]  
+| jsonPrimaryPlace | xref:http://www.opengis.net/spec/uml2json/1.0/req/jsonfg[style=id%] | see <<jsonschema_req_jsonfg_primary_place>>
+| jsonFormat | xref:http://www.opengis.net/spec/uml2json/1.0/req/core[style=id%] .7+| only relevant for _basic types_, see  <<jsonschema_req_core_types_basictype>>
+| jsonPattern | xref:http://www.opengis.net/spec/uml2json/1.0/req/core[style=id%] 
+| maxLength | xref:http://www.opengis.net/spec/uml2json/1.0/req/core[style=id%] 
+| minExclusive | xref:http://www.opengis.net/spec/uml2json/1.0/req/core[style=id%] 
+| minInclusive | xref:http://www.opengis.net/spec/uml2json/1.0/req/core[style=id%] 
+| maxExclusive | xref:http://www.opengis.net/spec/uml2json/1.0/req/core[style=id%] 
+| maxInclusive | xref:http://www.opengis.net/spec/uml2json/1.0/req/core[style=id%] 
+
+|===
+
+
+[[jsonschema_introduction_req_classes]]
+==== Requirements classes
+
+This specification defines a number of requirements classes, which specify requirements for encoding (elements of) an application schema in UML to JSON Schema. <<img_overview_req_classes>> provides an overview of these requirements classes, together with their dependencies.
+
+[[img_overview_req_classes]]
+.Requirements classes for encoding an application schema in UML as a JSON Schema
+image::figures/requirements_classes.png[align="center"]
+
+Common encoding behavior is defined in the core requirements class (<<jsonschema_req_core>>). Additional requirements classes exists, which serve different purposes:
+
+* Three requirements classes are defined, to establish basic JSON encodings:
+** a plain encoding (<<jsonschema_req_plain>>),
+** a GeoJSON encoding (<<jsonschema_req_geojson>>), and
+** a JSON-FG encoding (<<jsonschema_req_jsonfg>>)
+* There are two requirements classes that represent options for realizing a by-reference encoding of property values, one using URIs (<<jsonschema_byreference_encoding_req_uri>>, and one using link objects <<jsonschema_byreference_encoding_req_link_object>>).
+* Requirements classes also exist for the two ways in which \<<union>> types are used in practice: as type discriminator (<<jsonschema_unions_req_type_discriminator>>) and as property choice (<<jsonschema_unions_req_property_choice>>).
+* Code list valued properties can be represented in one of three ways, defined by requirements classes: as a literal (<<jsonschema_codelists_req_literal>>), as URI (<<jsonschema_codelists_req_uri>>), and as link object (<<jsonschema_codelists_req_link_object>>).
+* Finally, an additional requirements class supports the encoding of a JSON member for storing the name of the conceptual type that a JSON object encodes (<<jsonschema_req_entitytype>>).
+
+A community can combine these requirements classes as needed to achieve a full JSON Schema encoding, which satisfies their specific JSON encoding requirements. For example, a community might choose a GeoJSON compliant encoding, together with the property choice encoding for unions, as well as using link objects for by-reference encoding and code values.
+
+<<table_introduction_req_classes>> lists all requirements classes defined by this specification.
+
+[[table_introduction_req_classes]]
+.Requirements classes overview
+[width="90%",options="header"]
+|===
+| Requirements class | Clause
+|xref:http://www.opengis.net/spec/uml2json/1.0/req/core[style=id%] |<<jsonschema_req_core>>
+|xref:http://www.opengis.net/spec/uml2json/1.0/req/plain[style=id%] |<<jsonschema_req_plain>>
+|xref:http://www.opengis.net/spec/uml2json/1.0/req/geojson-formats[style=id%] |<<jsonschema_req_geojson_formats>>
+|xref:http://www.opengis.net/spec/uml2json/1.0/req/geojson[style=id%] |<<jsonschema_req_geojson>>
+|xref:http://www.opengis.net/spec/uml2json/1.0/req/jsonfg[style=id%] |<<jsonschema_req_jsonfg>>
+|xref:http://www.opengis.net/spec/uml2json/1.0/req/by-reference-basic[style=id%] |<<jsonschema_byreference_req_basic>>
+|xref:http://www.opengis.net/spec/uml2json/1.0/req/by-reference-uri[style=id%] |<<jsonschema_byreference_encoding_req_uri>>
+|xref:http://www.opengis.net/spec/uml2json/1.0/req/by-reference-link-object[style=id%] |<<jsonschema_byreference_encoding_req_link_object>>
+|xref:http://www.opengis.net/spec/uml2json/1.0/req/union-type-discriminator[style=id%] |<<jsonschema_unions_req_type_discriminator>>
+|xref:http://www.opengis.net/spec/uml2json/1.0/req/union-property-choice[style=id%] |<<jsonschema_unions_req_property_choice>>
+|xref:http://www.opengis.net/spec/uml2json/1.0/req/codelists-basic[style=id%] |<<jsonschema_codelists_req_basic>>
+|xref:http://www.opengis.net/spec/uml2json/1.0/req/codelists-literal[style=id%] |<<jsonschema_codelists_req_literal>>
+|xref:http://www.opengis.net/spec/uml2json/1.0/req/codelists-uri[style=id%] |<<jsonschema_codelists_req_uri>>
+|xref:http://www.opengis.net/spec/uml2json/1.0/req/codelists-link-object[style=id%] |<<jsonschema_codelists_req_link_object>>
+|xref:http://www.opengis.net/spec/uml2json/1.0/req/entitytype[style=id%] |<<jsonschema_req_entitytype>>
+|===
 
 
 [[jsonschema_req_core]]
 === Requirements class: Core
 
-#WIP#
-
 include::../requirements/core/requirements_class.adoc[]
+
 
 [[jsonschema_req_core_definitionsschema]]
 ==== Definitions schema
@@ -1930,11 +1941,9 @@ NOTE: The "$id" identifies the schema resource with its canonical URI. The URI i
 
 include::../requirements/core/REC002.adoc[]
 
-//[#example_jsonschema_definitions_schema,reftext='{listing-caption} {counter:listing-num}']
-
 [[example_req_core_jsonschema_definitions_schema]]
 .JSON Schema example of a definitions schema
-[source,json,linenumbers,options="unnumbered"]
+[source,json,linenumbers]
 ----
 {
   "$schema": "http://json-schema.org/draft/2019-09/schema",
@@ -1964,7 +1973,7 @@ include::../requirements/core/REQ002.adoc[]
 
 [[img_req_core_json_schema_references_between_definitions_schemas]]
 .References between JSON Schemas using $ref with JSON pointers as values
-image::images/references_between_definitions_schemas.png[align="center"]
+image::figures/references_between_definitions_schemas.png[align="center"]
 
 A link to a particular definition within a definitions schema requires the use of a JSON Pointer or an anchor in the fragment identifier of the link URL. https://tools.ietf.org/html/rfc6901#section-6[JSON Pointer], chapter 6, explicitly states that the media type in which a JSON value is provided needs to support this kind of fragment identifier, and that this is not the case for the media type application/json. If a JSON Schema was published with this media type, then it is possible that the application ignores a fragment identifier (because the media type does not support fragment identifiers).
 
@@ -2001,8 +2010,12 @@ Potential reasons for NOT using JSON Schema annotations are:
 ======
 
 
+[[jsonschema_req_core_types]]
+==== Types
+
+
 [[jsonschema_req_core_external_types]]
-==== External types
+===== External types
 
 Application schemas typically use types from other schemas, for example the types defined by ISO 19103 and ISO 19107. External types can be used as value types of properties, and as supertypes for types defined in the application schema that is being converted.
 
@@ -2039,7 +2052,7 @@ include::../requirements/core/REQ004.adoc[]
 
 [[jsonschema_for_iso19103_measure_types]]
 .JSON Schema for ISO 19103 measure types
-[source,json,linenumbers,options="unnumbered"]
+[source,json,linenumbers]
 ----
 {
   "type" : "object",
@@ -2059,17 +2072,15 @@ NOTE: If ISO TC 211 defines a JSON Schema for ISO 19103 measure types, then that
 
 
 [[jsonschema_req_core_types_classname]]
-==== Class name
+===== Class name
 
 include::../requirements/core/REQ005.adoc[]
 
 NOTE: Schema definitions that have an "$anchor" can be referenced using the plain text value of the anchor as fragment identifier, instead of using a more complex JSON Pointer.
 
-//[#example_jsonschema_types_classname_anchor,reftext='{listing-caption} {counter:listing-num}']
-
 [[example_req_core_jsonschema_types_classname_anchor]]
 .Example of a JSON Schema with $anchor members
-[source,json,linenumbers,options="unnumbered"]
+[source,json,linenumbers]
 ----
 {
   "$schema": "http://json-schema.org/draft/2019-09/schema",
@@ -2087,7 +2098,7 @@ NOTE: Schema definitions that have an "$anchor" can be referenced using the plai
 ----
 
 [[jsonschema_req_core_types_abstractness]]
-==== Abstractness
+===== Abstractness
 
 include::../requirements/core/REQ006.adoc[]
 
@@ -2095,7 +2106,7 @@ NOTE: JSON Schema does not directly support abstractness.
 
 
 [[jsonschema_req_core_types_inheritance]]
-==== Inheritance
+===== Inheritance
 
 JSON Schema does not support the concept of inheritance itself. In practice, an inheritance relationship is important in two areas:
 
@@ -2110,13 +2121,11 @@ Multiple inheritance is supported by adding all supertypes as elements of "allOf
 
 [[img_req_core_json_schema_inheritance_generalization_example]]
 .Example of type inheritance
-image::images/Generalization_example.png[align="center"]
-
-//[#example_jsonschema_types_inheritance_generalization,reftext='{listing-caption} {counter:listing-num}']
+image::figures/Generalization_example.png[align="center"]
 
 [[example_req_core_jsonschema_types_inheritance_generalization]]
 .JSON Schema example for realizing generalization using "allOf"
-[source,json,linenumbers,options="unnumbered"]
+[source,json,linenumbers]
 ----
 {
   "$schema": "http://json-schema.org/draft/2019-09/schema",
@@ -2156,7 +2165,7 @@ image::images/Generalization_example.png[align="center"]
 
 This JSON object is valid against the schema:
 
-[source,json,linenumbers,options="unnumbered"]
+[source,json,linenumbers]
 ----
 {
   "propertyA": 2,
@@ -2166,7 +2175,7 @@ This JSON object is valid against the schema:
 
 This JSON object is invalid (because "propertyA" is missing) against the schema:
 
-[source,json,linenumbers,options="unnumbered"]
+[source,json,linenumbers]
 ----
 {
   "propertyB": "x"
@@ -2185,13 +2194,13 @@ This approach to converting a generalization relationship has the following rest
 
 
 [[jsonschema_req_core_types_common_base]]
-==== Common base schema
+===== Common base schema
 
 It is often useful to encode all classes with a certain stereotype with a common base type. The generalization relationship to such a base type is often implied with the stereotype, for a given encoding. In GML, for example, the common base type for classes with stereotype \<<featureType>> is gml:AbstractFeature. Rather than explicitly modeling such a base type (e.g., _AnyFeature_ defined by ISO 19109), as well as explicitly modeling generalization relationships to the base type, the encoding rule typically takes care of adding that relationship to relevant schema types. Requirements class xref:http://www.opengis.net/spec/uml2json/1.0/req/core[style=id%] does not declare specific common base types. That is left to other requirements classes.
 
 
 [[jsonschema_req_core_types_featureandobjecttype]]
-==== Feature and object type
+===== Feature and object type
 
 In the conceptual model, feature and object types represent objects that have identity. That differentiates these types from, for example, data types. Other than that, feature and object types - in the following summarily called types with identity - are encoded as JSON objects, just like a data type.
 
@@ -2199,21 +2208,328 @@ include::../requirements/core/REQ008.adoc[]
 
 NOTE: ISO 19109 requires class names to be unique within the scope of an application schema.
 
-The conversion of the class properties is defined in the <<jsonschema_schemaconversionrules_properties>> section. General type conversion rules, such as those documented in the <<jsonschema_req_core_types_classname>> section, may apply.
+The conversion of the class properties is defined in the <<jsonschema_req_core_properties>> section. General type conversion rules, such as those documented in the <<jsonschema_req_core_types_classname>> section, may apply.
 
 The conceptual model of a type with identity often does not contain an identifier property (a UML property whose value for field "isId" is set to true), whose value is used by applications to identify objects of that type. Instead, the according information is added or defined in platform specific encodings. For example, a GML application schema offers the gml:id attribute as well as the gml:identifier element to encode identifying information. In a web publishing context, the URI at which a JSON object is published can be used as its identifier. Requirements class xref:http://www.opengis.net/spec/uml2json/1.0/req/core[style=id%] does not declare any specific mechanism for adding an identifier property. That could be achieved through the definition of a <<jsonschema_req_core_types_common_base>>. However, requirements regarding such a base schema are left to other requirements classes. Likewise, this requirements class does not define any requirement regarding the number and characteristics of identifier properties. Again, that is left to other requirements classes.
 
 
 [[jsonschema_req_core_types_datatype]]
-==== Data type
+===== Data type
 
 include::../requirements/core/REQ009.adoc[]
 
 
+[[jsonschema_req_core_types_enumeration]]
+===== Enumeration
+
+include::../requirements/core/REQ010.adoc[]
+
+[[img_req_core_enumeration_example]]
+.\<<enumeration>> example
+image::figures/Enumeration_example.png[align="center"]
+
+[[example_req_core_jsonschema_enumeration]]
+.Example of enumerations encoded in JSON Schema
+[source,json,linenumbers]
+----
+{
+  "$schema": "http://json-schema.org/draft/2019-09/schema",
+  "$defs": {
+    "Enumeration1": {
+      "type": "number",
+      "enum": [-5, 0, 5.5]
+    },
+    "Enumeration2": {
+      "type": "string",
+      "enum": ["A","B","C"]
+    }
+  },
+  "anyOf": [
+    {"$ref": "#/$defs/Enumeration1"},
+    {"$ref": "#/$defs/Enumeration2"}
+  ]
+}
+----
+
+
+[[jsonschema_req_core_types_basictype]]
+===== Basic Type
+
+If a direct or indirect supertype of an application schema class is represented in JSON Schema by one of the simple JSON Schema types _string_, _number_, _integer_, or _boolean_, then that class represents a so called _basic type_. A basic type does not define a JSON object. It represents a simple data value, e.g., a string. The JSON Schema definition of a basic type thus defines a simple JSON Schema type.
+
+include::../requirements/core/REQ011.adoc[]
+
+[[table_req_core_basictypes_restrictions]]
+.Basic type restrictions
+[options="header"]
+|====================
+| tagged value (to define a restriction) | JSON Schema keyword | applicable JSON Schema type(s)
+| _jsonFormat_ | format | string, number, integer
+| _maxLength_ | maxLength | string
+| _jsonPattern_ | pattern | string
+| _minInclusive_ | minimum | number, integer
+| _minExclusive_ | exclusiveMinimum | number, integer
+| _maxInclusive_ | maximum | number, integer
+| _maxExclusive_ | exclusiveMaximum | number, integer
+|====================
+
+NOTE: The JSON Schema keyword "format" is defined in chapter 7 of <<ref_jsonschema_02_validation,JSON Schema Validation: A Vocabulary for Structural Validation of JSON>>. The formats defined there (e.g., "date-time", "uri", and "json-pointer") apply to JSON values of type string. Custom formats could apply to JSON values of type number and integer.
+
+NOTE: <<ref_jsonschema_02_validation,JSON Schema Validation: A Vocabulary for Structural Validation of JSON>> defines the JSON Schema keyword "pattern". According to that specification, the value of the keyword should be a regular expression according to the ECMA 262 regular expression dialect. However, the specification does not reference a particular version or edition of ECMA 262. The regular expression dialect to be used in a JSON Schema "pattern" therefore is not exactly defined, and consequently depends on the implementation of a JSON Schema validator. In order to avoid issues with this diversity, <<ref_jsonschema_02,JSON Schema: A Media Type for Describing JSON Documents>> defines a number of recommendations for writing regular expressions in JSON Schema.
+
+NOTE: If the "format" keyword is used to restrict the structure of a JSON string, so that it matches a certain regular expression, then it is useful to add the "pattern" keyword as well, explicitly defining that regular expression (given that the regular expression follows an ECMA 262 regular expression dialect). The reason is that the "format" is first and foremost an annotation, so can be ignored by JSON Schema validators, whereas the "pattern" keyword will be evaluated by a JSON Schema validator. JSON Schema validators may treat the "format" keyword like an assertion, but that is not guaranteed. In any case, the "format" keyword helps to convey more information about the specific type of a JSON value (e.g., "date" instead of just "string"), and thus should not be omitted if a certain, well-known (i.e., defined by a JSON Schema vocabulary) format is applicable to a JSON value.
+
+<<img_req_core_basictypes_example>> provides a detailed example that illustrates a number of cases. The JSON Schema encoding is shown in <<example_req_core_basictypes>>.
+
+[[img_req_core_basictypes_example]]
+.Basic types example
+image::figures/basic_types_example.png[align="center"]
+
+[[example_req_core_basictypes]]
+.Example of basic types encoded in JSON Schema
+[source,json,linenumbers]
+----
+{
+  "$schema": "http://json-schema.org/draft/2019-09/schema",
+  "$defs": {
+    "MyBoolean": {
+      "type": "boolean"
+    },
+    "MyCharacterString": {
+      "type": "string"
+    },
+    "MyNumber": {
+      "type": "number"
+    },
+    "Number0to360": {
+      "allOf": [
+        {
+          "$ref": "#/$defs/NumberNonNegative"
+        },
+        {
+          "maximum": 360.0
+        }
+      ]
+    },
+    "NumberMinus180toPlus180": {
+      "allOf": [
+        {
+          "$ref": "#/$defs/MyNumber"
+        },
+        {
+          "minimum": -180.0,
+          "maximum": 180.0
+        }
+      ]
+    },
+    "NumberNonNegative": {
+      "allOf": [
+        {
+          "$ref": "#/$defs/NumberOther"
+        },
+        {
+          "minimum": 0.0
+        }
+      ]
+    },
+    "NumberOther": {
+      "$ref": "#/$defs/MyNumber"
+    },
+    "String10": {
+      "allOf": [
+        {
+          "type": "string"
+        },
+        {
+          "maxLength": 10
+        }
+      ]
+    },
+    "StringFormat": {
+      "allOf": [
+        {
+          "$ref": "#/$defs/MyCharacterString"
+        },
+        {
+          "format": "email"
+        }
+      ]
+    },
+    "StringPattern": {
+      "allOf": [
+        {
+          "$ref": "#/$defs/MyCharacterString"
+        },
+        {
+          "pattern": "^[abc]{3}$"
+        }
+      ]
+    }
+  }
+}
+----
+
+
+[[jsonschema_req_core_properties]]
+==== Properties
+
+
+[[jsonschema_req_core_properties_general]]
+===== General
+
+include::../requirements/core/REQ012.adoc[]
+
+NOTE: By default, UML properties are converted to keys within the "properties" member of the JSON Schema definition for the type that owns the property. Additional requirements may override this encoding (e.g., the <<jsonschema_unions_req_type_discriminator,type discriminator encoding>> of \<<union>> properties), or augment the encoding (e.g., <<jsonschema_req_geojson_formats_nestedproperties,encoding the properties under the "properties" member of a GeoJSON-based feature>>).
+
+The default result of converting a UML property, therefore, is a key within the "properties" key of the JSON Schema definition for the type that owns the property, with the key name being the name of the UML property, and the value being a JSON Schema with constraints and annotations that define the property (value type, multiplicity, etc).
+
+The following figure and listing provide an example: <<img_req_core_properties_example>> shows a feature type with a number of properties. <<example_req_core_properties_general>> illustrates how the UML properties are represented within the "properties" of the JSON Schema that defines that type.
+
+[[img_req_core_properties_example]]
+.UML type used to exemplify JSON Schema encoding of UML properties
+image::figures/Properties_example.png[align="center"]
+
+[[example_req_core_properties_general]]
+.Encoding UML properties in JSON Schema
+[source,json,linenumbers]
+----
+{
+  "$schema": "http://json-schema.org/draft/2019-09/schema",
+  "$defs": {
+    "TypeX": {
+      "type": "object",
+      "properties": {
+        "property1": {"type": "string"},
+        "property2": {"type": "number"}        
+      }
+    }
+  },
+  "$ref": "#/$defs/TypeX"
+}
+----
+
+
+[[jsonschema_req_core_properties_valuetype]]
+===== Value Type
+
+include::../requirements/core/REQ016.adoc[]
+
+Examples:
+
+* using the "$anchor" value "TypeX": https://example.org/schemas/schema_definitions.json#TypeX
+* using JSON Pointer: https://example.org/schemas/schema_definitions.json#/$defs/TypeX
+** NOTE: If the referenced schema is a draft 07 JSON Schema, the JSON Pointer would have to change as follows: https://example.org/schemas/schema_definitions.json#/definitions/TypeX
+
+#TODO JE# add examples - json schema and instance
+
+The behavior described in xref:http://www.opengis.net/spec/uml2json/1.0/req/core/property-inline[style=id%] covers the case of an inline encoding of the property value. That is sufficient for simple application schemas. For more complex schemas, typically ones that contain associations between feature types, it can be necessary or desired to encode property values by-reference, i.e., using links. However, multiple options exist for realizing a by-reference encoding. These options are defined in separate requirements classes - see <<jsonschema_byreference>>. A particular JSON Schema encoding of a given application schema needs to choose one of these options, in order to enable by-reference encoding for relevant properties.
+
+
+[[jsonschema_req_core_properties_multiplicity]]
+===== Multiplicity
+
+include::../requirements/core/REQ013.adoc[]
+
+[[img_req_core_properties_multiplicity_example]]
+.UML type used to exemplify JSON Schema encoding of multiplicity
+image::figures/Multiplicity_example.png[align="center"]
+
+[[example_req_core_properties_multiplicity]]
+.Example for encoding multiplicity in JSON Schema
+[source,json,linenumbers]
+----
+{
+  "$schema": "http://json-schema.org/draft/2019-09/schema",
+  "$defs": {
+    "Type": {
+      "type": "object",
+      "properties": {
+        "property": {
+          "type": "array",
+          "minItems": 1,
+          "maxItems": 2,
+          "items": {
+            "type": "string"
+          },
+          "uniqueItems": true
+        }
+      },
+      "required": [
+        "property"
+      ]
+    }
+  },
+  "$ref": "#/$defs/Type"
+}
+----
+
+This JSON object is valid against the schema from <<example_req_core_properties_multiplicity>>:
+
+[source,json,linenumbers]
+----
+{
+"property": ["a","b"]
+}
+----
+
+This JSON object is invalid (because "property" has three values, which exceeds the maximum amount of allowed values) against the schema from <<example_req_core_properties_multiplicity>>:
+
+[source,json,linenumbers]
+----
+{
+"property": ["a","b",""]
+}
+----
+
+NOTE: All arrays in JSON are ordered, thus that the values of a UML property are ordered is always represented, and that the values of such a property are unordered cannot be represented. However, the latter should not matter to an application that does not expect ordered values for a certain property.
+
+
+[[jsonschema_req_core_properties_readonly]]
+===== Fixed / readOnly
+
+include::../requirements/core/REQ014.adoc[]
+
+
+[[jsonschema_req_core_properties_derived]]
+===== Derived
+
+include::../requirements/core/REQ015.adoc[]
+
+
+[[jsonschema_req_core_properties_initialvalue]]
+===== Initial Value
+
+include::../requirements/core/REQ017.adoc[]
+ 
+NOTE: Theoretically, the default value can also be a JSON array or object, but that cannot be represented in UML and thus is not a relevant use case.
+
+
+[[jsonschema_req_core_associationclass]]
+==== Association class
+
+There is no native represention for association classes in JSON or JSON Schema. For schemas that include association classes, a transformation of association classes as defined by GML 3.3 should be used.
+
+
+[[jsonschema_req_core_constraint]]
+==== Constraints
+
+OCL constraints can be used to enrich a conceptual model with requirements that cannot be expressed in UML alone. However, this specification does not define any requirements for converting OCL constraints to JSON Schema definitions, or to any other format with which the constraints can be checked on a JSON dataset.
+
+
+[[jsonschema_req_core_transformations]]
+==== Conceptual model transformations
+
+The conceptual schema may need to be transformed, in order to deal with model elements:
+
+* that cannot be represented in JSON at all (e.g., association classes);
+* that cannot be represented in a certain JSON format (e.g., a Solid - a 3D geometry type - as value for the "geometry" member of a GeoJSON feature); or
+* that are not (well) supported by client software (e.g., complex attribute values for styling, processing, and filtering).
+
+No specific model transformation requirements and recommendations are defined in this document. Examples of model transformations are given in <<ref_ugas2020>> and in the https://github.com/INSPIRE-MIF/2017.2[GitHub repository of the INSPIRE action 2017.2 on alternative encodings].
+
+
 [[jsonschema_req_plain]]
 === Requirements class: Encoding rule for a plain JSON Schema format
-
-#WIP#
 
 include::../requirements/plain/requirements_class.adoc[]
 
@@ -2255,6 +2571,7 @@ This requirements class does not define a means to add an identifier property - 
 
 include::../requirements/geojson-formats/requirements_class.adoc[]
 
+
 [[jsonschema_req_geojson_formats_iso19107_types]]
 ==== Implementation of ISO 19107 types for the "geometry" member
 
@@ -2281,9 +2598,9 @@ NOTE: <<table_iso19107_types_geometry_member>> uses geometry types defined by <<
 
 include::../requirements/geojson-formats/REQ002.adoc[]
 
-#TBD# If we do not want to require the omission of the identifier property or properties, instead leaving that up to communities
-
 NOTE: If a feature type has multiple UML properties where "isId" = true, or if the value type of such a property is not a simple type, some community specific conversion mechanism needs to be defined, for mapping the identifier value(s) to a simple string or number, which can be used as value of the "id" member of a GeoJSON feature.
+
+NOTE: The UML properties with "isId" = true are encoded as any other property. That is especially useful in case multiple such properties exist in a feature type, because applications that know the conceptual schema can read these dedicated properties directly, in order to gather information about the ID of a given feature, rather than having to decode the "id" member.
 
 
 [[jsonschema_req_geojson_formats_nestedproperties]]
@@ -2294,6 +2611,16 @@ include::../requirements/geojson-formats/REQ003.adoc[]
 NOTE: Additional requirements can override this behavior, by omitting certain UML properties or by mapping ceratin UML properties to first-level members of the resulting JSON object. An example for such a mapping is the <<jsonschema_req_geojson_formats_identifier,identifier property>>.
 
 NOTE: Properties of object types are encoded as first-level properties of the resulting JSON object. If object types should be encoded as feature types, then the object types would need to be transformed accordingly, before a JSON Schema encoding is created.
+
+
+[[jsonschema_req_geojson_formats_primary_geometry]]
+==== Primary geometry
+
+include::../requirements/geojson-formats/REQ004.adoc[]
+
+NOTE: UML properties of other kinds of classes - object types, data types, and unions - are not considered by this requirements. Object types are not encoded as GeoJSON features. Data types and unions may be used by other classes, which prevents a general exclusive mapping to the GeoJSON top-level "geometry" member. Only a direct property of a \<<featureType>> can be mapped in this way.
+
+#TODO JE# Example
 
 
 [[jsonschema_req_geojson]]
@@ -2354,59 +2681,85 @@ include::../requirements/jsonfg/REQ002.adoc[]
 NOTE: No common base schema is defined for object types. Such types need to be transformed to feature types if they should be encoded as JSON-FG features.
 
 
-[[jsonschema_req_entitytype]]
-=== Requirements class: Encoding of an additional entityType property
+[[jsonschema_req_jsonfg_primary_place]]
+==== Primary place
 
-include::../requirements/entitytype/requirements_class.adoc[]
+include::../requirements/jsonfg/REQ003.adoc[]
 
-NOTE: The requirements class xref:http://www.opengis.net/spec/uml2json/1.0/req/entitytype[style=id%] is applicable in <<jsonschema_req_plain,plain>> and <<jsonschema_req_geojson,GeoJSON>> JSON encodings. The <<jsonschema_req_jsonfg,JSON-FG>> encoding already provides the "featureType" member, which plays a similar role - at least for JSON objects representing features. Adding an "entityType" member in such an encoding would duplicate the already existing typing mechanism there.
+NOTE: UML properties of other kinds of classes - object types, data types, and unions - are not considered by this requirements. Object types are not encoded as JSON-FG features. Data types and unions may be used by other classes, which prevents a general exclusive mapping to the JSON-FG top-level "place" member. Only a direct property of a \<<featureType>> can be mapped in this way.
 
-#TBD# For JSON-FG, the "featureType" member is not defined for data types. That is a bit of a mismatch, considering that inheritance hierarchies for complex data types are possible in application schemas, and identifying the type of a data type value in actual JSON data could thus be desired by applications.
+#TODO JE# Example
 
-include::../requirements/entitytype/REQ001.adoc[]
 
-NOTE: By default, the property value is not restricted using "const", because doing so would prevent JSON Schema constraints that support inheritance-related checks. However, if the application schema did not use inheritance, then such restrictions could be defined.
+[[jsonschema_req_jsonfg_primary_time]]
+==== Primary time
 
-NOTE: Encoding the type name in JSON objects can be useful, since, as described in http://docs.opengeospatial.org/per/18-091r2.html#JSON_LD[chapter 6 of the OGC Testbed-14: Application Schemas and JSON Technologies Engineering Report], having a key within a JSON object with a string value that identifies the type of the object allows that object to be mapped to RDF. More specifically, the string value can be mapped to an IRI that identifies the type of an RDFS resource.
+include::../requirements/jsonfg/REQ004.adoc[]
 
-NOTE: Encoding a JSON object that represents an abstract type, with the "entityType" having the abstract type name as value, would be useful with regards to linked data applications, and conversion of JSON data to RDF using JSON-LD. Abstractness is also not supported in RDF/OWL, so RDF resources can define the RDFS/OWL class or datatype, which represent an abstract type from the conceptual model, as their type. That makes sense for cases in which the exact type of a resource or "thing" is not known yet, but a more general type is.
+NOTE: UML properties of other kinds of classes - object types, data types, and unions - are not considered by this requirements. Object types are not encoded as JSON-FG features. Data types and unions may be used by other classes, which prevents a general exclusive mapping to the JSON-FG top-level "time" member. Only a direct property of a \<<featureType>> can be mapped in this way.
 
-//[#example_jsonschema_types_classname_typeidentification,reftext='{listing-caption} {counter:listing-num}']
+include::../requirements/jsonfg/REQ005.adoc[]
 
-[[example_req_entitytype_jsonschema]]
-.JSON Schema example with property "entityType" used for identifying the type of a JSON object
-[source,json,linenumbers,options="unnumbered"]
-----
-{
-  "$schema": "http://json-schema.org/draft/2019-09/schema",
-  "$defs": {
-    "Type": {
-      "properties": {
-        "entityType": {
-          "type": "string"
-        },
-        "property": {
-          "type": "string"
-        }
-      },
-      "required": [
-        "entityType", "property"
-      ]
-    }
-  },
-  "$ref": "#/$defs/Type"
-}
-----
+NOTE: UML properties of other kinds of classes - object types, data types, and unions - are not considered by this requirements. Object types are not encoded as JSON-FG features. Data types and unions may be used by other classes, which prevents a general exclusive mapping to the JSON-FG top-level "time" member. Only a direct property of a \<<featureType>> can be mapped in this way.
 
-The following JSON instance is valid against the schema:
+#TODO JE# Examples
 
-[source,json,linenumbers,options="unnumbered"]
-----
-{
-  "entityType": "Type",
-  "property": "x"
-}
-----
+
+[[jsonschema_byreference]]
+=== Additional requirements classes for the by-reference encoding of property values
+
+==== Overview
+
+Requirements class xref:http://www.opengis.net/spec/uml2json/1.0/req/core specifies an <<jsonschema_req_core_properties_valuetype,inline encoding of property values>>. In case that the value type of a UML property is a type with identity (that is not implemented as a simple JSON Schema type), it can be preferable and maybe even necessary to encode the value by reference. In other cases, both options should be offered. That is similar to what the GML Application Schema encoding rules support (for further details, see OGC 07-036r1, Annex E, section E.2.4.11).
+
+NOTE: An example where a reference to an object is needed is when the object is the value of properties from multiple other objects that are encoded within the same JSON document. For example, a feature referenced from several other features. In such a situation, it is often desirable not to encode the object inline multiple times - especially if that object also referenced other objects.
+
+NOTE: Some applications may prefer to reference types with identity using a code (of type string or number) instead of using a URI. That code could be seen as a foreign key. In such cases, a model transformation should be applied first, which, for all properties whose value type is a type with identity, replaces the value type with _CharacterString_ or __Number__.
+
+Multiple options exist for realizing the by-reference encoding of property values. A requirements class is available for each option:
+
+* xref:http://www.opengis.net/spec/uml2json/1.0/req/by-reference-uri[style=id%] - by-reference encoding of property values using a plain URI
+* xref:http://www.opengis.net/spec/uml2json/1.0/req/by-reference-link-object[style=id%] - by-reference encoding of property values using a link object
+
+NOTE: The conversion behavior does not support by reference encoding for value types that are data types. In general, a data type does not have identity, and therefore a data type value should always be encoded inline, not by reference. The XML Schema encoding rule defined by ISO 19139:2007, typically used to encode metadata schemas (as defined by ISO 19115, and extensions thereof), on the other hand, allows by reference encoding for data type values. When comparing the version of ISO 19115 from 2003/2006 against the version from 2014, it is apparent that some classes that were defined as data types in the previous version have been changed to object types, for example _CI_Citation_. This indicates that the assignment of the \<<dataType>> stereotype has been corrected, in order to reflect in the conceptual model that the type shall be a type with identity.
+
+// Interestingly, there is an early activity of standardizing or harmonizing references in JSON: https://github.com/json-schema-org/referencing. However, that activity is still ongoing (as of November, 2022) and there are competing proposals.
+
+
+[[jsonschema_byreference_req_basic]]
+==== Requirements class: basics for the by-reference encoding of property values
+
+include::../requirements/by-reference-basic/requirements_class.adoc[]
+
+include::../requirements/by-reference-basic/REQ001.adoc[]
+
+NOTE: The default value for tag _inlineOrByReference_ is different to GML. The value _byReference_ has been chosen as default, in order to reduce the degrees of freedom and to reduce the schema complexity.
+
+
+[[jsonschema_byreference_encoding_req_uri]]
+==== Requirements class: by-reference encoding of property values using a plain URI
+
+include::../requirements/by-reference-uri/requirements_class.adoc[]
+
+include::../requirements/by-reference-uri/REQ001.adoc[]
+
+NOTE: The result is an XOR type of check, i.e., a value can either be given inline or by reference, but not both. This is different to GML, where in the case of _inlineOrByReference_ and a type with identity as value type, a value can be encoded both inline and by reference.
+
+#TODO JE# Examples - JSON schema and instance
+
+
+[[jsonschema_byreference_encoding_req_link_object]]
+==== Requirements class: by-reference encoding of property values using a link object
+
+include::../requirements/by-reference-link-object/requirements_class.adoc[]
+
+include::../requirements/by-reference-link-object/REQ001.adoc[]
+
+NOTE: The result is an XOR type of check, i.e., a value can either be given inline or by reference, but not both. This is different to GML, where in the case of _inlineOrByReference_ and a type with identity as value type, a value can be encoded both inline and by reference.
+
+// link object is most "webby" ... maybe link to discussion in JSON-FG Annex about linking
+
+#TODO JE# Examples - JSON schema and instance
 
 
 [[jsonschema_unions]]
@@ -2434,13 +2787,11 @@ The result of applying this encoding to the unions from <<img_unions_req_type_di
 
 [[img_unions_req_type_discriminator_union_example]]
 .Example of type discriminator unions
-image::images/type_discriminator_unions.png[align="center"]
-
-//[#example_jsonschema_union_type_discriminator,reftext='{listing-caption} {counter:listing-num}']
+image::figures/type_discriminator_unions.png[align="center"]
 
 [[example_unions_req_type_discriminator_jsonschema]]
 .Example of a JSON Schema for unions, encoding them as type discriminators
-[source,json,linenumbers,options="unnumbered"]
+[source,json,linenumbers]
 ----
 {
   "$schema": "http://json-schema.org/draft/2019-09/schema",
@@ -2494,13 +2845,11 @@ The result of applying this encoding to the union from <<img_unions_req_property
 
 [[img_unions_req_property_choice_union_example]]
 .\<<union>> example
-image::images/Union_example.png[align="center"]
-
-//[#example_jsonschema_union_minMaxProperties,reftext='{listing-caption} {counter:listing-num}']
+image::figures/Union_example.png[align="center"]
 
 [[example_unions_req_property_choice_jsonschema]]
 .Example of a JSON Schema for a \<<union>> class, representing the property choice using "minProperties" and "maxProperites"
-[source,json,linenumbers,options="unnumbered"]
+[source,json,linenumbers]
 ----
 {
   "$schema": "http://json-schema.org/draft/2019-09/schema",
@@ -2528,7 +2877,7 @@ NOTE: An alternative approach would be using the "oneOf" keyword, with one subsc
 
 This JSON object is valid against the schema:
 
-[source,json,options="unnumbered"]
+[source,json]
 ----
 {
   "option1": "x"
@@ -2537,9 +2886,181 @@ This JSON object is valid against the schema:
 
 This JSON object is invalid (because "option2" has a string value, rather than a numeric value) against the schema:
 
-[source,json,options="unnumbered"]
+[source,json]
 ----
 {
   "option2": "x"
+}
+----
+
+
+[[jsonschema_codelists]]
+=== Additional requirements classes for the encoding of code list types
+
+==== Overview
+
+This specification defines three approaches for encoding the values of properties that have a \<<codeList>> as value type:
+
+* using a simple literal value, e.g., a string or number that represents a code,
+* using a URI as code value, and
+* using a link object to link to a code representation.
+
+The following sections document requirements classes for code list encodings that support these three approaches. All of them inherit requirements from a common requirements class, which is defined in <<jsonschema_codelists_req_basic>>.
+
+
+[[jsonschema_codelists_req_basic]]
+==== Requirements class: Basic JSON Schema encoding for code lists
+
+include::../requirements/codelists-basic/requirements_class.adoc[]
+
+include::../requirements/codelists-basic/REQ001.adoc[]
+
+include::../requirements/codelists-basic/REQ002.adoc[]
+
+[[img_codelists_req_basic_jsonschema_example]]
+.Example of a \<<codeList>> type with tagged value 'codeList'
+image::figures/code_lists_basic.png[align="center"]
+
+[[example_codelists_req_basic_jsonschema]]
+.Example of the basic JSON Schema encoding of a \<<codeList>> type with tagged value 'codeList'
+[source,json,linenumbers]
+----
+{
+  "$schema": "http://json-schema.org/draft/2019-09/schema",
+  "$defs": {
+    "SomeCodelist": {
+      ...
+      "codeList": "http://example.org/codelists/SomeCodelist",
+      ...
+    }
+  }
+}
+----
+
+
+[[jsonschema_codelists_req_literal]]
+==== Requirements class: JSON Schema encoding for code lists - literal
+
+include::../requirements/codelists-literal/requirements_class.adoc[]
+
+include::../requirements/codelists-literal/REQ001.adoc[]
+
+[[table_req_codelists_literal_literalencodingtypes]]
+.Literal encoding type
+[options="header"]
+|====================
+| Conceptual type from ISO 19103 | simple JSON Schema type
+| CharacterString | string
+| Boolean | boolean
+| Real, Number | number
+| Integer | integer
+|====================
+
+[[img_codelists_req_literal_jsonschema_example]]
+.Example of \<<codeList>> types with tagged value 'literalEncodingType'
+image::figures/code_lists_literal.png[align="center"]
+
+[[example_codelists_req_literal_jsonschema]]
+.Example of the JSON Schema encodings of \<<codeList>> types with tagged value 'literalEncodingType'
+[source,json,linenumbers]
+----
+{
+  "$schema": "http://json-schema.org/draft/2019-09/schema",
+  "$defs": {
+    "CodelistNumeric": {
+      "type": "number"
+    },
+    "CodelistString": {
+      "type": "string"
+    }
+  }
+}
+----
+
+
+[[jsonschema_codelists_req_uri]]
+==== Requirements class: JSON Schema encoding for code lists - URI
+
+include::../requirements/codelists-uri/requirements_class.adoc[]
+
+include::../requirements/codelists-uri/REQ001.adoc[]
+
+[[example_codelists_req_uri_jsonschema]]
+.Example of the JSON Schema encodings of a \<<codeList>> type with the JSON Schema "type" being a URI
+[source,json,linenumbers]
+----
+{
+  "$schema": "http://json-schema.org/draft/2019-09/schema",
+  "$defs": {
+    "CodelistUriFormat": {
+      "type": "string",
+      "format": "uri"
+    }
+  }
+}
+----
+
+
+[[jsonschema_codelists_req_link_object]]
+==== Requirements class: JSON Schema encoding for code lists - link object
+
+include::../requirements/codelists-link-object/requirements_class.adoc[]
+
+include::../requirements/codelists-link-object/REQ001.adoc[]
+
+That means that a code value is essentially encoded as a "link object" as specified by IETF RFC 8288 and implemented in the OGC API standards. The Link object provides "href" and "title" members like the simple Xlinks in GML.
+
+#TBD# Do we have or need a dependency on OGC API Common, if we use the link object schema defined there? Is there a suitable requirements class in OGC API Common? That standard is still WIP?
+ 
+
+[[jsonschema_req_entitytype]]
+=== Requirements class: Encoding of an additional entityType property
+
+include::../requirements/entitytype/requirements_class.adoc[]
+
+NOTE: The requirements class xref:http://www.opengis.net/spec/uml2json/1.0/req/entitytype[style=id%] is applicable in <<jsonschema_req_plain,plain>> and <<jsonschema_req_geojson,GeoJSON>> JSON encodings. The <<jsonschema_req_jsonfg,JSON-FG>> encoding already provides the "featureType" member, which plays a similar role - at least for JSON objects representing features. Adding an "entityType" member in such an encoding would duplicate the already existing typing mechanism there.
+
+#TBD# For JSON-FG, the "featureType" member is not defined for data types. That is a bit of a mismatch, considering that inheritance hierarchies for complex data types are possible in application schemas, and identifying the type of a data type value in actual JSON data could thus be desired by applications.
+
+include::../requirements/entitytype/REQ001.adoc[]
+
+NOTE: By default, the property value is not restricted using "const", because doing so would prevent JSON Schema constraints that support inheritance-related checks. However, if the application schema did not use inheritance, then such restrictions could be defined.
+
+NOTE: Encoding the type name in JSON objects can be useful, since, as described in http://docs.opengeospatial.org/per/18-091r2.html#JSON_LD[chapter 6 of the OGC Testbed-14: Application Schemas and JSON Technologies Engineering Report], having a key within a JSON object with a string value that identifies the type of the object allows that object to be mapped to RDF. More specifically, the string value can be mapped to an IRI that identifies the type of an RDFS resource.
+
+NOTE: Encoding a JSON object that represents an abstract type, with the "entityType" having the abstract type name as value, would be useful with regards to linked data applications, and conversion of JSON data to RDF using JSON-LD. Abstractness is also not supported in RDF/OWL, so RDF resources can define the RDFS/OWL class or datatype, which represent an abstract type from the conceptual model, as their type. That makes sense for cases in which the exact type of a resource or "thing" is not known yet, but a more general type is.
+
+[[example_req_entitytype_jsonschema]]
+.JSON Schema example with property "entityType" used for identifying the type of a JSON object
+[source,json,linenumbers]
+----
+{
+  "$schema": "http://json-schema.org/draft/2019-09/schema",
+  "$defs": {
+    "Type": {
+      "properties": {
+        "entityType": {
+          "type": "string"
+        },
+        "property": {
+          "type": "string"
+        }
+      },
+      "required": [
+        "entityType", "property"
+      ]
+    }
+  },
+  "$ref": "#/$defs/Type"
+}
+----
+
+The following JSON instance is valid against the schema:
+
+[source,json,linenumbers]
+----
+{
+  "entityType": "Type",
+  "property": "x"
 }
 ----

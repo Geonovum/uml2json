@@ -1,0 +1,8 @@
+[requirements_class]
+====
+[%metadata]
+identifier:: http://www.opengis.net/spec/uml2json/1.0/req/union-property-choice
+target:: JSON Schema Encoding
+inherit:: http://www.opengis.net/spec/uml2json/1.0/req/core
+requirement:: http://www.opengis.net/spec/uml2json/1.0/req/union-property-choice/encoding
+====

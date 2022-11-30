@@ -1,0 +1,7 @@
+[requirement]
+====
+[%metadata]
+identifier:: http://www.opengis.net/spec/uml2json/1.0/req/core/feature-and-object-types
+statement:: The feature and object types of an application schema shall be converted to JSON Schema definitions of JSON objects. These definitions shall be added to the definitions schema, using the type name as definition key.
+
+====

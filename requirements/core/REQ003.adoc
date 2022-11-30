@@ -1,0 +1,7 @@
+[requirement]
+====
+[%metadata]
+identifier:: http://www.opengis.net/spec/uml2json/1.0/req/core/iso19103-primitive-types
+statement:: If a UML property is encoded in JSON Schema, and the value type is one of the ISO 19103 primitive types listed in <<table_req_core_iso19103_primitive_types>>, then the simple JSON Schema type as well as the JSON Schema keywords listed in <<table_req_core_iso19103_primitive_types>> shall be used in the JSON Schema definition of the property.
+
+====

@@ -1,0 +1,7 @@
+[requirement]
+====
+[%metadata]
+identifier:: http://www.opengis.net/spec/uml2json/1.0/req/core/schema-references
+statement:: References from types of the application schema to other types - within the same or within an external schema - shall be encoded as references to the according definitions schemas, using the JSON Schema keyword "$ref" - see <<img_req_core_json_schema_references_between_definitions_schemas>>.
+
+====

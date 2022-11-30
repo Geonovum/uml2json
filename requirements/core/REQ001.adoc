@@ -1,0 +1,40 @@
+[requirement]
+====
+[%metadata]
+identifier:: http://www.opengis.net/spec/uml2json/1.0/req/core/definitions-schema
+
+[.component,class=part]
+--
+A UML application schema and its classes shall be converted into a single _definitions schema_.
+
+NOTE: A definitions schema is a JSON Schema that uses the "$defs" keyword.
+--
+
+[.component,class=part]
+--
+The file name of the _definitions schema_ shall be constructed as follows: If tagged value _jsonDocument_ is set on the application schema package, with a value that is not blank (i.e., purely whitespace characters), then the tag value shall be used as the file name of the definitions schema. Otherwise, the package name shall be used as fallback, replacing all spaces and forward slashes with underscores, and appending '.json'.
+--
+
+[.component,class=part]
+--
+The "$schema" keyword shall be added to the definitions schema. Its value shall be one of:
+
+* "https://json-schema.org/draft/2019-09/schema"
+* "https://json-schema.org/draft/2020-12/schema"
+--
+
+[.component,class=part]
+--
+The definitions schema shall have an "$id" member, whose value is the value of tag _jsonId_, as defined on the application schema package.
+--
+
+[.component,class=part]
+--
+The "$defs" keyword shall have a JSON object as value, with each member representing the JSON Schema definition of a class from the application schema.
+--
+
+
+
+
+ 
+====

@@ -1,0 +1,10 @@
+[requirement]
+====
+[%metadata]
+identifier:: http://www.opengis.net/spec/uml2json/1.0/req/entitytype/member
+
+part:: If the class C that is being converted is a feature type, an object type, or a data type, then the JSON member "entityType" shall be added to the properties of the JSON object that represents the class. If, however, the JSON Schema encoding of any of the potentially existing supertypes of the class already defines the "entityType" member, then the "entityType" member shall not be added to the JSON representation of class C.
+part:: The "entityType" member shall be required and string-valued.
+part:: The "entityType" member shall be used to encode the name of the conceptual type (i.e., the class) that is represented by the JSON object.
+ 
+====

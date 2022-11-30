@@ -1,0 +1,20 @@
+[requirement]
+====
+[%metadata]
+identifier:: http://www.opengis.net/spec/uml2json/1.0/req/core/property-multiplicity
+
+[.component,class=part]
+--
+If the minimum cardinality of a UML property is 1 or greater, and the class that owns the property is not a \<<union>>, then the property shall be listed under the "required" properties of the JSON object to which the property belongs.
+--
+
+[.component,class=part]
+--
+In addition, if the maximum cardinality of the property is greater than 1, then a JSON Schema shall be created for the property as follows.
+
+* The "type" of the JSON property is set to "array", with the "items" keyword containing the JSON Schema constraints that are created to represent the value type of the property.
+* If the minimum cardinality is greater than 0, it is encoded using the "minItems" keyword.
+* If the maximum cardinality is not unbounded, it is encoded using the "maxItems" keyword.
+* If the values of the property must be unique (which is the default for UML properties), then that is represented by adding `"uniqueItems": true`.
+--
+====

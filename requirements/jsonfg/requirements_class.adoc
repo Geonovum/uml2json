@@ -1,0 +1,14 @@
+[requirements_class]
+====
+[%metadata]
+identifier:: http://www.opengis.net/spec/uml2json/1.0/req/jsonfg
+target:: JSON (Schema) Encoding
+inherit:: http://www.opengis.net/spec/uml2json/1.0/req/geojson-formats
+inherit:: http://www.opengis.net/spec/json-fg-1/0.1/req/core
+requirement:: http://www.opengis.net/spec/uml2json/1.0/req/jsonfg/iso19107-types-for-place-member
+requirement:: http://www.opengis.net/spec/uml2json/1.0/req/jsonfg/common-base
+requirement:: http://www.opengis.net/spec/uml2json/1.0/req/jsonfg/primary-place
+requirement:: http://www.opengis.net/spec/uml2json/1.0/req/jsonfg/primary-instant
+requirement:: http://www.opengis.net/spec/uml2json/1.0/req/jsonfg/primary-interval
+
+====

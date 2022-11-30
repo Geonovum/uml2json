@@ -1,0 +1,7 @@
+[requirement]
+====
+[%metadata]
+identifier:: http://www.opengis.net/spec/uml2json/1.0/req/codelists-uri/type
+statement:: The JSON Schema definition of a \<<codeList>> shall have a "type" member with value "string", as well as a "format" member with value "uri".
+
+====

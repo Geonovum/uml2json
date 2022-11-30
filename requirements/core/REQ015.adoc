@@ -1,0 +1,7 @@
+[requirement]
+====
+[%metadata]
+identifier:: http://www.opengis.net/spec/uml2json/1.0/req/core/property-derived
+statement:: The JSON Schema definition of a UML property that is marked as derived shall include the "readOnly" annotation with JSON value true.
+
+====

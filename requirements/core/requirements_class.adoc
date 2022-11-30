@@ -1,0 +1,28 @@
+[requirements_class]
+====
+[%metadata]
+identifier:: http://www.opengis.net/spec/uml2json/1.0/req/core
+target:: JSON (Schema) Encoding
+
+requirement:: http://www.opengis.net/spec/uml2json/1.0/req/core/definitions-schema
+requirement:: http://www.opengis.net/spec/uml2json/1.0/req/core/schema-references
+requirement:: http://www.opengis.net/spec/uml2json/1.0/req/core/iso19103-primitive-types
+requirement:: http://www.opengis.net/spec/uml2json/1.0/req/core/iso19103-measure-types
+requirement:: http://www.opengis.net/spec/uml2json/1.0/req/core/class-name
+requirement:: http://www.opengis.net/spec/uml2json/1.0/req/core/abstract-types
+requirement:: http://www.opengis.net/spec/uml2json/1.0/req/core/generalization
+requirement:: http://www.opengis.net/spec/uml2json/1.0/req/core/feature-and-object-types
+requirement:: http://www.opengis.net/spec/uml2json/1.0/req/core/data-types
+requirement:: http://www.opengis.net/spec/uml2json/1.0/req/core/enumerations
+requirement:: http://www.opengis.net/spec/uml2json/1.0/req/core/basic-types
+requirement:: http://www.opengis.net/spec/uml2json/1.0/req/core/properties
+requirement:: http://www.opengis.net/spec/uml2json/1.0/req/core/property-inline
+requirement:: http://www.opengis.net/spec/uml2json/1.0/req/core/property-multiplicity
+requirement:: http://www.opengis.net/spec/uml2json/1.0/req/core/property-fixed-readonly
+requirement:: http://www.opengis.net/spec/uml2json/1.0/req/core/property-derived
+requirement:: http://www.opengis.net/spec/uml2json/1.0/req/core/property-initial-value
+
+recommendation:: http://www.opengis.net/spec/uml2json/1.0/req/core/id-characteristics
+recommendation:: http://www.opengis.net/spec/uml2json/1.0/req/core/schema-publication-media-type
+recommendation:: http://www.opengis.net/spec/uml2json/1.0/req/core/format-and-pattern
+====

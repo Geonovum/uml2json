@@ -1,0 +1,7 @@
+[requirement]
+====
+[%metadata]
+identifier:: http://www.opengis.net/spec/uml2json/1.0/req/core/class-name
+statement:: The name of a class shall be encoded as value of an "$anchor" member in the schema definition of the class (within the definitions schema).
+
+====

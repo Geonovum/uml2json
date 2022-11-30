@@ -1,0 +1,7 @@
+[requirement]
+====
+[%metadata]
+identifier:: http://www.opengis.net/spec/uml2json/1.0/req/core/abstract-types
+statement:: An abstract class shall be encoded like a non-abstract class.
+
+====

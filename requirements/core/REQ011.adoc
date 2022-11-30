@@ -1,0 +1,26 @@
+[requirement]
+====
+[%metadata]
+identifier:: http://www.opengis.net/spec/uml2json/1.0/req/core/basic-types
+
+[.component,class=part]
+--
+If the direct supertype of a basic type is implemented as one of the simple JSON Schema types, then the JSON Schema definition of the basic type shall have a "type" member with that simple JSON Schema type as value, and potentially additional JSON Schema keywords - especially "format" - which may be defined for the JSON Schema implementation of the supertype (for further details, see <<jsonschema_req_core_external_types>>). Otherwise, the JSON Schema definition of the basic type shall reference the JSON Schema definition of its supertype using the "$ref" member.
+
+NOTE: If an official JSON Schema was published for the types defined in <<ref_iso19103>>, then the definitions of that schema could be referenced, instead of creating a "type" member.
+--
+
+[.component,class=part]
+--
+For each tag listed in <<table_req_core_basictypes_restrictions>>, add the corresponding JSON Schema keyword (as defined in the table) to the JSON Schema definition of the basic type, with the tag value as value, if all of the following conditions are met:
+
+* The tag is defined on the basic type and has a non-blank value.
+* The simple JSON Schema type with which the basic type (or its direct or indirect supertype) is implemented is one of the simple JSON Schema types for which the JSON Schema keyword is applicable (as defined in <<table_req_core_basictypes_restrictions>>). 
+--
+
+[.component,class=part]
+--
+If one or more JSON Schema keywords listed in <<table_req_core_basictypes_restrictions>> are added to the JSON Schema definition of the basic type, and that definition does not declare a "type" member - i.e., it references the JSON Schema definition of its supertype via "$ref" - then an "allOf" keyword shall be used to combine the referenced schema definition and the list of additional JSON Schema keywords.
+--
+
+====

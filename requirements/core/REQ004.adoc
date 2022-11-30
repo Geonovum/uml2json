@@ -1,0 +1,7 @@
+[requirement]
+====
+[%metadata]
+identifier:: http://www.opengis.net/spec/uml2json/1.0/req/core/iso19103-measure-types
+statement:: If a UML property is encoded in JSON Schema, and the value type is one of the ISO 19103 measure types (e.g., Measure, Length, Speed, Angle, Area, or Volume), then the JSON schema definition in <<jsonschema_for_iso19103_measure_types>> shall be used in the JSON Schema definition of the property.
+
+====

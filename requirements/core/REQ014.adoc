@@ -1,0 +1,7 @@
+[requirement]
+====
+[%metadata]
+identifier:: http://www.opengis.net/spec/uml2json/1.0/req/core/property-fixed-readonly
+statement:: The JSON Schema definition of a UML property that is marked as read only or fixed shall include the "readOnly" annotation with JSON value true.
+
+====
