@@ -11,11 +11,15 @@ See https://www.metanorma.org/author/ogc/authoring-guide/bibliographic-reference
 
 * [[[ref_json,IETF RFC 8259]]]IETF RFC 8259, The JavaScript Object Notation (JSON) Data Interchange Format
 * [[[ref_geojson,IETF RFC 7946]]]IETF RFC 7946, The GeoJSON Format
-* [[[ref_jsonschema_02,IETF I-D.draft-handrews-json-schema-02]]]Internet Engineering Task Force (IETF). Draft draft-handrews-json-schema-02: **JSON Schema: A Media Type for Describing JSON Documents** [online]. Edited by A. Wright, H. Andrews, B. Hutton, and G. Dennis. 2019 [viewed 2020-04-20]. Available at https://tools.ietf.org/html/draft-handrews-json-schema-02
-* [[[ref_jsonschema_02_validation,IETF I-D.draft-handrews-json-schema-validation-02]]]Internet Engineering Task Force (IETF). Draft draft-handrews-json-schema-validation-02: **JSON Schema Validation: A Vocabulary for Structural Validation of JSON** [online]. Edited by A. Wright, H. Andrews, and B. Hutton. 2019 [viewed 2020-04-20]. Available at https://tools.ietf.org/html/draft-handrews-json-schema-validation-02
+* [[[ref_jsonpointer,IETF RFC 6901]]]IETF RFC 6901, JavaScript Object Notation (JSON) Pointer
+* [[[ref_jsonschema_19,IETF I-D.draft-handrews-json-schema-02]]]Internet Engineering Task Force (IETF). Draft draft-handrews-json-schema-02: JSON Schema: A Media Type for Describing JSON Documents
+* [[[ref_jsonschema_19_validation,IETF I-D.draft-handrews-json-schema-validation-02]]]Internet Engineering Task Force (IETF). Draft draft-handrews-json-schema-validation-02: JSON Schema Validation: A Vocabulary for Structural Validation of JSON
+* [[[ref_jsonschema_20,IETF I-D.draft-bhutton-json-schema-01]]]Internet Engineering Task Force (IETF). Draft draft-bhutton-json-schema-01: JSON Schema: A Media Type for Describing JSON Documents
+* [[[ref_jsonschema_20_validation,IETF I-D.draft-bhutton-json-schema-validation-01]]]Internet Engineering Task Force (IETF). Draft draft-bhutton-json-schema-validation-01: JSON Schema Validation: A Vocabulary for Structural Validation of JSON
 * [[[ref_iso8601_2,ISO 8601-2:2019]]]ISO 8601-2:2019, Date and time — Representations for information interchange — Part 1: Extensions
 * [[[ref_iso19103,ISO 19103:2015]]]ISO 19103:2015, Geographic information – Conceptual schema language
 * [[[ref_iso19107,ISO 19107:2003]]]ISO 19107:2003, Geographic information – Spatial schema
 * [[[ref_iso19109,ISO 19109:2015]]]ISO 19109:2015, Geographic information – Rules for application schema
-* [[[ref_ogcapi_features_part1,OGC 17-069r3]]]OGC 17-069r3, OGC API - Features - Part 1: Core, Version 1.0.0
-* [[[OGC06121r9,OGC 06-121r9]]], OGC Web Service Common Implementation Specification
+//* [[[ref_ogcapi_features_part1,OGC 17-069r3]]]OGC 17-069r3, OGC API - Features - Part 1: Core, Version 1.0.0
+//* [[[OGC06121r9,OGC 06-121r9]]], OGC Web Service Common Implementation Specification
+* [[[ref_ecma262v11,ECMA 262]]]ECMA-262, 11th edition specification, June 2020, https://www.ecma-international.org/ecma-262/11.0/index.html

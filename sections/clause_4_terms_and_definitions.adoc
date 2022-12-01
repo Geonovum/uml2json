@@ -28,58 +28,34 @@ As defined by <<ref_iso19103>>, section 6.10, a data type is a class with stereo
 ===	Abbreviated terms
 
 API:: Application Programming Interface
-ASCII:: American Standard Code for Information Interchange
-CRS:: Coordinate Reference System
-DDL:: Data Definition Language
-EAP:: Enterprise Architect Project
 ECMA:: European association for standardizing information and communication systems
-EPSG:: European Petroleum Survey Group
-ER:: Engineering Report
-GFM:: General Feature Model
 GML:: Geography Markup Language
-GML-SF:: GML Simple Features
-GUI:: Graphical User Interface
-HTML:: Hypertext Markup Language
 HTTP:: Hypertext Transfer Protocol
 IETF:: Internet Engineering Task Force
-IP :: Innovation Program
+INSPIRE:: Infrastructure for spatial information in Europe
 IRI:: Internationalized Resource Identifier
 ISO:: International Organization for Standardization
 JSON:: JavaScript Object Notation
+JSON-FG:: OGC Features and Geometries JSON
 JSON-LD:: JSON for Linked Data
-MDA:: Model Driven Architecture
-MDE:: Model Driven Engineering
-MDG:: Model Driven Generation
-MSL:: Mean Sea Level
-OAI:: OpenAPI Initiative
 OCL:: Object Constraint Language
 OGC:: Open Geospatial Consortium
-PSM:: Platform Specific Model
-RDB:: Relational Databases
-SQL:: Structured Query Language
-SSI:: System Security Interoperability
-SWE:: Sensor Web Enablement
-SWG:: Standards Working Group
-TC:: Technical Committee
-UCUM:: The Unified Code for Units of Measure
+OWL:: Web Ontology Language
+RDF:: Resource Description Framework
+RDFS:: RDF Schema
 UGAS:: UML to GML Application Schema
 UML:: Unified Modeling Language
 URI:: Uniform Resource Identifier
 URL:: Unform Resource Locator
 W3C:: World Wide Web Consortium
-WGS:: World Geodetic System
 XML:: Extensible Markup Language
-XPath:: XML Path Language
-XQuery:: XML Query Language
-XSD:: XML Schema
-YAML:: YAML Ain't Markup Language
 
 /////
 
-Note to self for future documents: You can find acronyms by generating the document as HTML, saving it as XHTML, and then running the following XQuery:
+Note to self for future documents: You can find acronyms by generating the document as HTML, saving it as XHTML, and then running the following XQuery (for example in the oXygen XML editor, on the opened XHTML document):
 
 let $acronyms :=
-  for $text in //text()[fn:string-length() > 0]
+  for $text in //*[not(local-name() = ('script','style'))]/text()[fn:string-length() > 0]
   let $tokens := fn:tokenize($text,'\W')
   return
     for $token in $tokens
@@ -89,6 +65,6 @@ let $acronyms :=
 return sort(distinct-values($acronyms))
 
 
-You'll have to throw away a couple of false-positives but in general this has been useful.
+You'll have to throw away false-positives but in general this has been useful.
 
 /////

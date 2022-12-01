@@ -30,7 +30,7 @@ The definitions schema shall have an "$id" member, whose value is the value of t
 
 [.component,class=part]
 --
-The "$defs" keyword shall have a JSON object as value, with each member representing the JSON Schema definition of a class from the application schema.
+The "$defs" keyword shall have a JSON object as value, where each member represents the JSON Schema definition of a class from the application schema.
 --
 
 

@@ -1817,13 +1817,15 @@ This JSON object is valid against the schema from <<example_jsonschema_encrule_p
 [[jsonschema_introduction]]
 === Introduction
 
-The following chapters define requirements classes for the encoding of application schemas in UML as JSON Schema, and likewise for the encoding of application schema data as JSON data. 
-
-The remainder of this chapter provides a summary of the relevant UML profile - stereotypes and their tagged values - (<<jsonschema_introduction_uml_profile>>), as well as an overview of the requirements classes defined in this specification (<<jsonschema_introduction_req_classes>>).
+This chapter defines requirements classes for the encoding of application schemas in UML as JSON Schema, and likewise for the encoding of application schema data as JSON data. 
 
 
-[[jsonschema_introduction_uml_profile]]
-==== UML profile
+[[jsonschema_uml_profile]]
+=== UML profile
+
+// summary of the relevant UML profile - stereotypes and their tagged values
+
+#TBD# Move to an annex, to clause 6 (informative)? The conventions chapter does not seem to be the right place ...
 
 The stereotypes as well as tagged values that are relevant for JSON Schema encodings are listed in <<table_umlprofile_stereotypes>> and <<table_umlprofile_tagged_values>>.
 
@@ -1875,53 +1877,6 @@ NOTE: Some conceptual schemas and application schemas do not make use of the ste
 |===
 
 
-[[jsonschema_introduction_req_classes]]
-==== Requirements classes
-
-This specification defines a number of requirements classes, which specify requirements for encoding (elements of) an application schema in UML to JSON Schema. <<img_overview_req_classes>> provides an overview of these requirements classes, together with their dependencies.
-
-[[img_overview_req_classes]]
-.Requirements classes for encoding an application schema in UML as a JSON Schema
-image::figures/requirements_classes.png[align="center"]
-
-Common encoding behavior is defined in the core requirements class (<<jsonschema_req_core>>). Additional requirements classes exists, which serve different purposes:
-
-* Three requirements classes are defined, to establish basic JSON encodings:
-** a plain encoding (<<jsonschema_req_plain>>),
-** a GeoJSON encoding (<<jsonschema_req_geojson>>), and
-** a JSON-FG encoding (<<jsonschema_req_jsonfg>>)
-* There are two requirements classes that represent options for realizing a by-reference encoding of property values, one using URIs (<<jsonschema_byreference_encoding_req_uri>>, and one using link objects <<jsonschema_byreference_encoding_req_link_object>>).
-* Requirements classes also exist for the two ways in which \<<union>> types are used in practice: as type discriminator (<<jsonschema_unions_req_type_discriminator>>) and as property choice (<<jsonschema_unions_req_property_choice>>).
-* Code list valued properties can be represented in one of three ways, defined by requirements classes: as a literal (<<jsonschema_codelists_req_literal>>), as URI (<<jsonschema_codelists_req_uri>>), and as link object (<<jsonschema_codelists_req_link_object>>).
-* Finally, an additional requirements class supports the encoding of a JSON member for storing the name of the conceptual type that a JSON object encodes (<<jsonschema_req_entitytype>>).
-
-A community can combine these requirements classes as needed to achieve a full JSON Schema encoding, which satisfies their specific JSON encoding requirements. For example, a community might choose a GeoJSON compliant encoding, together with the property choice encoding for unions, as well as using link objects for by-reference encoding and code values.
-
-<<table_introduction_req_classes>> lists all requirements classes defined by this specification.
-
-[[table_introduction_req_classes]]
-.Requirements classes overview
-[width="90%",options="header"]
-|===
-| Requirements class | Clause
-|xref:http://www.opengis.net/spec/uml2json/1.0/req/core[style=id%] |<<jsonschema_req_core>>
-|xref:http://www.opengis.net/spec/uml2json/1.0/req/plain[style=id%] |<<jsonschema_req_plain>>
-|xref:http://www.opengis.net/spec/uml2json/1.0/req/geojson-formats[style=id%] |<<jsonschema_req_geojson_formats>>
-|xref:http://www.opengis.net/spec/uml2json/1.0/req/geojson[style=id%] |<<jsonschema_req_geojson>>
-|xref:http://www.opengis.net/spec/uml2json/1.0/req/jsonfg[style=id%] |<<jsonschema_req_jsonfg>>
-|xref:http://www.opengis.net/spec/uml2json/1.0/req/by-reference-basic[style=id%] |<<jsonschema_byreference_req_basic>>
-|xref:http://www.opengis.net/spec/uml2json/1.0/req/by-reference-uri[style=id%] |<<jsonschema_byreference_encoding_req_uri>>
-|xref:http://www.opengis.net/spec/uml2json/1.0/req/by-reference-link-object[style=id%] |<<jsonschema_byreference_encoding_req_link_object>>
-|xref:http://www.opengis.net/spec/uml2json/1.0/req/union-type-discriminator[style=id%] |<<jsonschema_unions_req_type_discriminator>>
-|xref:http://www.opengis.net/spec/uml2json/1.0/req/union-property-choice[style=id%] |<<jsonschema_unions_req_property_choice>>
-|xref:http://www.opengis.net/spec/uml2json/1.0/req/codelists-basic[style=id%] |<<jsonschema_codelists_req_basic>>
-|xref:http://www.opengis.net/spec/uml2json/1.0/req/codelists-literal[style=id%] |<<jsonschema_codelists_req_literal>>
-|xref:http://www.opengis.net/spec/uml2json/1.0/req/codelists-uri[style=id%] |<<jsonschema_codelists_req_uri>>
-|xref:http://www.opengis.net/spec/uml2json/1.0/req/codelists-link-object[style=id%] |<<jsonschema_codelists_req_link_object>>
-|xref:http://www.opengis.net/spec/uml2json/1.0/req/entitytype[style=id%] |<<jsonschema_req_entitytype>>
-|===
-
-
 [[jsonschema_req_core]]
 === Requirements class: Core
 
@@ -1931,11 +1886,11 @@ include::../requirements/core/requirements_class.adoc[]
 [[jsonschema_req_core_definitionsschema]]
 ==== Definitions schema
 
-Schema packages have the stereotype \<<applicationSchema>>, \<<schema>>, or an alias (e.g., using a specific language, like \<<anwendungsschema>>). An \<<applicationSchema>> package represents an application schema according to ISO 19109. The stereotype \<<schema>> has been introduced for packages that should be treated like application schemas, but do not contain feature types.
+Schema packages have the stereotype \<<applicationSchema>>, \<<schema>>, or an alias (e.g., using a specific language, like in German: \<<anwendungsschema>>). An \<<applicationSchema>> package represents an application schema according to ISO 19109. The stereotype \<<schema>> has been introduced for packages that should be treated like application schemas, but do not contain feature types.
 
 include::../requirements/core/REQ001.adoc[]
 
-NOTE: Encoding the content of an application schema in a single _definitions schema_, it is straightforward to assign the JSON Schema URL whenever such a reference is required for one of the application schema classes. If the content of the application schemas was distributed over multiple _definitions schema_ files, it would be necessary to maintain a mapping for each application schema class, to the URL of the JSON Schema that contains the definition of that class.
+NOTE: When encoding the content of an application schema in a single _definitions schema_, it is straightforward to assign the JSON Schema URL whenever such a reference is required for one of the application schema classes. If the content of the application schemas was distributed over multiple _definitions schema_ files, it would be necessary to maintain a mapping for each application schema class, to the URL of the JSON Schema that contains the definition of that class.
 
 NOTE: The "$id" identifies the schema resource with its canonical URI. The URI is an identifier and not necessarily a resolvable URL. If the "$id" is a URL, there is no expectation that the JSON Schema can be downloaded at that URL. 
 
@@ -1967,6 +1922,7 @@ include::../requirements/core/REC002.adoc[]
 }
 ----
 
+
 NOTE: The "$id" of the definitions schema is not included in other examples within this chapter, because declaring an absolute, non-existent URL in these examples often prevents JSON Pointers from these examples from working when testing the examples, for instance on https://www.jsonschemavalidator.net/.
 
 include::../requirements/core/REQ002.adoc[]
@@ -1975,7 +1931,7 @@ include::../requirements/core/REQ002.adoc[]
 .References between JSON Schemas using $ref with JSON pointers as values
 image::figures/references_between_definitions_schemas.png[align="center"]
 
-A link to a particular definition within a definitions schema requires the use of a JSON Pointer or an anchor in the fragment identifier of the link URL. https://tools.ietf.org/html/rfc6901#section-6[JSON Pointer], chapter 6, explicitly states that the media type in which a JSON value is provided needs to support this kind of fragment identifier, and that this is not the case for the media type application/json. If a JSON Schema was published with this media type, then it is possible that the application ignores a fragment identifier (because the media type does not support fragment identifiers).
+A link to a particular definition within a definitions schema requires the use of a JSON Pointer or an anchor in the fragment identifier of the link URL. <<ref_jsonpointer,JSON Pointer>>, chapter 6, explicitly states that the media type in which a JSON value is provided needs to support this kind of fragment identifier, and that this is not the case for the media type application/json. If a JSON Schema was published with this media type, then it is possible that the application ignores a fragment identifier (because the media type does not support fragment identifiers).
 
 include::../requirements/core/REC001.adoc[]
 
@@ -1983,7 +1939,7 @@ include::../requirements/core/REC001.adoc[]
 
 [NOTE]
 ======
-The JSON Schema with which to validate a JSON document cannot be identified within that document itself. In other words, JSON Schema does not define a concept like an xsi:schemaLocation, which is typically used in an XML document to reference the applicable XML Schema(s). Instead, JSON Schema uses link headers and media type parameters to tie a JSON Schema to a JSON document (for further details, see https://tools.ietf.org/html/draft-handrews-json-schema-02[JSON Schema core], sections 11.1 and 11.2). The relationship between a JSON document and the JSON Schema for validation can also be defined explicitly by an application.
+The JSON Schema with which to validate a JSON document cannot be identified within that document itself. In other words, JSON Schema does not define a concept like an xsi:schemaLocation, which is typically used in an XML document to reference the applicable XML Schema(s). Instead, JSON Schema uses link headers and media type parameters to tie a JSON Schema to a JSON document (for further details, see <<ref_jsonschema_19,JSON Schema core>>, sections 11.1 and 11.2). The relationship between a JSON document and the JSON Schema for validation can also be defined explicitly by an application, i.e., in an application specific way.
 ======
 
 
@@ -2019,7 +1975,7 @@ Potential reasons for NOT using JSON Schema annotations are:
 
 Application schemas typically use types from other schemas, for example the types defined by ISO 19103 and ISO 19107. External types can be used as value types of properties, and as supertypes for types defined in the application schema that is being converted.
 
-Whenever an external type is used, its JSON Schema definition is needed. Either an external type is implemented as one of the simple JSON value types (e.g., string - maybe with a certain format), or it is defined by a particular JSON Schema. In case of a JSON Schema, the URL of that schema needs to be known during the encoding process. If the schema is a definitions schema, then the URL needs to be augmented with a fragment identifier that includes a JSON Pointer or an anchor reference within the schema. 
+Whenever an external type is used, its JSON Schema definition is needed. Either an external type is implemented as one of the simple JSON value types (e.g., string - maybe with a certain format or pattern), or it is defined by a particular JSON Schema. In case of a JSON Schema, the URL of that schema needs to be known during the encoding process. If the schema is a definitions schema, then the URL needs to be augmented with a fragment identifier that includes a JSON Pointer or an anchor reference within the schema. 
 
 include::../requirements/core/REQ003.adoc[]
 
@@ -2273,11 +2229,11 @@ include::../requirements/core/REQ011.adoc[]
 | _maxExclusive_ | exclusiveMaximum | number, integer
 |====================
 
-NOTE: The JSON Schema keyword "format" is defined in chapter 7 of <<ref_jsonschema_02_validation,JSON Schema Validation: A Vocabulary for Structural Validation of JSON>>. The formats defined there (e.g., "date-time", "uri", and "json-pointer") apply to JSON values of type string. Custom formats could apply to JSON values of type number and integer.
+NOTE: The JSON Schema keyword "format" is defined in chapter 7 of <<ref_jsonschema_20_validation,JSON Schema Validation: A Vocabulary for Structural Validation of JSON>>. The formats defined there (e.g., "date-time", "uri", and "json-pointer") apply to JSON values of type string. Custom formats could apply to JSON values of type number and integer.
 
-NOTE: <<ref_jsonschema_02_validation,JSON Schema Validation: A Vocabulary for Structural Validation of JSON>> defines the JSON Schema keyword "pattern". According to that specification, the value of the keyword should be a regular expression according to the ECMA 262 regular expression dialect. However, the specification does not reference a particular version or edition of ECMA 262. The regular expression dialect to be used in a JSON Schema "pattern" therefore is not exactly defined, and consequently depends on the implementation of a JSON Schema validator. In order to avoid issues with this diversity, <<ref_jsonschema_02,JSON Schema: A Media Type for Describing JSON Documents>> defines a number of recommendations for writing regular expressions in JSON Schema.
+NOTE: <<ref_jsonschema_20_validation,JSON Schema Validation: A Vocabulary for Structural Validation of JSON>> defines the JSON Schema keyword "pattern". According to that specification, the value of the keyword should be a regular expression according to the <<ref_ecma262v11>> regular expression dialect. <<ref_jsonschema_20,JSON Schema: A Media Type for Describing JSON Documents>> defines a number of recommendations for writing regular expressions in JSON Schema.
 
-NOTE: If the "format" keyword is used to restrict the structure of a JSON string, so that it matches a certain regular expression, then it is useful to add the "pattern" keyword as well, explicitly defining that regular expression (given that the regular expression follows an ECMA 262 regular expression dialect). The reason is that the "format" is first and foremost an annotation, so can be ignored by JSON Schema validators, whereas the "pattern" keyword will be evaluated by a JSON Schema validator. JSON Schema validators may treat the "format" keyword like an assertion, but that is not guaranteed. In any case, the "format" keyword helps to convey more information about the specific type of a JSON value (e.g., "date" instead of just "string"), and thus should not be omitted if a certain, well-known (i.e., defined by a JSON Schema vocabulary) format is applicable to a JSON value.
+NOTE: If the "format" keyword is used to restrict the structure of a JSON string, so that it matches a certain regular expression, then it is useful to add the "pattern" keyword as well, explicitly defining that regular expression (given that the regular expression follows an <<ref_ecma262v11>> regular expression dialect). The reason is that the "format" is first and foremost an annotation, so can be ignored by JSON Schema validators, whereas the "pattern" keyword will be evaluated by a JSON Schema validator. JSON Schema validators may treat the "format" keyword like an assertion, but that is not guaranteed. In any case, the "format" keyword helps to convey more information about the specific type of a JSON value (e.g., "date" instead of just "string"), and thus should not be omitted if a certain, well-known (i.e., defined by a JSON Schema vocabulary) format is applicable to a JSON value.
 
 <<img_req_core_basictypes_example>> provides a detailed example that illustrates a number of cases. The JSON Schema encoding is shown in <<example_req_core_basictypes>>.
 

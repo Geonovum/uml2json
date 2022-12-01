@@ -1,16 +1,51 @@
+[[conformance]]
 == Conformance
-This Best Practice defines XXXX.
 
-Requirements for N standardization target types are considered:
+This Best Practice defines a number of requirements classes, which specify encoding (elements of) an application schema in UML in JSON (Schema). The standardization target for all these classes are JSON (Schema) documents. <<img_conformance_req_classes>> provides an overview of the requirements classes, together with their dependencies.
 
-* AAAA
-* BBBB
+[[img_conformance_req_classes]]
+.Requirements classes for encoding an application schema in UML as a JSON Schema
+image::figures/requirements_classes.png[align="center"]
+
+Common encoding behavior is defined in the core requirements class (<<jsonschema_req_core>>). Additional requirements classes exist, which serve different purposes:
+
+* Three requirements classes for basic JSON encodings are defined:
+** a plain encoding (<<jsonschema_req_plain>>),
+** a GeoJSON encoding (<<jsonschema_req_geojson>>), and
+** a JSON-FG encoding (<<jsonschema_req_jsonfg>>).
+* There are two requirements classes that represent options for realizing a by-reference encoding of property values, one using URIs (<<jsonschema_byreference_encoding_req_uri>>, and one using link objects <<jsonschema_byreference_encoding_req_link_object>>).
+* Requirements classes also exist for the two ways in which \<<union>> types are used in practice: as type discriminator (<<jsonschema_unions_req_type_discriminator>>) and as property choice (<<jsonschema_unions_req_property_choice>>).
+* Code list valued properties can be represented in one of three ways, defined by requirements classes: as a literal (<<jsonschema_codelists_req_literal>>), as URI (<<jsonschema_codelists_req_uri>>), and as link object (<<jsonschema_codelists_req_link_object>>).
+* Finally, an additional requirements class supports the encoding of a JSON member for storing the name of the conceptual type that a JSON object encodes (<<jsonschema_req_entitytype>>).
+
+A community can combine these requirements classes as needed to achieve a full JSON Schema encoding, which satisfies their specific JSON encoding requirements. For example, a community might choose a GeoJSON compliant encoding, together with the property choice encoding for unions, as well as using link objects for by-reference encoding and code values.
+
+<<table_introduction_req_classes>> lists all requirements classes defined by this specification.
+
+[[table_introduction_req_classes]]
+.Requirements classes overview
+[width="90%",options="header"]
+|===
+| Requirements class | Clause
+|xref:http://www.opengis.net/spec/uml2json/1.0/req/core[style=id%] |<<jsonschema_req_core>>
+|xref:http://www.opengis.net/spec/uml2json/1.0/req/plain[style=id%] |<<jsonschema_req_plain>>
+|xref:http://www.opengis.net/spec/uml2json/1.0/req/geojson-formats[style=id%] |<<jsonschema_req_geojson_formats>>
+|xref:http://www.opengis.net/spec/uml2json/1.0/req/geojson[style=id%] |<<jsonschema_req_geojson>>
+|xref:http://www.opengis.net/spec/uml2json/1.0/req/jsonfg[style=id%] |<<jsonschema_req_jsonfg>>
+|xref:http://www.opengis.net/spec/uml2json/1.0/req/by-reference-basic[style=id%] |<<jsonschema_byreference_req_basic>>
+|xref:http://www.opengis.net/spec/uml2json/1.0/req/by-reference-uri[style=id%] |<<jsonschema_byreference_encoding_req_uri>>
+|xref:http://www.opengis.net/spec/uml2json/1.0/req/by-reference-link-object[style=id%] |<<jsonschema_byreference_encoding_req_link_object>>
+|xref:http://www.opengis.net/spec/uml2json/1.0/req/union-type-discriminator[style=id%] |<<jsonschema_unions_req_type_discriminator>>
+|xref:http://www.opengis.net/spec/uml2json/1.0/req/union-property-choice[style=id%] |<<jsonschema_unions_req_property_choice>>
+|xref:http://www.opengis.net/spec/uml2json/1.0/req/codelists-basic[style=id%] |<<jsonschema_codelists_req_basic>>
+|xref:http://www.opengis.net/spec/uml2json/1.0/req/codelists-literal[style=id%] |<<jsonschema_codelists_req_literal>>
+|xref:http://www.opengis.net/spec/uml2json/1.0/req/codelists-uri[style=id%] |<<jsonschema_codelists_req_uri>>
+|xref:http://www.opengis.net/spec/uml2json/1.0/req/codelists-link-object[style=id%] |<<jsonschema_codelists_req_link_object>>
+|xref:http://www.opengis.net/spec/uml2json/1.0/req/entitytype[style=id%] |<<jsonschema_req_entitytype>>
+|===
 
 Conformance with this Best Practice shall be checked using all the relevant tests specified in Annex A (normative) of this document. The framework, concepts, and methodology for testing, and the criteria to be achieved to claim conformance are specified in the OGC Compliance Testing Policies and Procedures and the OGC Compliance Testing web site.
 
-In order to conform to this OGC® encoding Best Practice, a software implementation shall choose to implement:
-
-* Any one of the conformance levels specified in Annex A (normative).
-* Any one of the Distributed Computing Platform profiles specified in Annexes TBD through TBD (normative).
+In order to conform to this OGC® encoding Best Practice, a software implementation shall choose to implement one or more of the conformance levels specified in Annex A (normative).
 
 All requirements-classes and conformance-classes described in this document are owned by the documents(s) identified.

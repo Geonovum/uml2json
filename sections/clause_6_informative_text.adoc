@@ -1,8 +1,6 @@
 // [obligation=informative]
 // == Background
 
-// #TBD# Document relationship to the UGAS-2020 ER. Document removal of implementation specific details (i.e. everything ShapeChange related, but don't say so).
-
 [[jsonschema_overview]]
 [obligation=informative]
 == Overview
@@ -13,14 +11,4 @@ ISO / TC 211 defines Standards in the field of digital geographic information. A
 
 XML has been and still is a widely used format for encoding data on the web. However, web applications also use other formats. JSON is another prominent format for encoding and exchanging data on the web. The ISO / TC 211 standards do not define rules for encoding an application schema in JSON. The main reason for this gap likely is that in the past, XML was a more prominent format than JSON for (geospatial) web service interactions. Another reason could be that a schema language for JSON has not fully been standardized yet. JSON Schema is such a language. The JSON Schema specification - a draft IETF standard - has improved considerably over the past couple of years. It is a serious candidate for the definition of rules for encoding application schema data in JSON.
 
-#TBD: Update the NOTE content, based upon result of decision regarding target JSON Schema versions.#
-
-NOTE: The current version of JSON Schema, in early 2022, is draft 2019-09. It consists of three documents, https://tools.ietf.org/html/draft-handrews-json-schema-02[JSON Schema core] (cite:[I-D.handrews-json-schema2]), a https://tools.ietf.org/html/draft-handrews-json-schema-validation-02[schema for validation] (cite:[I-D.handrews-json-schema-validation2]), and a https://tools.ietf.org/html/draft-handrews-json-schema-hyperschema-02[hyper schema] (cite:[I-D.handrews-json-schema-hyperschema2]). For the analysis in UGAS-2020, the first two documents were of primary interest. Note also that the website http://www.json-schema.org provides a http://json-schema.org/specification-links.html[list of the current and older drafts of the specification, as well as the latest unreleased version]. The site also provides an overview of existing http://json-schema.org/implementations.html[JSON Schema implementations].
-
-////
-A small tutorial for hyper schema:
-https://blog.apisyouwonthate.com/getting-started-with-json-hyper-schema-184775b91f
-https://blog.apisyouwonthate.com/getting-started-with-json-hyper-schema-part-2-ca9d7ffdf6f6
-////
-
-This document defines a set of encoding rules for converting an application schema in UML to JSON Schema. These rules are documented in the following chapter.
+This document defines a set of requirements classes for converting an application schema in UML to JSON Schema.

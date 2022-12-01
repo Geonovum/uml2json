@@ -3,15 +3,15 @@
 :abbrev: uml-to-json-encoding-rules
 :doctype: best-practice
 :docsubtype: encoding
-//:status: draft
+:status: draft
+:docstage: draft
 //:draft: 0.1
 :edition: 1.0
-:keywords: ogcdoc, OGC document, UML, JSON, encoding rules
+:keywords: ogcdoc, OGC document, UML, JSON, JSON Schema, encoding, GeoJSON, JSON-FG
 :committee: technical
 :workgroup: Architecture
 :workgroup-type: DWG
-:submitters: TBD
-:submitting-organizations: Organization one; Organization two; Organization three
+:submitting-organizations: Geonovum; interactive instruments GmbH
 :fullname: Johannes Echterhoff
 :role: editor
 :affiliation: interactive instruments GmbH
@@ -32,9 +32,6 @@
 :language: en
 :htmltoclevels: 5
 // :toclevels: 5
-
-// listing caption does not appear to have any effect
-:listing-caption: Listing
 
 
 ////
@@ -61,7 +58,7 @@ add or remove annexes after "A" as necessary
 ////
 include::sections/annex-a.adoc[]
 
-include::sections/annex-n.adoc[]
+// include::sections/annex-n.adoc[]
 
 ////
 Revision History should be the last annex before the Bibliography
