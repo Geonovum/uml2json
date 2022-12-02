@@ -12,6 +12,7 @@ document.xml.abort
 _files/
 iev/
 relaton/
+UML/ShapeChange/
 
 # Deploy key
 deploy_key

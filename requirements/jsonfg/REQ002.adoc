@@ -2,9 +2,9 @@
 ====
 [%metadata]
 identifier:: http://www.opengis.net/spec/uml2json/1.0/req/jsonfg/common-base
-statement:: All feature types shall use the JSON-FG Feature definition - https://beta.schemas.opengis.net/json-fg/featuretype.json - as common base.
+statement:: All feature types shall use the JSON-FG Feature definition - https://beta.schemas.opengis.net/json-fg/feature.json - as common base.
 
-part:: The relationship to the JSON-FG Feature definition schema shall be implemented by converting a feature type to a JSON Schema that consists of an "allOf" with two subschemas: the first being a "$ref" with value "https://beta.schemas.opengis.net/json-fg/featuretype.json", the second being the schema produced by applying the other conversion rules to the feature type. However, if one of the supertypes of the feature type already has the JSON-FG Feature definition in its JSON Schema definition, then the JSON Schema definition of the feature type itself shall not define it again. 
+part:: The relationship to the JSON-FG Feature definition schema shall be implemented by converting a feature type to a JSON Schema that consists of an "allOf" with two subschemas: the first being a "$ref" with value "https://beta.schemas.opengis.net/json-fg/feature.json", the second being the schema produced by applying the other conversion rules to the feature type. However, if one of the supertypes of the feature type already has the JSON-FG Feature definition in its JSON Schema definition, then the JSON Schema definition of the feature type itself shall not define it again. 
 part:: If the feature type is encoded with an "allOf" for the JSON-FG Feature definition, then the "$anchor" member (see <<jsonschema_req_core_types_classname>>) shall be encoded in the schema that contains the "allOf", instead of within the second subschema.
 
 ====

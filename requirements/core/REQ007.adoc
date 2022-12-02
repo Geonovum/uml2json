@@ -2,6 +2,6 @@
 ====
 [%metadata]
 identifier:: http://www.opengis.net/spec/uml2json/1.0/req/core/generalization
-statement:: The generalization relationship of a subtype to its supertype shall be converted by combining the structural constraints of the subtype and its supertype using the "allOf" JSON Schema keyword.
+statement:: The generalization relationship of a subtype to its supertype shall be encoded by combining the structural constraints of the subtype and its supertype using the "allOf" JSON Schema keyword in the JSON Schema definition of the subtype.
 
 ====

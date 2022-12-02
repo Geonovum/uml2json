@@ -12,3 +12,5 @@ ISO / TC 211 defines Standards in the field of digital geographic information. A
 XML has been and still is a widely used format for encoding data on the web. However, web applications also use other formats. JSON is another prominent format for encoding and exchanging data on the web. The ISO / TC 211 standards do not define rules for encoding an application schema in JSON. The main reason for this gap likely is that in the past, XML was a more prominent format than JSON for (geospatial) web service interactions. Another reason could be that a schema language for JSON has not fully been standardized yet. JSON Schema is such a language. The JSON Schema specification - a draft IETF standard - has improved considerably over the past couple of years. It is a serious candidate for the definition of rules for encoding application schema data in JSON.
 
 This document defines a set of requirements classes for converting an application schema in UML to JSON Schema.
+
+NOTE: The results and findings from <<ref_ugas2020>> have been an important foundation for the UML to JSON Schema encoding requirements defined in this specification. 

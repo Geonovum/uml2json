@@ -1,0 +1,243 @@
+{
+  "$schema": "https://json-schema.org/draft/2019-09/schema",
+  "$id": "http://example.org/schema/infra.json",
+  "$defs": {
+    "Address": {
+      "$anchor": "Address",
+      "type": "object",
+      "properties": {
+        "street": {
+          "type": "string"
+        },
+        "housenumber": {
+          "type": "string"
+        },
+        "poBox": {
+          "type": "string"
+        },
+        "city": {
+          "type": "string"
+        },
+        "postalCode": {
+          "type": "string"
+        },
+        "country": {
+          "type": "string"
+        }
+      },
+      "required": [
+        "city",
+        "postalCode"
+      ]
+    },
+    "Building": {
+      "$anchor": "Building",
+      "allOf": [
+        {
+          "$ref": "http://example.org/schema/infra.json#Building_Core"
+        },
+        {
+          "type": "object",
+          "properties": {
+            "properties": {
+              "type": "object",
+              "properties": {
+                "address": {
+                  "$ref": "http://example.org/schema/infra.json#Address"
+                },
+                "type": {
+                  "$ref": "http://example.org/schema/infra.json#BuildingType"
+                }
+              },
+              "required": [
+                "address",
+                "type"
+              ]
+            }
+          },
+          "required": [
+            "properties"
+          ]
+        }
+      ]
+    },
+    "BuildingPart": {
+      "$anchor": "BuildingPart",
+      "allOf": [
+        {
+          "$ref": "http://example.org/schema/infra.json#Building_Core"
+        },
+        {
+          "type": "object",
+          "properties": {
+            "properties": {
+              "type": "object",
+              "properties": {
+                "type": {
+                  "$ref": "http://example.org/schema/infra.json#BuildingPartType"
+                },
+                "clearanceHeight": {
+                  "type": "number"
+                },
+                "extent3d": {
+                  "$ref": "https://beta.schemas.opengis.net/json-fg/geometry-objects.json#/$defs/Polyhedron"
+                },
+                "belongsTo": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "https://schemas.opengis.net/ogcapi/common/part1/1.0/openapi/schemas/link.json"
+                  },
+                  "uniqueItems": true
+                }
+              },
+              "required": [
+                "extent3d",
+                "type"
+              ]
+            }
+          },
+          "required": [
+            "properties"
+          ]
+        }
+      ]
+    },
+    "BuildingPartType": {
+      "$anchor": "BuildingPartType",
+      "type": "integer",
+      "enum": [
+        1000,
+        2000,
+        2100,
+        3000,
+        9999
+      ]
+    },
+    "BuildingType": {
+      "$anchor": "BuildingType",
+      "type": "string",
+      "enum": [
+        "school",
+        "residential house",
+        "mixed",
+        "other"
+      ]
+    },
+    "Building_Core": {
+      "$anchor": "Building_Core",
+      "allOf": [
+        {
+          "$ref": "https://geojson.org/schema/Feature.json"
+        },
+        {
+          "type": "object",
+          "properties": {
+            "geometry": {
+              "$ref": "https://geojson.org/schema/Polygon.json"
+            },
+            "properties": {
+              "type": "object",
+              "properties": {
+                "dateOfConstruction": {
+                  "type": "string",
+                  "format": "date",
+                  "pattern": "^\\d{4}-\\d{2}-\\d{2}$"
+                }
+              },
+              "required": [
+                "dateOfConstruction"
+              ]
+            }
+          },
+          "required": [
+            "properties"
+          ]
+        }
+      ]
+    },
+    "Parcel": {
+      "$anchor": "Parcel",
+      "allOf": [
+        {
+          "$ref": "https://geojson.org/schema/Feature.json"
+        },
+        {
+          "type": "object",
+          "properties": {
+            "geometry": {
+              "$ref": "https://geojson.org/schema/Polygon.json"
+            },
+            "properties": {
+              "type": "object",
+              "properties": {
+                "area": {
+                  "type": "number"
+                },
+                "hasBuilding": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "https://schemas.opengis.net/ogcapi/common/part1/1.0/openapi/schemas/link.json"
+                  },
+                  "uniqueItems": true
+                },
+                "owner": {
+                  "type": "array",
+                  "minItems": 1,
+                  "items": {
+                    "$ref": "https://schemas.opengis.net/ogcapi/common/part1/1.0/openapi/schemas/link.json"
+                  },
+                  "uniqueItems": true
+                }
+              },
+              "required": [
+                "area",
+                "owner"
+              ]
+            }
+          },
+          "required": [
+            "properties"
+          ]
+        }
+      ]
+    },
+    "Person": {
+      "$anchor": "Person",
+      "allOf": [
+        {
+          "$ref": "https://geojson.org/schema/Feature.json"
+        },
+        {
+          "type": "object",
+          "properties": {
+            "properties": {
+              "type": "object",
+              "properties": {
+                "firstName": {
+                  "type": "string"
+                },
+                "lastName": {
+                  "type": "string"
+                },
+                "owns": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "https://schemas.opengis.net/ogcapi/common/part1/1.0/openapi/schemas/link.json"
+                  },
+                  "uniqueItems": true
+                }
+              },
+              "required": [
+                "firstName",
+                "lastName"
+              ]
+            }
+          },
+          "required": [
+            "properties"
+          ]
+        }
+      ]
+    }
+  }
+}

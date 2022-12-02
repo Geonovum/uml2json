@@ -7,18 +7,7 @@ identifier:: http://www.opengis.net/spec/uml2json/1.0/req/core/enumerations
 --
 An \<<enumeration>> shall be converted to a JSON Schema definition with a type defined by evaluating tagged value _literalEncodingType_ on the enumeration.
 
-The tagged value _literalEncodingType_ identifies the conceptual type that applies to the enumeration values. If the tagged value is not set on the enumeration, or has an empty value, then the literal encoding type is defined to be CharacterString. The literal encoding type is one of the types from ISO 19103, which are implemented as a simple JSON Schema type:
-
-[[table_literalencodingtypes]]
-.Literal encoding type
-[options="header"]
-|====================
-| Conceptual type from ISO 19103 | simple JSON Schema type
-| CharacterString | string
-| Boolean | boolean
-| Real, Number | number
-| Integer | integer
-|====================
+The tagged value _literalEncodingType_ identifies the conceptual type that applies to the enumeration values. If the tagged value is not set on the enumeration, or has an empty value, then the literal encoding type is defined to be CharacterString.
 --
 
 [.component,class=part]

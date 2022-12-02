@@ -1,0 +1,52 @@
+[appendix]
+:appendix-caption: Annex
+== Example application schema
+
+=== Overview
+
+This Annex illustrates the results of applying the JSON Schema encoding rules on the application schema example shown in <<img_annex_b_example_schema>>.
+
+[[img_annex_b_example_schema]]
+.Example application schema in UML
+image::figures/example_schema.png[align="center"]
+
+=== Example schema in plain JSON encoding
+
+#TBD# Replace schema of measure-typed properties with the measure schema snippet.
+
+The JSON Schema shown in <<example_annex_b_example_schema_plain>> was created by applying requirements class xref:http://www.opengis.net/spec/uml2json/1.0/req/plain[style=id%] and xref:http://www.opengis.net/spec/uml2json/1.0/req/by-reference-link-object[style=id%].
+
+[[example_annex_b_example_schema_plain]]
+.JSON Schema for the example application schema - plain JSON encoding
+[source,json,linenumbers]
+----
+include::../code/example_schema_plain.json[]
+----
+
+=== Example schema in GeoJSON-compliant encoding
+
+#TBD# Replace schema of measure-typed properties with the measure schema snippet.
+
+The JSON Schema shown in <<example_annex_b_example_schema_plain>> was created by applying requirements class xref:http://www.opengis.net/spec/uml2json/1.0/req/geojson[style=id%] and xref:http://www.opengis.net/spec/uml2json/1.0/req/by-reference-link-object[style=id%].
+
+[[example_annex_b_example_schema_geojson]]
+.JSON Schema for the example application schema - GeoJSON-compliant encoding
+[source,json,linenumbers]
+----
+include::../code/example_schema_geojson.json[]
+----
+
+=== Example schema in JSON-FG-compliant encoding
+
+#TBD# Replace schema of measure-typed properties with the measure schema snippet.
+
+#TBD# When mapping Building_Core.dateOfConstruction to JSON-FG "time", should we enforce the presence of time/date (in case of Date) or time/timestamp (in case of DateTime)? ... would that go too far?
+
+The JSON Schema shown in <<example_annex_b_example_schema_plain>> was created by applying requirements class xref:http://www.opengis.net/spec/uml2json/1.0/req/jsonfg[style=id%] and xref:http://www.opengis.net/spec/uml2json/1.0/req/by-reference-link-object[style=id%].
+
+[[example_annex_b_example_schema_jsonfg]]
+.JSON Schema for the example application schema - JSON-FG-compliant encoding
+[source,json,linenumbers]
+----
+include::../code/example_schema_jsonfg.json[]
+----

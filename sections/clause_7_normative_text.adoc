@@ -1931,7 +1931,8 @@ include::../requirements/core/REQ002.adoc[]
 .References between JSON Schemas using $ref with JSON pointers as values
 image::figures/references_between_definitions_schemas.png[align="center"]
 
-A link to a particular definition within a definitions schema requires the use of a JSON Pointer or an anchor in the fragment identifier of the link URL. <<ref_jsonpointer,JSON Pointer>>, chapter 6, explicitly states that the media type in which a JSON value is provided needs to support this kind of fragment identifier, and that this is not the case for the media type application/json. If a JSON Schema was published with this media type, then it is possible that the application ignores a fragment identifier (because the media type does not support fragment identifiers).
+[[jsonschema_req_core_definitionsschema_media_types]]
+A link to a particular definition within a definitions schema requires the use of a JSON Pointer or an anchor in the fragment identifier of the link URL. <<ref_jsonpointer,JSON Pointer>>, chapter 6, explicitly states that the media type in which a JSON value is provided needs to support this kind of fragment identifier, and that this is not the case for the media type application/json. If a JSON Schema was published with this media type, then it is possible that the application ignores a fragment identifier (because the media type does not support fragment identifiers). If a JSON Schema is published with media type application/schema+json, using an anchor as fragment identifier is supported.
 
 include::../requirements/core/REC001.adoc[]
 
@@ -1979,8 +1980,6 @@ Whenever an external type is used, its JSON Schema definition is needed. Either 
 
 include::../requirements/core/REQ003.adoc[]
 
-// ,reftext='{table-caption} {counter:table-num}'
-
 [[table_req_core_iso19103_primitive_types]]
 .JSON Schema implementation of ISO 19103 primitive types
 [width="90%",options="header"]
@@ -1988,23 +1987,44 @@ include::../requirements/core/REQ003.adoc[]
 | UML class | JSON Schema simple type | JSON Schema keywords
 |Boolean |boolean |
 |CharacterString |string |
-|Date |string |format=date, pattern=#TBD#
-|DateTime |string |format=date-time, pattern=#TBD#
+|Date |string a|format=date, pattern= 
+[source,options="unnumbered"]
+----
+^\d{4}-\d{2}-\d{2}$
+----
+|DateTime |string a|format=date-time, pattern= 
+[source,options="unnumbered"]
+----
+^\d{4}-\d{2}-\d{2}T\d{2}:\d{2}:\d{2}(\.\d)?(Z\|((\+\|-)\d{2}:\d{2}))?$
+----
 |Decimal |number |
 |Integer |integer |
 |Number |number |
 |Real |number |
-|Time |string |format=time, pattern=#TBD#
-|URI |string |format=uri, pattern=#TBD#
+|Time |string a|format=time, pattern= 
+[source,options="unnumbered"]
+----
+^\d{2}:\d{2}:\d{2}(\.\d)?(Z\|((\+\|-)\d{2}:\d{2}))?$
+----
+|URI |string |format=uri
 |===
+
+// EDITORIAL ISSUE Writing regular expressions in table cells can be an issue - see https://github.com/metanorma/metanorma-ogc/issues/466 for details. Using source blocks is a solution. Note that when writing regular expressions in table cells, the cell delimiter character '|' needs to be escaped in the expression!
+
+#TBD# URI pattern: use 
+[source,options="unnumbered"]
+----
+^(([^:/?#]+):)?(\/\/([^/?#]*))?([^?#]*)(\?([^#]*))?(#(.*))?$
+----
+which is defined (without the last '$') in https://www.rfc-editor.org/rfc/rfc3986.html#appendix-A ? RFC 3986 is referenced from http://json-schema.org/draft/2020-12/json-schema-validation.html#section-7.3.5[JSON Schema] for the 'uri' format. Or omit the pattern for URI?
 
 Some JSON Schema validators do not support or ignore the JSON Schema keyword "format". That can be an issue, especially if a JSON Schema definition represented a choice (e.g. using the JSON Schema keyword "oneOf") between simple JSON Schema types. In that case, such a validator might complain that the choice cannot be made because both options match the simple type definition. The following recommendation is meant to prevent that issue. 
 
 include::../requirements/core/REC003.adoc[]
 
-include::../requirements/core/REQ004.adoc[]
+#TBD# Define the patterns to use for specific JSON Schema formats shown in <<table_req_core_iso19103_primitive_types>> in this recommendation?
 
-//[#jsonschema_for_iso19103_measure_types,reftext='{listing-caption} {counter:listing-num}']
+include::../requirements/core/REQ004.adoc[]
 
 [[jsonschema_for_iso19103_measure_types]]
 .JSON Schema for ISO 19103 measure types
@@ -2052,6 +2072,19 @@ NOTE: Schema definitions that have an "$anchor" can be referenced using the plai
   }
 }
 ----
+
+Examples of referring to the schema definition of "TypeA" from a "$ref" member:
+
+* within the JSON schema itself:
+** using the "$anchor" value: "$ref" = "#TypeA"
+** using a JSON Pointer: "$ref" = "#/$defs/TypeA"
+* from another JSON Schema:
+** using the "$anchor" value: "$ref" = "https://example.org/schemas/schema_definitions.json#TypeA"
+** using JSON Pointer: "$ref" = "https://example.org/schemas/schema_definitions.json#/$defs/TypeA"
+*** NOTE: If the referenced schema is a draft 07 JSON Schema, the JSON Pointer would have to change as follows: https://example.org/schemas/schema_definitions.json#/definitions/TypeA
+
+NOTE: Keep in mind that the use of an $anchor value in $ref references can depend upon the media type with which the referenced JSON schema is published, as is explained in more detail <<jsonschema_req_core_definitionsschema_media_types,here>>.
+
 
 [[jsonschema_req_core_types_abstractness]]
 ===== Abstractness
@@ -2121,7 +2154,7 @@ image::figures/Generalization_example.png[align="center"]
 
 This JSON object is valid against the schema:
 
-[source,json,linenumbers]
+[source,json,linenumbers,options="unnumbered"]
 ----
 {
   "propertyA": 2,
@@ -2131,7 +2164,7 @@ This JSON object is valid against the schema:
 
 This JSON object is invalid (because "propertyA" is missing) against the schema:
 
-[source,json,linenumbers]
+[source,json,linenumbers,options="unnumbered"]
 ----
 {
   "propertyB": "x"
@@ -2152,7 +2185,7 @@ This approach to converting a generalization relationship has the following rest
 [[jsonschema_req_core_types_common_base]]
 ===== Common base schema
 
-It is often useful to encode all classes with a certain stereotype with a common base type. The generalization relationship to such a base type is often implied with the stereotype, for a given encoding. In GML, for example, the common base type for classes with stereotype \<<featureType>> is gml:AbstractFeature. Rather than explicitly modeling such a base type (e.g., _AnyFeature_ defined by ISO 19109), as well as explicitly modeling generalization relationships to the base type, the encoding rule typically takes care of adding that relationship to relevant schema types. Requirements class xref:http://www.opengis.net/spec/uml2json/1.0/req/core[style=id%] does not declare specific common base types. That is left to other requirements classes.
+It is often useful to encode all classes that have a certain stereotype with a common base type. The generalization relationship to such a base type is often implied with the stereotype, for a given encoding. In GML, for example, the common base type for classes with stereotype \<<featureType>> is gml:AbstractFeature. Rather than explicitly modeling such a base type (e.g., _AnyFeature_ defined by ISO 19109), as well as explicitly modeling generalization relationships to the base type, the encoding rule typically takes care of adding that relationship to relevant schema types. Requirements class xref:http://www.opengis.net/spec/uml2json/1.0/req/core[style=id%] does not declare specific common base types. That is left to other requirements classes.
 
 
 [[jsonschema_req_core_types_featureandobjecttype]]
@@ -2164,9 +2197,9 @@ include::../requirements/core/REQ008.adoc[]
 
 NOTE: ISO 19109 requires class names to be unique within the scope of an application schema.
 
-The conversion of the class properties is defined in the <<jsonschema_req_core_properties>> section. General type conversion rules, such as those documented in the <<jsonschema_req_core_types_classname>> section, may apply.
+The conversion of the class properties is defined in <<jsonschema_req_core_properties>>. General type conversion rules, such as those documented in <<jsonschema_req_core_types_classname>>, may apply.
 
-The conceptual model of a type with identity often does not contain an identifier property (a UML property whose value for field "isId" is set to true), whose value is used by applications to identify objects of that type. Instead, the according information is added or defined in platform specific encodings. For example, a GML application schema offers the gml:id attribute as well as the gml:identifier element to encode identifying information. In a web publishing context, the URI at which a JSON object is published can be used as its identifier. Requirements class xref:http://www.opengis.net/spec/uml2json/1.0/req/core[style=id%] does not declare any specific mechanism for adding an identifier property. That could be achieved through the definition of a <<jsonschema_req_core_types_common_base>>. However, requirements regarding such a base schema are left to other requirements classes. Likewise, this requirements class does not define any requirement regarding the number and characteristics of identifier properties. Again, that is left to other requirements classes.
+The conceptual model of a type with identity often does not contain an identifier property (a UML property whose value for field "isId" is set to true), whose value is used by applications to identify objects of that type. Instead, the according information is added or defined in platform specific encodings. For example, a GML application schema offers the gml:id attribute as well as the gml:identifier element to encode identifying information. In a web publishing context, the URI at which a JSON object is published can be used as its identifier. Requirements class xref:http://www.opengis.net/spec/uml2json/1.0/req/core[style=id%] does not declare any specific mechanism for adding an identifier property. That could be achieved through the definition of a common base schema (see <<jsonschema_req_core_types_common_base>>). However, requirements regarding such a base schema are left to other requirements classes. Likewise, this requirements class does not define any requirements regarding the number and characteristics of identifier properties. Again, that is left to other requirements classes.
 
 
 [[jsonschema_req_core_types_datatype]]
@@ -2179,6 +2212,19 @@ include::../requirements/core/REQ009.adoc[]
 ===== Enumeration
 
 include::../requirements/core/REQ010.adoc[]
+
+The literal encoding type is one of the types from ISO 19103, which are implemented as a simple JSON Schema type - see <<table_literalencodingtypes>>.
+
+[[table_literalencodingtypes]]
+.Literal encoding type
+[options="header"]
+|====================
+| Conceptual type from ISO 19103 | simple JSON Schema type
+| CharacterString | string
+| Boolean | boolean
+| Real, Number | number
+| Integer | integer
+|====================
 
 [[img_req_core_enumeration_example]]
 .\<<enumeration>> example
@@ -2199,11 +2245,7 @@ image::figures/Enumeration_example.png[align="center"]
       "type": "string",
       "enum": ["A","B","C"]
     }
-  },
-  "anyOf": [
-    {"$ref": "#/$defs/Enumeration1"},
-    {"$ref": "#/$defs/Enumeration2"}
-  ]
+  }
 }
 ----
 
@@ -2359,8 +2401,7 @@ image::figures/Properties_example.png[align="center"]
         "property2": {"type": "number"}        
       }
     }
-  },
-  "$ref": "#/$defs/TypeX"
+  }
 }
 ----
 
@@ -2372,9 +2413,11 @@ include::../requirements/core/REQ016.adoc[]
 
 Examples:
 
-* using the "$anchor" value "TypeX": https://example.org/schemas/schema_definitions.json#TypeX
-* using JSON Pointer: https://example.org/schemas/schema_definitions.json#/$defs/TypeX
+* using the "$anchor" value "TypeX" as fragment identifier: https://example.org/schemas/schema_definitions.json#TypeX
+* using JSON Pointer as fragment identifier: https://example.org/schemas/schema_definitions.json#/$defs/TypeX
 ** NOTE: If the referenced schema is a draft 07 JSON Schema, the JSON Pointer would have to change as follows: https://example.org/schemas/schema_definitions.json#/definitions/TypeX
+
+NOTE: Keep in mind that the use of an $anchor value in $ref references can depend upon the media type with which the referenced JSON schema is published, as is explained in more detail <<jsonschema_req_core_definitionsschema_media_types,here>>.
 
 #TODO JE# add examples - json schema and instance
 
@@ -2901,16 +2944,7 @@ include::../requirements/codelists-literal/requirements_class.adoc[]
 
 include::../requirements/codelists-literal/REQ001.adoc[]
 
-[[table_req_codelists_literal_literalencodingtypes]]
-.Literal encoding type
-[options="header"]
-|====================
-| Conceptual type from ISO 19103 | simple JSON Schema type
-| CharacterString | string
-| Boolean | boolean
-| Real, Number | number
-| Integer | integer
-|====================
+The literal encoding type is one of the types from ISO 19103, which are implemented as a simple JSON Schema type - see <<table_literalencodingtypes>> in <<jsonschema_req_core_types_enumeration>>.
 
 [[img_codelists_req_literal_jsonschema_example]]
 .Example of \<<codeList>> types with tagged value 'literalEncodingType'
