@@ -1,0 +1,33 @@
+{
+  "$schema": "https://json-schema.org/draft/2019-09/schema",
+  "$defs": {
+    "DataType": {
+      "$anchor": "DataType",
+      "type": "object",
+      "properties": {
+        "attInteger": {
+          "type": "integer",
+          "default": 1
+        },
+        "attNumber": {
+          "type": "number",
+          "default": 2.2
+        }
+      }
+    },
+    "FeatureType3": {
+      "$anchor": "FeatureType3",
+      "type": "object",
+      "properties": {
+        "attBoolean": {
+          "type": "boolean",
+          "default": true
+        },
+        "attCharacterString": {
+          "type": "string",
+          "default": "xyz"
+        }
+      }
+    }
+  }
+}

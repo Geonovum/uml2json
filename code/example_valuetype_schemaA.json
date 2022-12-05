@@ -1,0 +1,27 @@
+{
+  "$schema": "https://json-schema.org/draft/2019-09/schema",
+  "$id": "http://example.org/schema/schemaA.json",
+  "$defs": {
+    "Class1": {
+      "$anchor": "Class1",
+      "type": "object",
+      "properties": {
+        "attBoolean": {
+          "type": "boolean"
+        },
+        "roleToClass2": {
+          "$ref": "http://example.org/schema/schemaA.json#Class2"
+        }
+      }
+    },
+    "Class2": {
+      "$anchor": "Class2",
+      "type": "object",
+      "properties": {
+        "attInteger": {
+          "type": "integer"
+        }
+      }
+    }
+  }
+}

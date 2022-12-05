@@ -7,7 +7,7 @@ identifier:: http://www.opengis.net/spec/uml2json/1.0/req/jsonfg/primary-interva
 --
 A UML property that is owned by a \<<featureType>> and that has tag "jsonPrimaryInterval" with value equal to, ignoring case, one of the allowed values "start", "end", or "period", shall not be encoded.
 
-NOTE: The value types of UML properties that represent or constitute to the primary interval should be compatible with that use. For example, properties marked as primary interval start or end can have value type "Date", "DateTime", or "TM_Instant", whereas a property marked as primary interval period can have value type "TM_Period".
+NOTE: The value types of UML properties that represent or contribute to the primary interval should be compatible with that use. For example, properties marked as primary interval start or end can have value type "Date", "DateTime", or "TM_Instant", whereas a property marked as primary interval period can have value type "TM_Period".
 --
 
 [.component,class=part]

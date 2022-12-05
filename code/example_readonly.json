@@ -1,0 +1,15 @@
+{
+  "$schema": "https://json-schema.org/draft/2019-09/schema",
+  "$defs": {
+    "FeatureType1": {
+      "$anchor": "FeatureType1",
+      "type": "object",
+      "properties": {
+        "attribute": {
+          "type": "string",
+          "readOnly": true
+        }
+      }
+    }
+  }
+}

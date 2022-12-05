@@ -1,7 +1,10 @@
 [appendix]
 :appendix-caption: Annex
+[[annex_example_application_schema]]
 == Example application schema
 
+
+[[annex_example_application_schema_overview]]
 === Overview
 
 This Annex illustrates the results of applying the JSON Schema encoding rules on the application schema example shown in <<img_annex_b_example_schema>>.
@@ -10,9 +13,11 @@ This Annex illustrates the results of applying the JSON Schema encoding rules on
 .Example application schema in UML
 image::figures/example_schema.png[align="center"]
 
+
+[[annex_example_application_schema_plain]]
 === Example schema in plain JSON encoding
 
-#TBD# Replace schema of measure-typed properties with the measure schema snippet.
+#TBD# Replace schema of measure-typed properties with the measure schema snippet(?)
 
 The JSON Schema shown in <<example_annex_b_example_schema_plain>> was created by applying requirements class xref:http://www.opengis.net/spec/uml2json/1.0/req/plain[style=id%] and xref:http://www.opengis.net/spec/uml2json/1.0/req/by-reference-link-object[style=id%].
 
@@ -23,9 +28,11 @@ The JSON Schema shown in <<example_annex_b_example_schema_plain>> was created by
 include::../code/example_schema_plain.json[]
 ----
 
+
+[[annex_example_application_schema_geojson]]
 === Example schema in GeoJSON-compliant encoding
 
-#TBD# Replace schema of measure-typed properties with the measure schema snippet.
+#TBD# Replace schema of measure-typed properties with the measure schema snippet(?)
 
 The JSON Schema shown in <<example_annex_b_example_schema_plain>> was created by applying requirements class xref:http://www.opengis.net/spec/uml2json/1.0/req/geojson[style=id%] and xref:http://www.opengis.net/spec/uml2json/1.0/req/by-reference-link-object[style=id%].
 
@@ -36,9 +43,11 @@ The JSON Schema shown in <<example_annex_b_example_schema_plain>> was created by
 include::../code/example_schema_geojson.json[]
 ----
 
+
+[[annex_example_application_schema_jsonfg]]
 === Example schema in JSON-FG-compliant encoding
 
-#TBD# Replace schema of measure-typed properties with the measure schema snippet.
+#TBD# Replace schema of measure-typed properties with the measure schema snippet(?)
 
 #TBD# When mapping Building_Core.dateOfConstruction to JSON-FG "time", should we enforce the presence of time/date (in case of Date) or time/timestamp (in case of DateTime)? ... would that go too far?
 

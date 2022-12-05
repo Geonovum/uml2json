@@ -1,0 +1,18 @@
+{
+  "$schema": "https://json-schema.org/draft/2019-09/schema",
+  "$id": "http://example.org/schema/schemaB.json",
+  "$defs": {
+    "Class3": {
+      "$anchor": "Class3",
+      "type": "object",
+      "properties": {
+        "roleToClass1": {
+          "$ref": "http://example.org/schema/schemaA.json#Class1"
+        },
+        "attCharacterString": {
+          "type": "string"
+        }
+      }
+    }
+  }
+}
