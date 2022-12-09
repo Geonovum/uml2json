@@ -1,8 +1,9 @@
 {
   "$schema": "https://json-schema.org/draft/2019-09/schema",
-  "$id": "https://beta.schemas.opengis.net/uml2json/schema_definitions.json",
+  "$id": "https://raw.githubusercontent.com/Geonovum/uml2json/main/schemas/schema_definitions.json",
   "$defs": {
     "LinkObject": {
+      "$anchor": "LinkObject",
       "title": "link object",
       "description": "definition of a link object",
       "type": "object",
@@ -37,6 +38,7 @@
       }
     },
     "Measure": {
+      "$anchor": "Measure",
       "title": "measure object",
       "description": "definition of a measure object",
       "type": "object",
@@ -48,6 +50,75 @@
         "value": {"type": "number"},
         "uom": {"type": "string"}
       }
+    },
+    "PrimaryInstantOptional": {
+      "$anchor": "PrimaryInstantOptional",
+      "title": "primary instant schema - optional value",
+      "description": "schema restriction for JSON-FG 'time' member to an optional instant value",
+      "oneOf": [
+        {"type": "null"},
+        {
+          "type": "object",
+          "properties": {
+            "date": {}
+          },
+          "required": ["date"]
+        },
+        {
+          "type": "object",
+          "properties": {
+            "timestamp": {}
+          },
+          "required": ["timestamp"]
+        }
+      ]
+    },
+    "PrimaryInstantRequired": {
+      "$anchor": "PrimaryInstantRequired",
+      "title": "primary instant schema - required value",
+      "description": "schema restriction for JSON-FG 'time' member to a required instant value",
+      "type": "object",
+      "oneOf": [
+        {
+          "type": "object",
+          "properties": {
+            "date": {}
+          },
+          "required": ["date"]
+        },
+        {
+          "type": "object",
+          "properties": {
+            "timestamp": {}
+          },
+          "required": ["timestamp"]
+        }
+      ]
+    },
+    "PrimaryIntervalOptional": {
+      "$anchor": "PrimaryIntervalOptional",
+      "title": "primary interval schema - optional value",
+      "description": "schema restriction for JSON-FG 'time' member to an optional interval value",
+      "oneOf": [
+        {"type": "null"},
+        {
+          "type": "object",
+          "properties": {
+            "interval": {}
+          },
+          "required": ["interval"]
+        }
+      ]
+    },
+    "PrimaryIntervalRequired": {
+      "$anchor": "PrimaryIntervalRequired",
+      "title": "primary interval schema - required value",
+      "description": "schema restriction for JSON-FG 'time' member to a required interval value",
+      "type": "object",
+      "properties": {
+        "interval": {}
+      },
+      "required": ["interval"]
     }
   }
 }
