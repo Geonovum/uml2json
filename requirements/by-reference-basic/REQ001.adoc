@@ -2,6 +2,11 @@
 ====
 [%metadata]
 identifier:: http://www.opengis.net/spec/uml2json/1.0/req/by-reference-basic/inline-or-by-reference-tag
-statement:: For a UML property, whose value type is a type with identity that is not implemented as a simple JSON Schema type, the tag _inlineOrByReference_, if set, shall have one of three values: _inlineOrByReference_, _byReference_, or _inline_. _byReference_ shall be assumed as the default value, in case the tag is not set, or has an empty value.
+
+statement:: For a UML property, whose value type is a type with identity that is not implemented as a simple JSON Schema type, the tag _inlineOrByReference_, if set, shall have one of three values: _inlineOrByReference_, _byReference_, or _inline_. If the tag is not set on a UML property, or has an empty value, then the following value shall be assumed as default value:
+
+* _inline_, in case that the UML property is an attribute
+* _byReference_, in case that the UML property is an association role
+
 
 ====

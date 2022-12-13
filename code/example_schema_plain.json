@@ -66,7 +66,8 @@
               "$ref": "http://example.org/schema/infra.json#BuildingPartType"
             },
             "clearanceHeight": {
-              "type": "number"
+              "type": "number",
+              "unit": "m"
             },
             "extent3d": {
               "$ref": "https://beta.schemas.opengis.net/json-fg/geometry-objects.json#/$defs/Polyhedron"
@@ -74,7 +75,7 @@
             "belongsTo": {
               "type": "array",
               "items": {
-                "$ref": "https://schemas.opengis.net/ogcapi/common/part1/1.0/openapi/schemas/link.json"
+                "$ref": "https://FIXME/schema_definitions.json#/$defs/LinkObject"
               },
               "uniqueItems": true
             }
@@ -130,7 +131,8 @@
       "type": "object",
       "properties": {
         "area": {
-          "type": "number"
+          "type": "number",
+          "unit": "m2"
         },
         "extent": {
           "$ref": "https://geojson.org/schema/Polygon.json"
@@ -138,7 +140,7 @@
         "hasBuilding": {
           "type": "array",
           "items": {
-            "$ref": "https://schemas.opengis.net/ogcapi/common/part1/1.0/openapi/schemas/link.json"
+            "$ref": "https://FIXME/schema_definitions.json#/$defs/LinkObject"
           },
           "uniqueItems": true
         },
@@ -146,7 +148,7 @@
           "type": "array",
           "minItems": 1,
           "items": {
-            "$ref": "https://schemas.opengis.net/ogcapi/common/part1/1.0/openapi/schemas/link.json"
+            "$ref": "https://FIXME/schema_definitions.json#/$defs/LinkObject"
           },
           "uniqueItems": true
         }
@@ -170,7 +172,7 @@
         "owns": {
           "type": "array",
           "items": {
-            "$ref": "https://schemas.opengis.net/ogcapi/common/part1/1.0/openapi/schemas/link.json"
+            "$ref": "https://FIXME/schema_definitions.json#/$defs/LinkObject"
           },
           "uniqueItems": true
         }

@@ -1823,17 +1823,13 @@ This chapter defines requirements classes for the encoding of application schema
 [[jsonschema_uml_profile]]
 === UML profile
 
-// summary of the relevant UML profile - stereotypes and their tagged values
-
-#TBD# Move to an annex, to clause 6 (informative)? The conventions chapter does not seem to be the right place ...
-
 The stereotypes as well as tagged values that are relevant for JSON Schema encodings are listed in <<table_umlprofile_stereotypes>> and <<table_umlprofile_tagged_values>>.
 
 [[table_umlprofile_stereotypes]]
 .Stereotypes relevant for JSON Schema encodings
 [width="90%",options="header"]
 |===
-| Stereotype | Model element | Description
+| Stereotype / keyword | Model element | Description
 |applicationSchema |Package |A conceptual schema for data required by one or more applications. Source: <<ref_iso19109>>, especially chapter 8.2. 
 |schema |Package |This stereotype is typically used in abstract schemas defined by ISO TC 211. For further details on abstract schemas, see <<ref_iso19103>>, chapter 6.2 and figure 4. An abstract schema and an application schema are both conceptual schemas, but they are on different levels of abstraction.
 |featureType |Class |A feature type as defined by <<ref_iso19109>>.
@@ -1843,7 +1839,6 @@ The stereotypes as well as tagged values that are relevant for JSON Schema encod
 |enumeration |Class |A fixed list of valid identifiers of named literal values. Attributes of an enumerated type may only take values from this list. Source: <<ref_iso19103>>
 |codeList |Class |A flexible enumeration that uses string values for expressing a list of potential values. Source: <<ref_iso19103>>
 |property |Property (attribute [not of an enumeration or code list] or association role) |A property of a schema type which is not an enumeration or code list.
-|#voidable# |Property (attribute [not of an enumeration or code list] or association role) |#TODO#
 
 |===
 
@@ -1987,64 +1982,56 @@ include::../requirements/core/REQ003.adoc[]
 | UML class | JSON Schema simple type | JSON Schema keywords
 |Boolean |boolean |
 |CharacterString |string |
-|Date |string a|format=date, pattern= 
-[source,options="unnumbered"]
-----
-^\d{4}-\d{2}-\d{2}$
-----
-|DateTime |string a|format=date-time, pattern= 
-[source,options="unnumbered"]
-----
-^\d{4}-\d{2}-\d{2}T\d{2}:\d{2}:\d{2}(\.\d)?(Z\|((\+\|-)\d{2}:\d{2}))?$
-----
+|Date |string |format=date
+|DateTime |string |format=date-time
 |Decimal |number |
 |Integer |integer |
 |Number |number |
 |Real |number |
-|Time |string a|format=time, pattern= 
-[source,options="unnumbered"]
-----
-^\d{2}:\d{2}:\d{2}(\.\d)?(Z\|((\+\|-)\d{2}:\d{2}))?$
-----
+|Time |string |format=time
 |URI |string |format=uri
 |===
-
-// EDITORIAL ISSUE Writing regular expressions in table cells can be an issue - see https://github.com/metanorma/metanorma-ogc/issues/466 for details. Using source blocks is a solution. Note that when writing regular expressions in table cells, the cell delimiter character '|' needs to be escaped in the expression!
-
-#TBD# URI pattern: use 
-[source,options="unnumbered"]
-----
-^(([^:/?#]+):)?(\/\/([^/?#]*))?([^?#]*)(\?([^#]*))?(#(.*))?$
-----
-which is defined (without the last '$') in https://www.rfc-editor.org/rfc/rfc3986.html#appendix-A ? RFC 3986 is referenced from http://json-schema.org/draft/2020-12/json-schema-validation.html#section-7.3.5[JSON Schema] for the 'uri' format. Or omit the pattern for URI?
 
 Some JSON Schema validators do not support or ignore the JSON Schema keyword "format". That can be an issue, especially if a JSON Schema definition represented a choice (e.g. using the JSON Schema keyword "oneOf") between simple JSON Schema types. In that case, such a validator might complain that the choice cannot be made because both options match the simple type definition. The following recommendation is meant to prevent that issue. 
 
 include::../requirements/core/REC003.adoc[]
 
-#TBD# Would it be better to define the patterns to use for specific JSON Schema formats shown in <<table_req_core_iso19103_primitive_types>> in this recommendation? That way, the specification would still list them, and implementations can choose to use them - or to omit them.
+[[table_req_core_iso19103_patterns]]
+.Regular expressions for some ISO 19103 types, to be used in the JSON Schema 'pattern' keyword
+[width="90%",options="header"]
+|===
+| UML class | Regular expression for use in JSON Schema 'pattern' keyword
+|Date a|
+[source,options="unnumbered"]
+----
+^\d{4}-\d{2}-\d{2}$
+----
+|DateTime a| 
+[source,options="unnumbered"]
+----
+^\d{4}-\d{2}-\d{2}T\d{2}:\d{2}:\d{2}(\.\d)?(Z\|((\+\|-)\d{2}:\d{2}))?$
+----
+|Time a|
+[source,options="unnumbered"]
+----
+^\d{2}:\d{2}:\d{2}(\.\d)?(Z\|((\+\|-)\d{2}:\d{2}))?$
+----
+|URI a|
+[source,options="unnumbered"]
+----
+^(([^:/?#]+):)?(\/\/([^/?#]*))?([^?#]*)(\?([^#]*))?(#(.*))?$
+----
+|===
+
+// EDITORIAL ISSUE Writing regular expressions in table cells can be an issue - see https://github.com/metanorma/metanorma-ogc/issues/466 for details. Using source blocks is a solution. Note that when writing regular expressions in table cells, the cell delimiter character '|' needs to be escaped in the expression!
 
 include::../requirements/core/REQ004.adoc[]
 
-[[jsonschema_for_iso19103_measure_types]]
-.JSON Schema for ISO 19103 measure types
-[source,json,linenumbers]
-----
-{
-  "type" : "object",
-  "required" : [ "value", "uom" ],
-  "properties" : {
-    "value" : {
-      "type" : "number"
-    },
-    "uom" : {
-      "type" : "string"
-    }
-  }
-}
-----
+NOTE: Tag _unit_ identifies that the UML property has a fixed unit of measure. Having a fixed unit for a given property is highly beneficial for practical applications, for example when writing queries and filter statements. Note that it is perfectly valid for an application schema to still use a measure type for an attribute with a fixed unit, instead of just type 'Number' or 'Real'. The reason is that the application schema is defined on the conceptual level. From that point of view, a measure typed attribute with a fixed unit still has a measure as value type, not just a number. It is on the implementation level that the simplification of just using a number value for a measure typed property with fixed unit makes sense.
 
 NOTE: If ISO TC 211 defines a JSON Schema for ISO 19103 measure types, then that JSON Schema definition can be used.
+
+NOTE: If an external type is not covered by the mapping tables defined in this document, then a suitable mapping needs be found on a case by case basis. For example, if CI_Citation from ISO 19115 was used by an application schema, a reference to a suitable JSON Schema definition needs to be identified. Such a schema definition could be created manually, or (semi-) automatic, for example using the encoding behavior defined in this specification.
 
 
 [[jsonschema_req_core_types_classname]]
@@ -2290,6 +2277,16 @@ image::figures/basic_types_example.png[align="center"]
 {
   "$schema": "http://json-schema.org/draft/2019-09/schema",
   "$defs": {
+    "EmailAddress": {
+      "allOf": [
+        {
+          "$ref": "#/$defs/MyCharacterString"
+        },
+        {
+          "format": "email"
+        }
+      ]
+    },
     "MyBoolean": {
       "type": "boolean"
     },
@@ -2343,16 +2340,6 @@ image::figures/basic_types_example.png[align="center"]
         }
       ]
     },
-    "StringFormat": {
-      "allOf": [
-        {
-          "$ref": "#/$defs/MyCharacterString"
-        },
-        {
-          "format": "email"
-        }
-      ]
-    },
     "StringPattern": {
       "allOf": [
         {
@@ -2399,7 +2386,10 @@ image::figures/Properties_example.png[align="center"]
       "properties": {
         "property1": {"type": "string"},
         "property2": {"type": "number"}        
-      }
+      },
+      "required": [
+        "property1", "property2"
+      ]
     }
   }
 }
@@ -2618,18 +2608,21 @@ include::../requirements/plain/REQ001.adoc[]
 [width="90%",options="header"]
 |===
 | UML class | JSON Schema reference
-|GM_Curve |https://geojson.org/schema/LineString.json
-|GM_MultiCurve |https://geojson.org/schema/MultiLineString.json
-|GM_MultiPoint |https://geojson.org/schema/MultiPoint.json
-|GM_MultiSurface |https://geojson.org/schema/MultiPolygon.json
-|GM_Object |https://geojson.org/schema/Geometry.json
 |GM_Point |https://geojson.org/schema/Point.json
+|GM_Curve |https://geojson.org/schema/LineString.json
 |GM_Surface |https://geojson.org/schema/Polygon.json
+|GM_MultiPoint |https://geojson.org/schema/MultiPoint.json
+|GM_MultiCurve |https://geojson.org/schema/MultiLineString.json
+|GM_MultiSurface |https://geojson.org/schema/MultiPolygon.json
+|GM_Aggregate |https://geojson.org/schema/GeometryCollection.json
+|GM_Object |https://geojson.org/schema/Geometry.json
+
 |===
 
-#TBD# What about solids - should we refer to the JSON-FG geometry then? ... and what about other geometry types, then, such as GM_Curve - should that always be a GeoJSON LineString, or should we also refer to the JSON-FG geometry in such cases? Do we need to reference some specific section of GeoJSON or JSON-FG in the dependencies of the requirements class? ... probably yes...
-
 NOTE: <<table_plain_iso19107_types>> uses geometry types defined by <<ref_iso19107>>. While this specification does not define mapping tables for newer versions of ISO 19107, application schemas may use geometry types from a newer version of ISO 19107. The mappings would then need to be adjusted accordingly (finding correct replacements for the types mentioned in the first column of the table).
+
+NOTE: For geometry typed properties whose value type is not covered in <<table_plain_iso19107_types>>, a suitable mapping needs to be defined, as explained in <<jsonschema_req_core_external_types>>.
+
 
 [[jsonschema_req_plain_common_base]]
 ==== Common base schema
@@ -2659,18 +2652,20 @@ include::../requirements/geojson-formats/REQ001.adoc[]
 [width="90%",options="header"]
 |===
 | UML class | JSON Schema reference
-|GM_Curve |https://geojson.org/schema/LineString.json
-|GM_MultiCurve |https://geojson.org/schema/MultiLineString.json
-|GM_MultiPoint |https://geojson.org/schema/MultiPoint.json
-|GM_MultiSurface |https://geojson.org/schema/MultiPolygon.json
-|GM_Object |https://geojson.org/schema/Geometry.json
 |GM_Point |https://geojson.org/schema/Point.json
+|GM_Curve |https://geojson.org/schema/LineString.json
 |GM_Surface |https://geojson.org/schema/Polygon.json
+|GM_MultiPoint |https://geojson.org/schema/MultiPoint.json
+|GM_MultiCurve |https://geojson.org/schema/MultiLineString.json
+|GM_MultiSurface |https://geojson.org/schema/MultiPolygon.json
+|GM_Aggregate |https://geojson.org/schema/GeometryCollection.json
+|GM_Object |https://geojson.org/schema/Geometry.json
+
 |===
 
 NOTE: <<table_iso19107_types_geometry_member>> uses geometry types defined by <<ref_iso19107>>. While this specification does not define mapping tables for newer versions of ISO 19107, application schemas may use geometry types from a newer version of ISO 19107. The mappings would then need to be adjusted accordingly (finding correct replacements for the types mentioned in the first column of the table).
 
-#TBD# Should we suggest the JSON-FG geometries for all non-primary-geometry cases? Likely depends on application requirements regarding dimension: if 3D, use JSON-FG geometries, otherwise use GeoJSON geometries. CRS choice can only be encoded with JSON-FG feature or feature collection. Also, we should not define such a requirement here. That should be left to the actual GeoJSON and JSON-FG encoding requirements classes. The former would likely only use GeoJSON geometry types for non-primary-geometry properties, while the latter only uses JSON-FG geometry types for such properties.
+NOTE: For geometry typed properties that are not mapped to the "geometry" top-level member, a suitable mapping needs to be defined, as explained in <<jsonschema_req_core_external_types>>.
 
 
 [[jsonschema_req_geojson_formats_identifier]]
@@ -2739,10 +2734,6 @@ include::../requirements/geojson/requirements_class.adoc[]
 
 NOTE: An example of an application schema encoded in GeoJSON compliant JSON Schema format is given in <<annex_example_application_schema_geojson>>.
 
-NOTE: The following sections refer to JSON-FG JSON Schema files via URLs that contain the string "beta." Once the JSON-FG standard and its JSON Schema definitions have been approved by OGC, these JSON Schema files are going to be available at the mentioned URLs, but without the "beta." part. For example, the geometry.json schema file is going to be available at https://schemas.opengis.net/json-fg/geometry.json.
-
-#TBD# Add a requirement for implementation of non-primary-geometry properties using the GeoJSON geometry definitions?
-
 
 [[jsonschema_req_geojson_common_base]]
 ==== Common base schema
@@ -2757,7 +2748,7 @@ NOTE: No common base schema is defined for object types. Such types need to be t
 
 [[img_req_geojson_common_base_example]]
 .Example of a feature type hierarchy in an application schema
-image::figures/example_primary_geometry.png[align="center"]
+image::figures/example_common_base.png[align="center"]
 
 [[example_req_geojson_common_base]]
 .Example for encoding the common base schema for feature types
@@ -2823,8 +2814,6 @@ include::../requirements/jsonfg/requirements_class.adoc[]
 
 NOTE: An example of an application schema encoded in JSON-FG compliant JSON Schema format is given in <<annex_example_application_schema_jsonfg>>.
 
-#TBD# Add a requirement for implementation of non-primary-geometry properties using the JSON-FG geometry definitions?
-
 
 [[jsonschema_req_jsonfg_iso19107_types]]
 ==== Implementation of ISO 19107 types for the "place" member
@@ -2836,18 +2825,22 @@ include::../requirements/jsonfg/REQ001.adoc[]
 [width="90%",options="header"]
 |===
 | UML class | JSON Schema reference
-|GM_Curve |https://beta.schemas.opengis.net/json-fg/geometry-objects.json#/$defs/LineString
-|GM_MultiCurve |https://beta.schemas.opengis.net/json-fg/geometry-objects.json#/$defs/MultiLineString.json
-|GM_MultiPoint |https://beta.schemas.opengis.net/json-fg/geometry-objects.json#/$defs/MultiPoint.json
-|GM_MultiSolid |https://beta.schemas.opengis.net/json-fg/geometry-objects.json#/$defs/MultiPolyhedron
-|GM_MultiSurface |https://beta.schemas.opengis.net/json-fg/geometry-objects.json#/$defs/MultiPolygon.json
-|GM_Object |https://beta.schemas.opengis.net/json-fg/geometry.json
 |GM_Point |https://beta.schemas.opengis.net/json-fg/geometry-objects.json#/$defs/Point.json
-|GM_Solid |https://beta.schemas.opengis.net/json-fg/geometry-objects.json#/$defs/Polyhedron
+|GM_Curve |https://beta.schemas.opengis.net/json-fg/geometry-objects.json#/$defs/LineString
 |GM_Surface |https://beta.schemas.opengis.net/json-fg/geometry-objects.json#/$defs/Polygon.json
+|GM_Solid |https://beta.schemas.opengis.net/json-fg/geometry-objects.json#/$defs/Polyhedron
+|GM_MultiPoint |https://beta.schemas.opengis.net/json-fg/geometry-objects.json#/$defs/MultiPoint.json
+|GM_MultiCurve |https://beta.schemas.opengis.net/json-fg/geometry-objects.json#/$defs/MultiLineString.json
+|GM_MultiSurface |https://beta.schemas.opengis.net/json-fg/geometry-objects.json#/$defs/MultiPolygon.json
+|GM_MultiSolid |https://beta.schemas.opengis.net/json-fg/geometry-objects.json#/$defs/MultiPolyhedron
+|GM_Aggregate |https://beta.schemas.opengis.net/json-fg/geometry-objects.json#/$defs/GeometryCollection
+|GM_Object |https://beta.schemas.opengis.net/json-fg/geometry.json
+
 |===
 
 NOTE: <<table_iso19107_types_place_member>> uses geometry types defined by <<ref_iso19107>>. While this specification does not define mapping tables for newer versions of ISO 19107, application schemas may use geometry types from a newer version of ISO 19107. The mappings would then need to be adjusted accordingly (finding correct replacements for the types mentioned in the first column of the table).
+
+NOTE: For geometry typed properties that are not mapped to the "geometry" top-level member, a suitable mapping needs to be defined, as explained in <<jsonschema_req_core_external_types>>.
 
 
 [[jsonschema_req_jsonfg_common_base]]
@@ -2890,7 +2883,7 @@ image::figures/example_primary_place.png[align="center"]
           "type": "object",
           "properties": {
             "place": {
-              "$ref": "https://beta.schemas.opengis.net/json-fg/geometry-objects.json#/$defs/Polygon.json"
+              "$ref": "https://beta.schemas.opengis.net/json-fg/geometry-objects.json#/$defs/Polyhedron.json"
             }
           }
         }
@@ -2912,9 +2905,6 @@ include::../requirements/jsonfg/REQ005.adoc[]
 
 NOTE: UML properties of other kinds of classes - object types, data types, and unions - are not considered by this requirements. Object types are not encoded as JSON-FG features. Data types and unions may be used by other classes, which prevents a general exclusive mapping to the JSON-FG top-level "time" member. Only a direct property of a \<<featureType>> can be mapped in this way.
 
-////
-This example is probably not that helpful, since the only other property is mapped to the GeoJSON "geometry" member and no other properties are defined.
-
 [[img_req_jsonfg_primary_time_example]]
 .Example of a feature type with an attribute designated as primary instant
 image::figures/example_primary_instant.png[align="center"]
@@ -2935,6 +2925,9 @@ image::figures/example_primary_instant.png[align="center"]
         {
           "type": "object",
           "properties": {
+            "time": {
+              "$ref": "https://FIXME/schema_definitions.json#/$defs/PrimaryInstantRequired"
+            },
             "geometry": {
               "$ref": "https://beta.schemas.opengis.net/json-fg/geometry-objects.json#/$defs/Polygon.json"
             }
@@ -2945,7 +2938,6 @@ image::figures/example_primary_instant.png[align="center"]
   }
 }
 ----
-////
 
 
 [[jsonschema_byreference]]
@@ -2978,11 +2970,11 @@ include::../requirements/by-reference-basic/requirements_class.adoc[]
 
 include::../requirements/by-reference-basic/REQ001.adoc[]
 
-NOTE: The default value for tag _inlineOrByReference_ is different to GML. The value _byReference_ has been chosen as default, in order to reduce the degrees of freedom and to reduce the schema complexity.
+NOTE: The default value for tag _inlineOrByReference_ is different in GML. For the JSON Schema encoding, the default values have been chosen in order to reduce the degrees of freedom and to reduce the schema complexity. The separation into default value _inline_ for UML attributes, and _byReference_ for UML association roles has been made since that reflects the typical modeling approach, where association roles have a value type that is usually encoded by reference, and attributes have a value type that is usually encoded inline - especially if the attribute value type is a type with identity (e.g. an ISO 19107 geometry type).
 
 
 [[jsonschema_byreference_encoding_req_uri]]
-==== Requirements class: by-reference encoding of property values using a plain URI
+==== Requirements class: by-reference encoding of property values using a plain URI reference
 
 include::../requirements/by-reference-uri/requirements_class.adoc[]
 
@@ -3012,7 +3004,7 @@ The JSON Schema encoding for the example in <<img_req_by_reference_example>>, us
           "minItems": 1,
           "items": {
             "type": "string",
-            "format": "uri"
+            "format": "uri-reference"
           },
           "uniqueItems": true
         }
@@ -3029,7 +3021,7 @@ The JSON Schema encoding for the example in <<img_req_by_reference_example>>, us
           "type": "array",
           "items": {
             "type": "string",
-            "format": "uri"
+            "format": "uri-reference"
           },
           "uniqueItems": true
         }
@@ -3048,8 +3040,6 @@ This JSON object is valid against the schema definition of "Parcel" from <<examp
 }
 ----
 
-#TBD# Should we really require the use of format=uri? ... I've tested the above example with #d024i42sl as value for owner on https://www.jsonschemavalidator.net/, and it did not validate. While that may just be due to the implementation of that page, it represents an issue that we should consider. Whenever an in-document reference is supposed to be put as content of a reference field, the question is if the format=uri may cause validation to fail. ... and I know that in-document references are not (yet) defined in JSON, so a community-specific mechanism would have to be defined. Note that the link object schema at https://schemas.opengis.net/ogcapi/common/part1/1.0/openapi/schemas/link.json also does not define a format for "href". If we decided to avoid format=uri here, and just use type=string, then the note in the overview section (about foreign key use with simple string or number) could be removed.
-
 
 [[jsonschema_byreference_encoding_req_link_object]]
 ==== Requirements class: by-reference encoding of property values using a link object
@@ -3059,6 +3049,8 @@ include::../requirements/by-reference-link-object/requirements_class.adoc[]
 include::../requirements/by-reference-link-object/REQ001.adoc[]
 
 NOTE: The result is an XOR type of check, i.e., a value can either be given inline or by reference, but not both. This is different to GML, where in the case of _inlineOrByReference_ and a type with identity as value type, a value can be encoded both inline and by reference.
+
+NOTE: The URL "https://FIXME/schema_definitions.json" is preliminary and will likely change during the OGC publication process for this document.
 
 // link object is most "webby" ... maybe link to discussion in JSON-FG Annex about linking
 
@@ -3079,7 +3071,7 @@ The JSON Schema encoding for the example in <<img_req_by_reference_example>>, us
           "type": "array",
           "minItems": 1,
           "items": {
-            "$ref": "https://schemas.opengis.net/ogcapi/common/part1/1.0/openapi/schemas/link.json"
+            "$ref": "https://FIXME/schema_definitions.json#/$defs/LinkObject"
           },
           "uniqueItems": true
         }
@@ -3095,7 +3087,7 @@ The JSON Schema encoding for the example in <<img_req_by_reference_example>>, us
         "owns": {
           "type": "array",
           "items": {
-            "$ref": "https://schemas.opengis.net/ogcapi/common/part1/1.0/openapi/schemas/link.json"
+            "$ref": "https://FIXME/schema_definitions.json#/$defs/LinkObject"
           },
           "uniqueItems": true
         }
@@ -3113,14 +3105,11 @@ This JSON object is valid against the schema definition of "Parcel" from <<examp
   "owner": [
     {
       "title": "John Doe",
-      "href": "http://example.org/Person/d024i42sl",
-      "rel": "owner"
+      "href": "http://example.org/Person/d024i42sl"
     }
   ]  
 }
 ----
-
-#TBD# Not sure about the value of "rel". Unfortunately, that is a required property of a link object. There are two registries to consult: http://www.opengis.net/def/rel and https://www.iana.org/assignments/link-relations/link-relations.xhtml. In addition, according to the OGC API Common User Guide, one can define arbitrary URIs as values - which would be seen as extensions to the registered link relations. ... just "owner" is wrong, then, I guess. Would https://defs.opengis.net/vocprez/object?uri=http%3A//www.opengis.net/def/rel/iana/1.0/item[item] be better? https://html.spec.whatwg.org/multipage/links.html#link-type-alternate[alternate] does not appear to be appropriate, either.
 
 
 [[jsonschema_unions]]
@@ -3167,10 +3156,6 @@ image::figures/type_discriminator_unions.png[align="center"]
         },
         {
           "$ref": "https://geojson.org/schema/Point.json"
-        },
-        {
-          "type": "string",
-          "format": "date"
         }
       ]
     },
@@ -3193,6 +3178,8 @@ image::figures/type_discriminator_unions.png[align="center"]
   }
 }
 ----
+
+WARNING: Care must be taken, that the type choice of a type discriminator union are separate value spaces. Otherwise, validation may fail, if an actual value matches more than one of the type choices. That would break the rule of the "oneOf" JSON Schema keyword, that one and only one of its component schemas is satisfied. If, for example, the "Union_TypeDiscriminator" in <<example_unions_req_type_discriminator_jsonschema>> had another option for a date value ("type": "string", "format": "date"), and value "2022-12-09" was validated against the resulting JSON Schema definition, validation would fail - because that value matches both the string-or-number case and the string-with-format-date case.
 
 
 [[jsonschema_unions_req_property_choice]]
@@ -3360,9 +3347,9 @@ include::../requirements/codelists-link-object/requirements_class.adoc[]
 
 include::../requirements/codelists-link-object/REQ001.adoc[]
 
-That means that a code value is essentially encoded as a "link object" as specified by IETF RFC 8288 and implemented in the OGC API standards. The Link object provides "href" and "title" members like the simple Xlinks in GML.
+That means that a code value is essentially encoded as a "link object" as specified by IETF RFC 8288 and implemented in the OGC API standards. The link object provides "href" and "title" members like the simple Xlinks in GML.
 
-#TBD# Do we have or need a dependency on OGC API Common, if we use the link object schema defined there? Is there a suitable requirements class in OGC API Common? Apparently, part 1 of OGC API Common has recently been published (see https://opengeospatial.github.io/ogcna-auto-review/19-072.html). There is a GitHub repository, which seems to have up-to-date information: https://github.com/opengeospatial/ogcapi-common. There is also a user guide: https://portal.ogc.org/files/?artifact_id=103046&version=1. It looks like there are no specific requirements in OGC API Common regarding the use of link objects. There are some recommendations regarding links and link relations (the user guide also has a chapter on link relations). So, I think we can get away with just referencing the JSON Schema of a link object, and not having a dependency on any of the requirements classes defined by OGC API Common - Part 1.
+NOTE: The URL "https://FIXME/schema_definitions.json" is preliminary and will likely change during the OGC publication process for this document.
  
 
 [[jsonschema_req_entitytype]]
@@ -3370,11 +3357,9 @@ That means that a code value is essentially encoded as a "link object" as specif
 
 include::../requirements/entitytype/requirements_class.adoc[]
 
-NOTE: The requirements class xref:http://www.opengis.net/spec/uml2json/1.0/req/entitytype[style=id%] is applicable in <<jsonschema_req_plain,plain>> and <<jsonschema_req_geojson,GeoJSON>> JSON encodings. The <<jsonschema_req_jsonfg,JSON-FG>> encoding already provides the "featureType" member, which plays a similar role - at least for JSON objects representing features. Adding an "entityType" member in such an encoding would duplicate the already existing typing mechanism there.
-
-#TBD# For JSON-FG, the "featureType" member is not defined for data types. That is a bit of a mismatch, considering that inheritance hierarchies for complex data types are possible in application schemas, and identifying the type of a data type value in actual JSON data could thus be desired by applications.
-
 include::../requirements/entitytype/REQ001.adoc[]
+
+include::../requirements/entitytype/PERM001.adoc[]
 
 NOTE: By default, the property value is not restricted using "const", because doing so would prevent JSON Schema constraints that support inheritance-related checks. However, if the application schema did not use inheritance, then such restrictions could be defined.
 

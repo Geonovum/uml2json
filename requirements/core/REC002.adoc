@@ -2,6 +2,6 @@
 ====
 [%metadata]
 identifier:: http://www.opengis.net/spec/uml2json/1.0/req/core/id-characteristics
-statement:: It is recommended that the "$id" URI be stable, persistent, and globally unique.
+statement:: It is recommended that the "$id" URI should be stable, persistent, and globally unique.
 
 ====

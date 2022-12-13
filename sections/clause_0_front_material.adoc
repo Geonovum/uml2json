@@ -1,20 +1,23 @@
 [abstract]
 == Abstract
 
-#<Insert Abstract Text here>#
+This best practice document on UML to JSON encoding rules is established as an initiative of Geonovum. The aim is to come to a standardized encoding from UML to JSON, in order to achieve technical interoperability in the chain from conceptual models to JSON implementation. In this document, JSON implementation includes plain JSON, GeoJSON and JSON-FG.
 
 == Preface
+
+This document defines how a conceptual schema in UML, compliant to <<ref_iso19103>> and <<ref_iso19109>>, can be encoded in JSON. A number of requirements classes are defined, which contain the necessary requirements and technical details.
+
+JSON is one of major data encodings used by current web applications. In order to achieve a high level of interoperability when exchanging JSON encoded data between such applications, especially when the applications are developed by different entities, the semantics and structure of the data need to be well defined. In the geospatial domain, conceptual schemas are used to define application relevant information. Typically, some additional schema language is used to define the structures for encoding the information. For JSON encoded data, such a schema language is JSON Schema. Ideally, the JSON Schema constructs can automatically be derived from a conceptual schema. For that task, a set of encoding rules is needed. 
+
+Within the OGC, the https://www.ogc.org/projects/initiatives/ugas-2020[UML-to-GML Application Schema Pilot 2020] (UGAS-2020) was the first innovation initiative that produced a comprehensive set of encoding rules, for the conversion of ISO 19109 compliant application schemas in UML to JSON Schema. The <<ref_ugas2020,UGAS-2020 Engineering Report>> documents the findings of that initiative.
+
+This document is based on and extends the results of UGAS-2020 regarding JSON Schema encoding rules. It defines the conversion behavior in an implementation agnostic way, adhering to the requirements defined in <<ref_modspec>> for writing OGC standards. This document thus represents the next step on the way to standardizing JSON Schema encoding rules in the geospatial domain.
 
 ////
 *Geonovum Declaration*
 ////
 
 *IMPORTANT* This working document is developed and maintained by Geonovum. It is intended for presentation to OGC later on, and will potentially be put forward into the OGC process.
-
-[NOTE]
-====
-Insert Preface Text here. Give OGC specific commentary: describe the technical content, reason for document, history of the document and precursors, and plans for future work.
-====
 
 ////
 *OGC Declaration*

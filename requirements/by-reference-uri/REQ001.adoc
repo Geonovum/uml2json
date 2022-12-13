@@ -4,7 +4,7 @@
 identifier:: http://www.opengis.net/spec/uml2json/1.0/req/by-reference-uri/encoding
 statement:: If the value of tag _inlineOrByReference_ of a UML property - whose value type is a type with identity that is not implemented as a simple JSON Schema type - is not _inline_: 
 
-part:: If the tag value is _byReference_, then the JSON Schema definition of the property shall contain a "type" member with value "string", as well as a "format" member with value "uri";
+part:: If the tag value is _byReference_, then the JSON Schema definition of the property shall contain a "type" member with value "string", as well as a "format" member with value "uri-reference";
 part:: Otherwise - the tag value is _inlineOrByReference_ - the inline and by-reference encoding cases shall be combined in the JSON Schema definition of the property using the "oneOf" keyword.
 
 ====

@@ -5,4 +5,5 @@ identifier:: http://www.opengis.net/spec/uml2json/1.0/req/entitytype
 target:: JSON (Schema) Encoding
 inherit:: http://www.opengis.net/spec/uml2json/1.0/req/core
 requirement:: http://www.opengis.net/spec/uml2json/1.0/req/entitytype/member
+permission:: http://www.opengis.net/spec/uml2json/1.0/req/entitytype/json-fg-feature-type
 ====

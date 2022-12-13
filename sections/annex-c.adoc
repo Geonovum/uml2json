@@ -1,0 +1,13 @@
+[appendix,obligation=normative]
+:appendix-caption: Annex
+[[annex_uml2json_schema_definition]]
+== JSON Schema definitions
+
+The following JSON Schema defines the schema for link object and measure, which are used in this specification.
+
+[[annex_c_schema_definitions]]
+.JSON Schema for link object and measure
+[source,json,linenumbers]
+----
+include::../schemas/schema_definitions.json[]
+----

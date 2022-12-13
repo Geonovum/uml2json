@@ -34,7 +34,7 @@
       "$anchor": "Building",
       "allOf": [
         {
-          "$ref": "http://example.org/schema/infra.json#Building_Core"
+          "$ref": "#/$defs/Building_Core"
         },
         {
           "type": "object",
@@ -43,10 +43,10 @@
               "type": "object",
               "properties": {
                 "address": {
-                  "$ref": "http://example.org/schema/infra.json#Address"
+                  "$ref": "#/$defs/Address"
                 },
                 "type": {
-                  "$ref": "http://example.org/schema/infra.json#BuildingType"
+                  "$ref": "#/$defs/BuildingType"
                 }
               },
               "required": [
@@ -65,7 +65,7 @@
       "$anchor": "BuildingPart",
       "allOf": [
         {
-          "$ref": "http://example.org/schema/infra.json#Building_Core"
+          "$ref": "#/$defs/Building_Core"
         },
         {
           "type": "object",
@@ -74,10 +74,11 @@
               "type": "object",
               "properties": {
                 "type": {
-                  "$ref": "http://example.org/schema/infra.json#BuildingPartType"
+                  "$ref": "#/$defs/BuildingPartType"
                 },
                 "clearanceHeight": {
-                  "type": "number"
+                  "type": "number",
+                  "unit": "m"
                 },
                 "extent3d": {
                   "$ref": "https://beta.schemas.opengis.net/json-fg/geometry-objects.json#/$defs/Polyhedron"
@@ -85,7 +86,7 @@
                 "belongsTo": {
                   "type": "array",
                   "items": {
-                    "$ref": "https://schemas.opengis.net/ogcapi/common/part1/1.0/openapi/schemas/link.json"
+                    "$ref": "https://FIXME/schema_definitions.json#/$defs/LinkObject"
                   },
                   "uniqueItems": true
                 }
@@ -171,12 +172,13 @@
               "type": "object",
               "properties": {
                 "area": {
-                  "type": "number"
+                  "type": "number",
+                  "unit": "m2"
                 },
                 "hasBuilding": {
                   "type": "array",
                   "items": {
-                    "$ref": "https://schemas.opengis.net/ogcapi/common/part1/1.0/openapi/schemas/link.json"
+                    "$ref": "https://FIXME/schema_definitions.json#/$defs/LinkObject"
                   },
                   "uniqueItems": true
                 },
@@ -184,7 +186,7 @@
                   "type": "array",
                   "minItems": 1,
                   "items": {
-                    "$ref": "https://schemas.opengis.net/ogcapi/common/part1/1.0/openapi/schemas/link.json"
+                    "$ref": "https://FIXME/schema_definitions.json#/$defs/LinkObject"
                   },
                   "uniqueItems": true
                 }
@@ -222,7 +224,7 @@
                 "owns": {
                   "type": "array",
                   "items": {
-                    "$ref": "https://schemas.opengis.net/ogcapi/common/part1/1.0/openapi/schemas/link.json"
+                    "$ref": "https://FIXME/schema_definitions.json#/$defs/LinkObject"
                   },
                   "uniqueItems": true
                 }

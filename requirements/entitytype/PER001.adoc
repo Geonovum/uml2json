@@ -1,0 +1,8 @@
+[permission]
+====
+[%metadata]
+identifier:: http://www.opengis.net/spec/uml2json/1.0/req/entitytype/json-fg-feature-type
+
+statement:: For a feature type that is encoded as a JSON-FG feature, the "entityType" member may be omitted. That is due to the fact that a JSON-FG feature already has a top-level "featureType" member, which serves the same purpose as the "entityType" member.
+ 
+====
