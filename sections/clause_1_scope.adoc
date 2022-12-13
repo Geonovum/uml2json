@@ -1,6 +1,6 @@
 == Scope
 
-This document defines requirements for encoding application schemas in UML as JSON schemas. The basic requirements classes cover the creation of JSON schemas for:
+This document defines requirements for encoding application schemas in UML as JSON schemas. The requirements classes cover the creation of JSON schemas for:
 
 * a plain JSON encoding;
 * a GeoJSON-compliant encoding; and

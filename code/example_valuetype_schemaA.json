@@ -10,7 +10,7 @@
           "type": "boolean"
         },
         "roleToClass2": {
-          "$ref": "http://example.org/schema/schemaA.json#Class2"
+          "$ref": "#/$defs/Class2"
         }
       }
     },

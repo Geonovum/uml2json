@@ -34,16 +34,16 @@
       "$anchor": "Building",
       "allOf": [
         {
-          "$ref": "http://example.org/schema/infra.json#Building_Core"
+          "$ref": "#/$defs/Building_Core"
         },
         {
           "type": "object",
           "properties": {
             "address": {
-              "$ref": "http://example.org/schema/infra.json#Address"
+              "$ref": "#/$defs/Address"
             },
             "type": {
-              "$ref": "http://example.org/schema/infra.json#BuildingType"
+              "$ref": "#/$defs/BuildingType"
             }
           },
           "required": [
@@ -57,13 +57,13 @@
       "$anchor": "BuildingPart",
       "allOf": [
         {
-          "$ref": "http://example.org/schema/infra.json#Building_Core"
+          "$ref": "#/$defs/Building_Core"
         },
         {
           "type": "object",
           "properties": {
             "type": {
-              "$ref": "http://example.org/schema/infra.json#BuildingPartType"
+              "$ref": "#/$defs/BuildingPartType"
             },
             "clearanceHeight": {
               "type": "number",

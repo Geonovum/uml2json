@@ -151,9 +151,6 @@
         {
           "type": "object",
           "properties": {
-            "time": {
-              "$ref": "https://FIXME/schema_definitions.json#/$defs/PrimaryInstantRequired"
-            },
             "geometry": {
               "$ref": "https://beta.schemas.opengis.net/json-fg/geometry-objects.json#/$defs/Polygon.json"
             },

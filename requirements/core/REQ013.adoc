@@ -10,7 +10,7 @@ If the minimum cardinality of a UML property is 1 or greater, and the class that
 
 [.component,class=part]
 --
-In addition, if the maximum cardinality of the property is greater than 1, then a JSON Schema shall be created for the property as follows.
+In addition, if the maximum cardinality of the property is greater than 1, then the JSON Schema definition for the property shall be created as follows.
 
 * The "type" of the JSON property is set to "array", with the "items" keyword containing the JSON Schema constraints that are created to represent the value type of the property.
 * If the minimum cardinality is greater than 0, it is encoded using the "minItems" keyword.

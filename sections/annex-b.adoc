@@ -32,7 +32,7 @@ include::../code/example_schema_plain.json[]
 [[annex_example_application_schema_geojson]]
 === Example schema in GeoJSON-compliant encoding
 
-The JSON Schema shown in <<example_annex_b_example_schema_plain>> was created by applying requirements class xref:http://www.opengis.net/spec/uml2json/1.0/req/geojson[style=id%] and xref:http://www.opengis.net/spec/uml2json/1.0/req/by-reference-link-object[style=id%].
+The JSON Schema shown in <<example_annex_b_example_schema_geojson>> was created by applying requirements class xref:http://www.opengis.net/spec/uml2json/1.0/req/geojson[style=id%] and xref:http://www.opengis.net/spec/uml2json/1.0/req/by-reference-link-object[style=id%].
 
 [[example_annex_b_example_schema_geojson]]
 .JSON Schema for the example application schema - GeoJSON-compliant encoding
@@ -45,7 +45,7 @@ include::../code/example_schema_geojson.json[]
 [[annex_example_application_schema_jsonfg]]
 === Example schema in JSON-FG-compliant encoding
 
-The JSON Schema shown in <<example_annex_b_example_schema_plain>> was created by applying requirements class xref:http://www.opengis.net/spec/uml2json/1.0/req/jsonfg[style=id%] and xref:http://www.opengis.net/spec/uml2json/1.0/req/by-reference-link-object[style=id%].
+The JSON Schema shown in <<example_annex_b_example_schema_jsonfg>> was created by applying requirements class xref:http://www.opengis.net/spec/uml2json/1.0/req/jsonfg[style=id%] and xref:http://www.opengis.net/spec/uml2json/1.0/req/by-reference-link-object[style=id%].
 
 [[example_annex_b_example_schema_jsonfg]]
 .JSON Schema for the example application schema - JSON-FG-compliant encoding

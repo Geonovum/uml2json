@@ -1817,7 +1817,7 @@ This JSON object is valid against the schema from <<example_jsonschema_encrule_p
 [[jsonschema_introduction]]
 === Introduction
 
-This chapter defines requirements classes for the encoding of application schemas in UML as JSON Schema, and likewise for the encoding of application schema data as JSON data. 
+This chapter defines requirements classes for the encoding of application schemas in UML as JSON Schema, and likewise for the encoding of application data as JSON data. 
 
 
 [[jsonschema_uml_profile]]
@@ -1853,10 +1853,10 @@ NOTE: Some conceptual schemas and application schemas do not make use of the ste
 [width="90%",options="header"]
 |===
 | Applicable stereotype(s) | Tagged value | Relevant requirements class(es) | Comment
-.2+| \<<applicationSchema>> and \<<schema>> | jsonDocument | xref:http://www.opengis.net/spec/uml2json/1.0/req/core[style=id%] | see <<jsonschema_req_core_definitionsschema>>
-| jsonId  | xref:http://www.opengis.net/spec/uml2json/1.0/req/core[style=id%] | see <<jsonschema_req_core_definitionsschema>>
+.2+| \<<applicationSchema>> and \<<schema>> | jsonDocument | xref:http://www.opengis.net/spec/uml2json/1.0/req/core[style=id%] .2+| see <<jsonschema_req_core_definitionsschema>>
+| jsonId  | xref:http://www.opengis.net/spec/uml2json/1.0/req/core[style=id%]
 | \<<enumeration>> and \<<codeList>> | literalEncodingType |xref:http://www.opengis.net/spec/uml2json/1.0/req/core[style=id%] and xref:http://www.opengis.net/spec/uml2json/1.0/req/codelists-literal[style=id%] | see <<jsonschema_req_core_types_enumeration>> and <<jsonschema_codelists_req_literal>>
-.12+| \<<property>> | inlineOrByReference | xref:http://www.opengis.net/spec/uml2json/1.0/req/core[style=id%] | see <<jsonschema_byreference_req_basic>> and <<jsonschema_req_core_properties_valuetype>>
+.13+| \<<property>> | inlineOrByReference | xref:http://www.opengis.net/spec/uml2json/1.0/req/by-reference-basic[style=id%] | see <<jsonschema_byreference_req_basic>>
 | jsonPrimaryGeometry | xref:http://www.opengis.net/spec/uml2json/1.0/req/geojson-formats[style=id%] | see <<jsonschema_req_geojson_formats_primary_geometry>>
 | jsonPrimaryInstant | xref:http://www.opengis.net/spec/uml2json/1.0/req/jsonfg[style=id%] .2+| see <<jsonschema_req_jsonfg_primary_time>>
 | jsonPrimaryInterval | xref:http://www.opengis.net/spec/uml2json/1.0/req/jsonfg[style=id%]  
@@ -1868,7 +1868,7 @@ NOTE: Some conceptual schemas and application schemas do not make use of the ste
 | minInclusive | xref:http://www.opengis.net/spec/uml2json/1.0/req/core[style=id%] 
 | maxExclusive | xref:http://www.opengis.net/spec/uml2json/1.0/req/core[style=id%] 
 | maxInclusive | xref:http://www.opengis.net/spec/uml2json/1.0/req/core[style=id%] 
-
+| unit | xref:http://www.opengis.net/spec/uml2json/1.0/req/core[style=id%]  | see <<jsonschema_req_core_external_types>>
 |===
 
 
@@ -1876,6 +1876,8 @@ NOTE: Some conceptual schemas and application schemas do not make use of the ste
 === Requirements class: Core
 
 include::../requirements/core/requirements_class.adoc[]
+
+#TBD# Should we add a section to explain how JSON Schema files can be used together with actual JSON data, i.e. instance documents? JSON Schema only recommends the use of links with rel=describedBy (see http://json-schema.org/draft/2020-12/json-schema-core.html#name-associating-instances-and-s). Such a link can be added to the http header of a server response that contains the actual JSON (instance) data. Specific formats may encode such links in the JSON data itself. Also see https://ietf-wg-httpapi.github.io/mediatypes/draft-ietf-httpapi-rest-api-mediatypes.html and the "schema" parameter defined there. Some tools (e.g., the oXygen editor) use a "$schema" member in JSON (instance) data to reference the applicable JSON Schema. However, that is a tool-specific approach. In principle, tool-specific approaches are allowed. However, the choice of re-using the "$schema" keyword in that way is problematic, since it does not reflect the intent of "$schema" as defined by http://json-schema.org/draft/2020-12/json-schema-core.html#name-the-schema-keyword.
 
 
 [[jsonschema_req_core_definitionsschema]]
@@ -1918,7 +1920,7 @@ include::../requirements/core/REC002.adoc[]
 ----
 
 
-NOTE: The "$id" of the definitions schema is not included in other examples within this chapter, because declaring an absolute, non-existent URL in these examples often prevents JSON Pointers from these examples from working when testing the examples, for instance on https://www.jsonschemavalidator.net/.
+NOTE: The "$id" of the definitions schema has been omitted in some examples within this chapter. Declaring an absolute, non-existent URL as "$id" in these examples can prevent the examples from working, when testing them using certain JSON Schema validators, for instance on https://www.jsonschemavalidator.net/.
 
 include::../requirements/core/REQ002.adoc[]
 
@@ -1926,12 +1928,14 @@ include::../requirements/core/REQ002.adoc[]
 .References between JSON Schemas using $ref with JSON pointers as values
 image::figures/references_between_definitions_schemas.png[align="center"]
 
+A reference to a schema definition within the same JSON Schema file should be encoded as a relative URL that consists of a fragment identifier, either using a JSON Pointer (e.g., #/$defs/XYZ) or an anchor (e.g., #XYZ).
+
 [[jsonschema_req_core_definitionsschema_media_types]]
-A link to a particular definition within a definitions schema requires the use of a JSON Pointer or an anchor in the fragment identifier of the link URL. <<ref_jsonpointer,JSON Pointer>>, chapter 6, explicitly states that the media type in which a JSON value is provided needs to support this kind of fragment identifier, and that this is not the case for the media type application/json. If a JSON Schema was published with this media type, then it is possible that the application ignores a fragment identifier (because the media type does not support fragment identifiers). If a JSON Schema is published with media type application/schema+json, using an anchor as fragment identifier is supported.
+A link to a particular definition within a definitions schema requires the use of a JSON Pointer or an anchor in the fragment identifier of the link URL. <<ref_jsonpointer,JSON Pointer>>, chapter 6, explicitly states that the media type in which a JSON value is provided needs to support this kind of fragment identifier, and that this is not the case for the media type application/json. If a JSON Schema was published with this media type, then it is possible that the application ignores a fragment identifier (because the media type does not support fragment identifiers). If a JSON Schema is published with media type application/schema+json, using anchors and JSON Pointers as fragment identifiers is supported.
 
 include::../requirements/core/REC001.adoc[]
 
-// JSON Schema 2019-09 and 2020-12 define another media type identifier (application/schema-instance+json). The "application/schema+json" media type is defined to offer a superset of the fragment identifier syntax and semantics provided by  "application/schema-instance+json".
+// JSON Schema 2019-09 and 2020-12 define another media type identifier (application/schema-instance+json). The "application/schema+json" media type is defined to offer a superset of the fragment identifier syntax and semantics provided by  "application/schema-instance+json". Also see https://ietf-wg-httpapi.github.io/mediatypes/draft-ietf-httpapi-rest-api-mediatypes.html
 
 [NOTE]
 ======
@@ -1971,7 +1975,7 @@ Potential reasons for NOT using JSON Schema annotations are:
 
 Application schemas typically use types from other schemas, for example the types defined by ISO 19103 and ISO 19107. External types can be used as value types of properties, and as supertypes for types defined in the application schema that is being converted.
 
-Whenever an external type is used, its JSON Schema definition is needed. Either an external type is implemented as one of the simple JSON value types (e.g., string - maybe with a certain format or pattern), or it is defined by a particular JSON Schema. In case of a JSON Schema, the URL of that schema needs to be known during the encoding process. If the schema is a definitions schema, then the URL needs to be augmented with a fragment identifier that includes a JSON Pointer or an anchor reference within the schema. 
+Whenever an external type is used, its JSON Schema definition is needed. Either an external type is implemented as one of the simple JSON value types (e.g., string - maybe with a certain format or pattern), or it is defined by a particular JSON Schema. In case of a JSON Schema, the URL of that schema needs to be known during the encoding process. If the schema is a definitions schema, then the URL typically needs to be augmented with a fragment identifier that includes a JSON Pointer or an anchor reference within the schema. 
 
 include::../requirements/core/REQ003.adoc[]
 
@@ -1992,7 +1996,7 @@ include::../requirements/core/REQ003.adoc[]
 |URI |string |format=uri
 |===
 
-Some JSON Schema validators do not support or ignore the JSON Schema keyword "format". That can be an issue, especially if a JSON Schema definition represented a choice (e.g. using the JSON Schema keyword "oneOf") between simple JSON Schema types. In that case, such a validator might complain that the choice cannot be made because both options match the simple type definition. The following recommendation is meant to prevent that issue. 
+Some JSON Schema validators do not support or ignore the JSON Schema keyword "format". That can be an issue, especially if a JSON Schema definition represented a choice (e.g., using the JSON Schema keyword "oneOf") between simple JSON Schema types. In that case, such a validator might complain that the choice cannot be made because both options match the simple type definition. The following recommendation is meant to prevent that issue. 
 
 include::../requirements/core/REC003.adoc[]
 
@@ -2031,7 +2035,7 @@ NOTE: Tag _unit_ identifies that the UML property has a fixed unit of measure. H
 
 NOTE: If ISO TC 211 defines a JSON Schema for ISO 19103 measure types, then that JSON Schema definition can be used.
 
-NOTE: If an external type is not covered by the mapping tables defined in this document, then a suitable mapping needs be found on a case by case basis. For example, if CI_Citation from ISO 19115 was used by an application schema, a reference to a suitable JSON Schema definition needs to be identified. Such a schema definition could be created manually, or (semi-) automatic, for example using the encoding behavior defined in this specification.
+NOTE: If an external type is not covered by the mapping tables defined in this document, then a suitable mapping needs be found on a case by case basis. For example, if CI_Citation from ISO 19115 was used by an application schema, a reference to a suitable JSON Schema definition needs to be identified. Such a schema definition could be created manually, or (semi-) automatically, for example using the encoding behavior defined in this specification.
 
 
 [[jsonschema_req_core_types_classname]]
@@ -2070,7 +2074,7 @@ Examples of referring to the schema definition of "TypeA" from a "$ref" member:
 ** using JSON Pointer: "$ref" = "https://example.org/schemas/schema_definitions.json#/$defs/TypeA"
 *** NOTE: If the referenced schema is a draft 07 JSON Schema, the JSON Pointer would have to change as follows: https://example.org/schemas/schema_definitions.json#/definitions/TypeA
 
-NOTE: Keep in mind that the use of an $anchor value in $ref references can depend upon the media type with which the referenced JSON schema is published, as is explained in more detail <<jsonschema_req_core_definitionsschema_media_types,here>>.
+NOTE: Keep in mind that the use of a fragment identifier with anchor or JSON Pointer value in $ref references can depend upon the media type with which the referenced JSON schema is published, as is explained in more detail <<jsonschema_req_core_definitionsschema_media_types,here>>.
 
 
 [[jsonschema_req_core_types_abstractness]]
@@ -2079,6 +2083,8 @@ NOTE: Keep in mind that the use of an $anchor value in $ref references can depen
 include::../requirements/core/REQ006.adoc[]
 
 NOTE: JSON Schema does not directly support abstractness. 
+
+Encoding an abstract class as a schema definition allows that definition to be referenced from the schema definitions that are created for the subclasses of the abstract class.
 
 
 [[jsonschema_req_core_types_inheritance]]
@@ -2407,7 +2413,7 @@ Examples:
 * using JSON Pointer as fragment identifier: https://example.org/schemas/schema_definitions.json#/$defs/TypeX
 ** NOTE: If the referenced schema is a draft 07 JSON Schema, the JSON Pointer would have to change as follows: https://example.org/schemas/schema_definitions.json#/definitions/TypeX
 
-NOTE: Keep in mind that the use of an $anchor value in $ref references can depend upon the media type with which the referenced JSON schema is published, as is explained in more detail <<jsonschema_req_core_definitionsschema_media_types,here>>.
+NOTE: Keep in mind that the use of a fragment identifier with anchor or JSON Pointer value in $ref references can depend upon the media type with which the referenced JSON schema is published, as is explained in more detail <<jsonschema_req_core_definitionsschema_media_types,here>>.
 
 The behavior described in xref:http://www.opengis.net/spec/uml2json/1.0/req/core/property-inline[style=id%] covers the case of an inline encoding of the property value. That is sufficient for simple application schemas. For more complex schemas, typically ones that contain associations between feature types, it can be necessary or desired to encode property values by-reference, i.e., using links. However, multiple options exist for realizing a by-reference encoding. These options are defined in separate requirements classes - see <<jsonschema_byreference>>. A particular JSON Schema encoding of a given application schema needs to choose one of these options, in order to enable by-reference encoding for relevant properties.
 
@@ -2627,7 +2633,7 @@ NOTE: For geometry typed properties whose value type is not covered in <<table_p
 [[jsonschema_req_plain_common_base]]
 ==== Common base schema
 
-As described in the <<jsonschema_req_core_types_common_base,core requirements class>>, common base types or - for the purposes of this encoding rule - common JSON Schema definitions can be added to the schema definition of certain kinds of classes, for example, all feature types. This requirements class does not specify any such common JSON Schema definitions. As a consequence, if the types with identity defined by an application schema do not contain attributes that convey the identity of an actual object, according JSON objects cannot be identified using information from property values.
+As described in the <<jsonschema_req_core_types_common_base,core requirements class>>, common base types or - for the purposes of this encoding rule - common JSON Schema definitions can be added to the schema definition of certain kinds of classes, for example, all feature types. This requirements class does not specify any such common JSON Schema definitions. As a consequence, if the types with identity defined by an application schema do not contain attributes that convey the identity of an actual object, according JSON objects cannot be identified using information from property values. Additional requirements classes, which depend on xref:http://www.opengis.net/spec/uml2json/1.0/req/plain[style=id%], may add requirements regarding a common base.
 
 
 [[jsonschema_req_plain_identifier]]
@@ -2683,7 +2689,7 @@ NOTE: The UML properties with "isId" = true are encoded as any other property. T
 
 include::../requirements/geojson-formats/REQ003.adoc[]
 
-NOTE: Additional requirements can override this behavior, by omitting certain UML properties or by mapping ceratin UML properties to first-level members of the resulting JSON object. Examples are the <<jsonschema_req_geojson_formats_primary_geometry,primary geometry property>> as well as the <<jsonschema_req_geojson_formats_identifier,identifier property>>.
+NOTE: Additional requirements can override this behavior, by omitting certain UML properties or by mapping certain UML properties to first-level members of the resulting JSON object. Examples are the <<jsonschema_req_geojson_formats_primary_geometry,primary geometry property>> as well as the <<jsonschema_req_geojson_formats_identifier,identifier property>>.
 
 NOTE: Properties of object types are encoded as first-level properties of the resulting JSON object. If object types should be encoded as feature types, then the object types would need to be transformed accordingly, before a JSON Schema encoding is created.
 
@@ -2693,7 +2699,7 @@ NOTE: Properties of object types are encoded as first-level properties of the re
 
 include::../requirements/geojson-formats/REQ004.adoc[]
 
-NOTE: UML properties of other kinds of classes - object types, data types, and unions - are not considered by this requirements. Object types are not encoded as GeoJSON features. Data types and unions may be used by other classes, which prevents a general exclusive mapping to the GeoJSON top-level "geometry" member. Only a direct property of a \<<featureType>> can be mapped in this way.
+NOTE: UML properties of other kinds of classes - object types, data types, and unions - are not considered by this requirement. Object types are not encoded as GeoJSON features. Data types and unions may be used by other classes, which prevents a general exclusive mapping to the GeoJSON top-level "geometry" member. Only a direct property of a \<<featureType>> can be mapped in this way.
 
 [[img_req_geojson_formats_primary_geometry_example]]
 .Example of a feature type with an attribute designated as primary geometry
@@ -2762,7 +2768,7 @@ image::figures/example_common_base.png[align="center"]
       "$anchor": "Building",
       "allOf": [
         {
-          "$ref": "http://example.org/schema/infra.json#Building_Core"
+          "$ref": "#/$defs/Building_Core"
         },
         {
           "type": "object"
@@ -2773,7 +2779,7 @@ image::figures/example_common_base.png[align="center"]
       "$anchor": "BuildingPart",
       "allOf": [
         {
-          "$ref": "http://example.org/schema/infra.json#Building_Core"
+          "$ref": "#/$defs/Building_Core"
         },
         {
           "type": "object"
@@ -2860,7 +2866,7 @@ An example of encoding feature types with a common base schema is given in <<jso
 
 include::../requirements/jsonfg/REQ003.adoc[]
 
-NOTE: UML properties of other kinds of classes - object types, data types, and unions - are not considered by this requirements. Object types are not encoded as JSON-FG features. Data types and unions may be used by other classes, which prevents a general exclusive mapping to the JSON-FG top-level "place" member. Only a direct property of a \<<featureType>> can be mapped in this way.
+NOTE: UML properties of other kinds of classes - object types, data types, and unions - are not considered by this requirement. Object types are not encoded as JSON-FG features. Data types and unions may be used by other classes, which prevents a general exclusive mapping to the JSON-FG top-level "place" member. Only a direct property of a \<<featureType>> can be mapped in this way.
 
 [[img_req_jsonfg_primary_place_example]]
 .Example of a feature type with an attribute designated as primary place
@@ -2899,11 +2905,11 @@ image::figures/example_primary_place.png[align="center"]
 
 include::../requirements/jsonfg/REQ004.adoc[]
 
-NOTE: UML properties of other kinds of classes - object types, data types, and unions - are not considered by this requirements. Object types are not encoded as JSON-FG features. Data types and unions may be used by other classes, which prevents a general exclusive mapping to the JSON-FG top-level "time" member. Only a direct property of a \<<featureType>> can be mapped in this way.
+NOTE: UML properties of other kinds of classes - object types, data types, and unions - are not considered by this requirement. Object types are not encoded as JSON-FG features. Data types and unions may be used by other classes, which prevents a general exclusive mapping to the JSON-FG top-level "time" member. Only a direct property of a \<<featureType>> can be mapped in this way.
 
 include::../requirements/jsonfg/REQ005.adoc[]
 
-NOTE: UML properties of other kinds of classes - object types, data types, and unions - are not considered by this requirements. Object types are not encoded as JSON-FG features. Data types and unions may be used by other classes, which prevents a general exclusive mapping to the JSON-FG top-level "time" member. Only a direct property of a \<<featureType>> can be mapped in this way.
+NOTE: UML properties of other kinds of classes - object types, data types, and unions - are not considered by this requirement. Object types are not encoded as JSON-FG features. Data types and unions may be used by other classes, which prevents a general exclusive mapping to the JSON-FG top-level "time" member. Only a direct property of a \<<featureType>> can be mapped in this way.
 
 [[img_req_jsonfg_primary_time_example]]
 .Example of a feature type with an attribute designated as primary instant
@@ -2949,11 +2955,11 @@ Requirements class xref:http://www.opengis.net/spec/uml2json/1.0/req/core[style=
 
 NOTE: An example where a reference to an object is needed is when the object is the value of properties from multiple other objects that are encoded within the same JSON document. For example, a feature referenced from several other features. In such a situation, it is often desirable not to encode the object inline multiple times - especially if that object also referenced other objects.
 
-NOTE: Some applications may prefer to reference types with identity using a code (of type string or number) instead of using a URI. That code could be seen as a foreign key. In such cases, a model transformation should be applied first, which, for all properties whose value type is a type with identity, replaces the value type with _CharacterString_ or __Number__.
+NOTE: Some applications may prefer to reference types with identity using a code (of type string or number) instead of using a URI. That code could be seen as a foreign key. In such cases, a model transformation should be applied first, which, for all relevant properties whose value type is a type with identity, replaces the value type with _CharacterString_ or __Number__.
 
 Multiple options exist for realizing the by-reference encoding of property values. A requirements class is available for each option:
 
-* xref:http://www.opengis.net/spec/uml2json/1.0/req/by-reference-uri[style=id%] - by-reference encoding of property values using a plain URI
+* xref:http://www.opengis.net/spec/uml2json/1.0/req/by-reference-uri[style=id%] - by-reference encoding of property values using a plain URI (reference, i.e., and absolute or relative URI)
 * xref:http://www.opengis.net/spec/uml2json/1.0/req/by-reference-link-object[style=id%] - by-reference encoding of property values using a link object
 
 NOTE: The conversion behavior does not support by reference encoding for value types that are data types. In general, a data type does not have identity, and therefore a data type value should always be encoded inline, not by reference. 
@@ -2970,7 +2976,7 @@ include::../requirements/by-reference-basic/requirements_class.adoc[]
 
 include::../requirements/by-reference-basic/REQ001.adoc[]
 
-NOTE: The default value for tag _inlineOrByReference_ is different in GML. For the JSON Schema encoding, the default values have been chosen in order to reduce the degrees of freedom and to reduce the schema complexity. The separation into default value _inline_ for UML attributes, and _byReference_ for UML association roles has been made since that reflects the typical modeling approach, where association roles have a value type that is usually encoded by reference, and attributes have a value type that is usually encoded inline - especially if the attribute value type is a type with identity (e.g. an ISO 19107 geometry type).
+NOTE: The default value for tag _inlineOrByReference_ is different in GML. For the JSON Schema encoding, the default values have been chosen in order to reduce the degrees of freedom and to reduce the schema complexity. The separation into default value _inline_ for UML attributes, and _byReference_ for UML association roles has been made since that reflects the typical modeling approach, where association roles have a value type that is usually encoded by reference, and attributes have a value type that is usually encoded inline - especially if the attribute value type is a type with identity (e.g., an ISO 19107 geometry type).
 
 
 [[jsonschema_byreference_encoding_req_uri]]
@@ -3049,8 +3055,6 @@ include::../requirements/by-reference-link-object/requirements_class.adoc[]
 include::../requirements/by-reference-link-object/REQ001.adoc[]
 
 NOTE: The result is an XOR type of check, i.e., a value can either be given inline or by reference, but not both. This is different to GML, where in the case of _inlineOrByReference_ and a type with identity as value type, a value can be encoded both inline and by reference.
-
-NOTE: The URL "https://FIXME/schema_definitions.json" is preliminary and will likely change during the OGC publication process for this document.
 
 // link object is most "webby" ... maybe link to discussion in JSON-FG Annex about linking
 
@@ -3133,7 +3137,7 @@ include::../requirements/union-type-discriminator/requirements_class.adoc[]
 
 include::../requirements/union-type-discriminator/REQ001.adoc[]
 
-The result of applying this encoding to the unions from <<img_unions_req_type_discriminator_union_example>> is shown in <<example_unions_req_type_discriminator_jsonschema,the following source block>>.
+The result of applying this encoding to the unions from <<img_unions_req_type_discriminator_union_example>> is shown in <<example_unions_req_type_discriminator_jsonschema>>.
 
 [[img_unions_req_type_discriminator_union_example]]
 .Example of type discriminator unions
@@ -3179,7 +3183,7 @@ image::figures/type_discriminator_unions.png[align="center"]
 }
 ----
 
-WARNING: Care must be taken, that the type choice of a type discriminator union are separate value spaces. Otherwise, validation may fail, if an actual value matches more than one of the type choices. That would break the rule of the "oneOf" JSON Schema keyword, that one and only one of its component schemas is satisfied. If, for example, the "Union_TypeDiscriminator" in <<example_unions_req_type_discriminator_jsonschema>> had another option for a date value ("type": "string", "format": "date"), and value "2022-12-09" was validated against the resulting JSON Schema definition, validation would fail - because that value matches both the string-or-number case and the string-with-format-date case.
+WARNING: Care must be taken, that the type choices of a type discriminator union are separate value spaces. Otherwise, validation may fail, if an actual value matches more than one of the type choices. That would break the rule of the "oneOf" JSON Schema keyword, that one and only one of its component schemas is satisfied. If, for example, the "Union_TypeDiscriminator" in <<example_unions_req_type_discriminator_jsonschema>> had another option for a date value ("type": "string", "format": "date"), and value "2022-12-09" was validated against the resulting JSON Schema definition, validation would fail - because that value matches both the string-or-number case and the string-with-format-date case.
 
 
 [[jsonschema_unions_req_property_choice]]
@@ -3348,8 +3352,6 @@ include::../requirements/codelists-link-object/requirements_class.adoc[]
 include::../requirements/codelists-link-object/REQ001.adoc[]
 
 That means that a code value is essentially encoded as a "link object" as specified by IETF RFC 8288 and implemented in the OGC API standards. The link object provides "href" and "title" members like the simple Xlinks in GML.
-
-NOTE: The URL "https://FIXME/schema_definitions.json" is preliminary and will likely change during the OGC publication process for this document.
  
 
 [[jsonschema_req_entitytype]]
@@ -3359,7 +3361,7 @@ include::../requirements/entitytype/requirements_class.adoc[]
 
 include::../requirements/entitytype/REQ001.adoc[]
 
-include::../requirements/entitytype/PERM001.adoc[]
+include::../requirements/entitytype/PER001.adoc[]
 
 NOTE: By default, the property value is not restricted using "const", because doing so would prevent JSON Schema constraints that support inheritance-related checks. However, if the application schema did not use inheritance, then such restrictions could be defined.
 
