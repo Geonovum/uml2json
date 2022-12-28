@@ -2951,15 +2951,15 @@ image::figures/example_primary_instant.png[align="center"]
 
 ==== Overview
 
-Requirements class xref:http://www.opengis.net/spec/uml2json/1.0/req/core[style=id%] specifies an <<jsonschema_req_core_properties_valuetype,inline encoding of property values>>. In case that the value type of a UML property is a type with identity (that is not implemented as a simple JSON Schema type), it can be preferable and maybe even necessary to encode the value by reference. In other cases, both options should be offered. That is similar to what the GML Application Schema encoding rules support (for further details, see OGC 07-036r1, Annex E, section E.2.4.11).
+Requirements class xref:http://www.opengis.net/spec/uml2json/1.0/req/core[style=id%] specifies an <<jsonschema_req_core_properties_valuetype,inline encoding of property values>>. In the case that the value type of a UML property is a type with identity (that is not implemented as a simple JSON Schema type), it can be preferable and maybe even necessary to encode the value by reference. In other cases, both options should be offered. That is similar to what the GML Application Schema encoding rules support (for further details, see OGC 07-036r1, Annex E, section E.2.4.11).
 
-NOTE: An example where a reference to an object is needed is when the object is the value of properties from multiple other objects that are encoded within the same JSON document. For example, a feature referenced from several other features. In such a situation, it is often desirable not to encode the object inline multiple times - especially if that object also referenced other objects.
+NOTE: An example where a reference to an object is needed, is when the object is the value of properties from multiple other objects that are encoded within the same JSON document. For example, a feature referenced from several other features. In such a situation, it is often desirable not to encode the object inline multiple times - especially if that object also references other objects.
 
 NOTE: Some applications may prefer to reference types with identity using a code (of type string or number) instead of using a URI. That code could be seen as a foreign key. In such cases, a model transformation should be applied first, which, for all relevant properties whose value type is a type with identity, replaces the value type with _CharacterString_ or __Number__.
 
 Multiple options exist for realizing the by-reference encoding of property values. A requirements class is available for each option:
 
-* xref:http://www.opengis.net/spec/uml2json/1.0/req/by-reference-uri[style=id%] - by-reference encoding of property values using a plain URI (reference, i.e., and absolute or relative URI)
+* xref:http://www.opengis.net/spec/uml2json/1.0/req/by-reference-uri[style=id%] - by-reference encoding of property values using a plain URI (reference, i.e., an absolute or relative URI)
 * xref:http://www.opengis.net/spec/uml2json/1.0/req/by-reference-link-object[style=id%] - by-reference encoding of property values using a link object
 
 NOTE: The conversion behavior does not support by reference encoding for value types that are data types. In general, a data type does not have identity, and therefore a data type value should always be encoded inline, not by reference. 
