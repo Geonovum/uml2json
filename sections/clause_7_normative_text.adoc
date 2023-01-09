@@ -2147,7 +2147,7 @@ image::figures/Generalization_example.png[align="center"]
 
 This JSON object is valid against the schema:
 
-[source,json,linenumbers,options="unnumbered"]
+[source,json]
 ----
 {
   "propertyA": 2,
@@ -2157,7 +2157,7 @@ This JSON object is valid against the schema:
 
 This JSON object is invalid (because "propertyA" is missing) against the schema:
 
-[source,json,linenumbers,options="unnumbered"]
+[source,json]
 ----
 {
   "propertyB": "x"
@@ -2437,7 +2437,7 @@ include::../code/example_valuetype_schemaB.json[]
 
 This JSON object is valid against the definition of "Class1" from <<example_req_core_properties_valuetype_schemaa>>:
 
-[source,json,linenumbers,options="unnumbered"]
+[source,json]
 ----
 {
   "attBoolean": true,
@@ -2449,7 +2449,7 @@ This JSON object is valid against the definition of "Class1" from <<example_req_
 
 This JSON object is invalid (because "attInteger" has a string value, where an integer value is expected) against the schema from <<example_req_core_properties_valuetype_schemaa>>:
 
-[source,json,linenumbers,options="unnumbered"]
+[source,json]
 ----
 {
   "attBoolean": true,
@@ -2500,7 +2500,7 @@ image::figures/Multiplicity_example.png[align="center"]
 
 This JSON object is valid against the schema from <<example_req_core_properties_multiplicity>>:
 
-[source,json,linenumbers,options="unnumbered"]
+[source,json]
 ----
 {
 "property": ["a","b"]
@@ -2509,7 +2509,7 @@ This JSON object is valid against the schema from <<example_req_core_properties_
 
 This JSON object is invalid (because "property" has three values, which exceeds the maximum amount of allowed values) against the schema from <<example_req_core_properties_multiplicity>>:
 
-[source,json,linenumbers,options="unnumbered"]
+[source,json]
 ----
 {
 "property": ["a","b","c"]
@@ -3039,7 +3039,7 @@ The JSON Schema encoding for the example in <<img_req_by_reference_example>>, us
 
 This JSON object is valid against the schema definition of "Parcel" from <<example_req_byreference_uri>>:
 
-[source,json,linenumbers,options="unnumbered"]
+[source,json]
 ----
 {  
   "owner": ["http://example.org/Person/d024i42sl"]
@@ -3103,7 +3103,7 @@ The JSON Schema encoding for the example in <<img_req_by_reference_example>>, us
 
 This JSON object is valid against the schema definition of "Parcel" from <<example_req_byreference_link_object>>:
 
-[source,json,linenumbers,options="unnumbered"]
+[source,json]
 ----
 {
   "owner": [
@@ -3229,7 +3229,7 @@ NOTE: An alternative approach would be using the "oneOf" keyword, with one subsc
 
 This JSON object is valid against the schema:
 
-[source,json,options="unnumbered"]
+[source,json]
 ----
 {
   "option1": "x"
@@ -3238,7 +3238,7 @@ This JSON object is valid against the schema:
 
 This JSON object is invalid (because "option2" has a string value, rather than a numeric value) against the schema:
 
-[source,json,options="unnumbered"]
+[source,json]
 ----
 {
   "option2": "x"
@@ -3396,7 +3396,7 @@ NOTE: Encoding a JSON object that represents an abstract type, with the "entityT
 
 The following JSON instance is valid against the schema:
 
-[source,json,linenumbers,options="unnumbered"]
+[source,json]
 ----
 {
   "entityType": "Type",
