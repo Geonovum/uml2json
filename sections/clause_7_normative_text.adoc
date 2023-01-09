@@ -3376,21 +3376,21 @@ NOTE: Encoding a JSON object that represents an abstract type, with the "entityT
 {
   "$schema": "http://json-schema.org/draft/2019-09/schema",
   "$defs": {
-    "Type": {
+    "Person": {
       "properties": {
         "entityType": {
           "type": "string"
         },
-        "property": {
+        "name": {
           "type": "string"
         }
       },
       "required": [
-        "entityType", "property"
+        "entityType", "name"
       ]
     }
   },
-  "$ref": "#/$defs/Type"
+  "$ref": "#/$defs/Person"
 }
 ----
 
@@ -3399,7 +3399,7 @@ The following JSON instance is valid against the schema:
 [source,json]
 ----
 {
-  "entityType": "Type",
-  "property": "x"
+  "entityType": "Person",
+  "name": "John Doe"
 }
 ----
