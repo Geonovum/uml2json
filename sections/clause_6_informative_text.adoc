@@ -9,6 +9,6 @@ ISO / TC 211 defines Standards in the field of digital geographic information. A
 
 <<ref_gml322,OGC 07-036r1>> defines rules for encoding an application schema in XML. The result is an XML Schema, which defines the structure for encoding application data in XML. Applications would use this XML as a format for interoperable information exchange.
 
-JSON is a prominent format for encoding and exchanging data on the web. JSON Schema can be used to validate syntactical constraints for - i.e., the structure of - a specific JSON format. This document defines a set of requirements classes for encoding an application schema in UML in JSON Schema.
+JSON is a prominent format for encoding and exchanging data on the web. JSON Schema can be used to validate syntactical constraints for - i.e., the structure of - a specific JSON format. This document defines a set of requirements classes for encoding an application schema in UML in JSON Schema. The UML profiles defined by <<ref_iso19103>> and <<ref_iso19109>> are used as the base UML profile in this document.
 
 NOTE: The results and findings from <<ref_ugas2020>> have been an important foundation for the UML to JSON Schema encoding requirements defined in this specification. 

@@ -2,6 +2,6 @@
 ====
 [%metadata]
 identifier:: http://www.opengis.net/spec/uml2json/1.0/req/codelists-literal/type
-statement:: The JSON Schema definition of a \<<codeList>> shall have a "type" member defined by evaluating tagged value _literalEncodingType_. The tagged value _literalEncodingType_ identifies the conceptual type that applies to the code values. If the tagged value is not set on the code list, or has an empty value, then the literal encoding type is defined to be CharacterString.
+statement:: The JSON Schema definition of a \<<CodeList>> shall have a "type" member defined by evaluating tagged value _literalEncodingType_. The tagged value _literalEncodingType_ identifies the conceptual type that applies to the code values. If the tagged value is not set on the code list, or has an empty value, then the literal encoding type is defined to be CharacterString.
 
 ====

@@ -2,6 +2,6 @@
 ====
 [%metadata]
 identifier:: http://www.opengis.net/spec/uml2json/1.0/req/codelists-basic/schema-definition
-statement:: A \<<codeList>> shall be converted to a JSON Schema definition of a JSON object. That definition shall be added to the definitions schema, using the type name as definition key. 
+statement:: A \<<CodeList>> shall be converted to a JSON Schema definition of a JSON object. That definition shall be added to the definitions schema, using the type name as definition key. 
 
 ====

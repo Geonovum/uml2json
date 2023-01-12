@@ -5,11 +5,11 @@ identifier:: http://www.opengis.net/spec/uml2json/1.0/req/jsonfg/primary-place
 
 [.component,class=part]
 --
-A UML property that is owned by a \<<featureType>> and that has tag "jsonPrimaryPlace" with value equal to, ignoring case, "true", shall be encoded as a type restriction for the top-level "place" member. The UML property shall not be encoded within the "properties" member.
+A UML property that is owned by a \<<FeatureType>> and that has tag "jsonPrimaryPlace" with value equal to, ignoring case, "true", shall be encoded as a type restriction for the top-level "place" member. The UML property shall not be encoded within the "properties" member.
 --
 
 [.component,class=part]
 --
-In instance data, the value of such a property shall be encoded within the (JSON-FG) top-level "place" member of the JSON object that represents the \<<featureType>>.
+In instance data, the value of such a property shall be encoded within the (JSON-FG) top-level "place" member of the JSON object that represents the \<<FeatureType>>.
 --
 ====

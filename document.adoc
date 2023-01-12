@@ -62,6 +62,8 @@ include::sections/annex-b.adoc[]
 
 include::sections/annex-c.adoc[]
 
+include::sections/annex-d.adoc[]
+
 // include::sections/annex-n.adoc[]
 
 ////

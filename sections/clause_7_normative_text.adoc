@@ -19,7 +19,7 @@ The stereotypes as well as tagged values that are relevant for JSON Schema encod
 |===
 | Stereotype / keyword | Model element | Description
 |applicationSchema |Package |A conceptual schema for data required by one or more applications. Source: <<ref_iso19109>>, especially chapter 8.2. 
-|schema |Package |This stereotype is typically used in abstract schemas defined by ISO TC 211. For further details on abstract schemas, see <<ref_iso19103>>, chapter 6.2 and figure 4. An abstract schema and an application schema are both conceptual schemas, but they are on different levels of abstraction.
+|schema |Package |This stereotype is typically used in abstract schemas defined by ISO TC 211. For further details on abstract schemas, see <<ref_iso19103>>, chapter 6.2 and figure 4. An abstract schema and an application schema are both conceptual schemas, but they are on different levels of abstraction. The stereotype \<<Schema>> has been introduced for schemas that conform to ISO 19103, but do not follow the rules for application schemas from ISO 19109, but still need a stereotype on the schema package for adding tagged values.
 |featureType |Class |A feature type as defined by <<ref_iso19109>>.
 |interface - for backwards-compatibility to UML 1 schemas (that comply with earlier versions of <<ref_iso19103>>) also: type |Class |An abstract classifier with operations, attributes and associations, which can only inherit from or be inherited by other interfaces. Other classifiers may realize an interface by implementing its operations and supporting its attributes and associations (at least through derivation). Source: <<ref_iso19103>> This stereotype is typically used in conceptual schemas from ISO TC 211. It should not be used in application schemas, as these are on a different conceptual level than classifiers with this stereotype.
 |dataType |Class |A set of properties that lack identity (independent existence and the possibility of side effects). A data type is a classifier with no operations, whose primary purpose is to hold information. Source: <<ref_iso19103>>
@@ -64,8 +64,6 @@ NOTE: Some conceptual schemas and application schemas do not make use of the ste
 === Requirements class: Core
 
 include::../requirements/core/requirements_class.adoc[]
-
-#TBD# Should we add a section to explain how JSON Schema files can be used together with actual JSON data, i.e. instance documents? JSON Schema only recommends the use of links with rel=describedBy (see http://json-schema.org/draft/2020-12/json-schema-core.html#name-associating-instances-and-s). Such a link can be added to the http header of a server response that contains the actual JSON (instance) data. Specific formats may encode such links in the JSON data itself. Also see https://ietf-wg-httpapi.github.io/mediatypes/draft-ietf-httpapi-rest-api-mediatypes.html and the "schema" parameter defined there. Some tools (e.g., the oXygen editor) use a "$schema" member in JSON (instance) data to reference the applicable JSON Schema. However, that is a tool-specific approach. In principle, tool-specific approaches are allowed. However, the choice of re-using the "$schema" keyword in that way is problematic, since it does not reflect the intent of "$schema" as defined by http://json-schema.org/draft/2020-12/json-schema-core.html#name-the-schema-keyword.
 
 
 [[jsonschema_req_core_definitionsschema]]
@@ -127,7 +125,9 @@ include::../requirements/core/REC001.adoc[]
 
 [NOTE]
 ======
-The JSON Schema with which to validate a JSON document cannot be identified within that document itself. In other words, JSON Schema does not define a concept like an xsi:schemaLocation, which is typically used in an XML document to reference the applicable XML Schema(s). Instead, JSON Schema uses link headers and media type parameters to tie a JSON Schema to a JSON document (for further details, see <<ref_jsonschema_19,JSON Schema core>>, sections 11.1 and 11.2). The relationship between a JSON document and the JSON Schema for validation can also be defined explicitly by an application, i.e., in an application specific way.
+The JSON Schema with which to validate a JSON document cannot be identified within that document itself. In other words, JSON Schema does not define a concept like an xsi:schemaLocation, which is typically used in an XML document to reference the applicable XML Schema(s). Instead, JSON Schema uses link headers and media type parameters to tie a JSON Schema to a JSON document (for further details, see <<ref_jsonschema_20,JSON Schema core>>, section 9.5). 
+
+Specific formats may encode such links in the JSON data itself. Also see https://ietf-wg-httpapi.github.io/mediatypes/draft-ietf-httpapi-rest-api-mediatypes.html and the "schema" parameter defined there. Some tools (e.g., the oXygen editor) use a "$schema" member in JSON (instance) data to reference the applicable JSON Schema. However, that is a tool-specific approach. In principle, tool-specific approaches are allowed. However, the choice of re-using the "$schema" keyword in that way is problematic, since it does not reflect the intent of "$schema" as defined by <<ref_jsonschema_20,JSON Schema core>>, section 8.1.1. The relationship between a JSON document and the JSON Schema for validation can also be defined explicitly by an application, i.e., in an application specific way.
 ======
 
 
@@ -402,7 +402,6 @@ The literal encoding type is one of the types from ISO 19103, which are implemen
 |====================
 | Conceptual type from ISO 19103 | simple JSON Schema type
 | CharacterString | string
-| Boolean | boolean
 | Real, Number | number
 | Integer | integer
 |====================
@@ -445,6 +444,7 @@ include::../requirements/core/REQ011.adoc[]
 | tagged value (to define a restriction) | JSON Schema keyword | applicable JSON Schema type(s)
 | _jsonFormat_ | format | string, number, integer
 | _maxLength_ | maxLength | string
+| _minLength_ | minLength | string
 | _jsonPattern_ | pattern | string
 | _minInclusive_ | minimum | number, integer
 | _minExclusive_ | exclusiveMinimum | number, integer
@@ -629,7 +629,7 @@ This JSON object is valid against the definition of "Class1" from <<example_req_
 ----
 {
   "attBoolean": true,
-  "roleToClass2": {
+  "role2_1": {
     "attInteger": 2
   }
 }
@@ -641,7 +641,7 @@ This JSON object is invalid (because "attInteger" has a string value, where an i
 ----
 {
   "attBoolean": true,
-  "roleToClass2": {
+  "role2_1": {
     "attInteger": "X"
   }
 }

@@ -6,7 +6,7 @@
       "$anchor": "Class3",
       "type": "object",
       "properties": {
-        "roleToClass1": {
+        "role1_3": {
           "$ref": "schemaA.json#/$defs/Class1"
         },
         "attCharacterString": {

@@ -1,0 +1,39 @@
+[appendix,obligation=informative]
+:appendix-caption: Annex
+[[annex_uml2json_collections]]
+== JSON Schema definitions for collections
+
+This specification defines requirements for the creation of schema definitions with the JSON Schema constraints to validate a JSON object that represents a type with identity. The specification does not define requirements (classes) with which to define the schema for collections of such types. There are different aspects to consider, when defining such collections. The following sections document considerations and ideas regarding these aspects, to be used as input for future discussion and possibly standardization work.
+
+=== Scope and naming of collection definitions
+
+In practice, uniform as well as mixed collections are possible. A uniform collection contains features of a single specific type, whereas a mixed collection can have objects of different type. JSON Schema definitions for uniform collections could be defined with name being `{type name} + Collection`, whereas a single definition with name FeatureCollection could cover the case of all mixed collections (at least for all types with identity defined by the application schema).
+
+
+=== Structure of collection definitions
+
+The definition for a uniform collection would ensure that the collection members are all valid against a single type definition.
+
+The definition for the general FeatureCollection would use either an _anyOf_ or _oneOf_, with a choice of schema definitions for all types with identity. Cases in which an object is valid against more than one of these definitions can be problematic:
+
+* In case of _anyOf_, maybe the schema definition for a more general type matches, causing the validator to stop the validation process, thus potentially not checking constraints for the specific schema definition for a given type.
+* In case of _oneOf_, the validator does not stop at the first matching schema definition, but continues validation against all options, until it has ensured that either all other definitions do not match, or one more does match. The latter case would result in the overall validation to fail. However, that can easily happen in case of similar class structures, or in case of inheritance hierarchies, where an object matches the schema defined by a supertype as well as that of a subtype.
+
+
+=== Performance
+
+It is unclear how performant the validation against the general FeatureCollection would be in practice, in case of a large or complex application schema. Then again, validation time may not be that critical to an application that wants to ensure that data within a collection is valid.
+
+
+=== Abstract types
+
+It is unclear if collection definitions should be created for or include abstract types. It may be useful to create such definitions for "uniform" collections of abstract types, even if that implies that actual collections may have objects of different subtypes of the abstract type. Definitions for abstract types should not be included in the general FeatureCollection.
+
+
+=== Base schemas
+
+Another aspect is which base schema to use for the collections. GeoJSON and JSON-FG both define schemas for feature collections (see https://geojson.org/schema/FeatureCollection.json and https://github.com/opengeospatial/ogc-feat-geo-json/blob/main/core/schemas/featurecollection.json). These schemas should be used as base in according encodings. For the plain JSON encoding, a simple JSON array could be used.
+
+=== Requirements classes
+
+Requirements for the generation of collections could be defined in the three encoding requirements classes. However, it may be better to create additional requirements classes that depend on them, since communities may want to create different schema definitions for collections. It would even be possible to have separate requirements classes for uniform collections and the general collection, since communities may or may not want to use both types of collections.

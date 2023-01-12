@@ -44,10 +44,6 @@ A community can combine these requirements classes as needed to achieve a full J
 |xref:http://www.opengis.net/spec/uml2json/1.0/req/entitytype[style=id%] |<<jsonschema_req_entitytype>>
 |===
 
-#TBD# Should we revise the following, since we have not specified conformance tests and conformance classes?
+This document does not define conformance classes. Such classes become relevant if and when this specification moves on in the OGC standardization process, i.e., if the document type changes from Best Practice to Standard. It is expected that the standardization process will involve further review and discussion, and may lead to changes within the specification. Once the specification has reached a stable state during that process, that would be a good time to define conformance classes.
 
-Conformance with this Best Practice shall be checked using all the relevant tests specified in Annex A (normative) of this document. The framework, concepts, and methodology for testing, and the criteria to be achieved to claim conformance are specified in the OGC Compliance Testing Policies and Procedures and the OGC Compliance Testing web site.
-
-In order to conform to this OGC® encoding Best Practice, a software implementation shall choose to implement one or more of the conformance levels specified in Annex A (normative).
-
-All requirements-classes and conformance-classes described in this document are owned by the documents(s) identified.
+All requirements-classes described in this document are owned by the document(s) identified.

@@ -5,11 +5,21 @@ identifier:: http://www.opengis.net/spec/uml2json/1.0/req/geojson-formats/primar
 
 [.component,class=part]
 --
-A UML property that is owned by a \<<featureType>> and that has tag "jsonPrimaryGeometry" with value equal to, ignoring case, "true", shall be encoded as a type restriction for the top-level "geometry" member. The UML property shall not be encoded within the "properties" member.
+If a UML property has tag "jsonPrimaryGeometry" with value equal to, ignoring case, "true", and the property is directly owned (i.e., not inherited) by a \<<FeatureType>>, then that property shall be encoded as the primary geometry of the feature type (see part C).
 --
 
 [.component,class=part]
 --
-In instance data, the value of such a property shall be encoded within the (GeoJSON) top-level "geometry" member of the JSON object that represents the \<<featureType>>.
+If the set of (direct and inherited, but ignoring redefined) UML properties of a \<<FeatureType>> only contains a single UML property with a geometric type (as defined in <<jsonschema_req_geojson_formats_iso19107_types>>), and that property is directly owned by the feature type, and that property does not have tag "jsonPrimaryGeometry" with value equal to, ignoring case, "false", then that property shall be encoded as the primary geometry of the feature type (see part C).
+--
+
+[.component,class=part]
+--
+In the JSON Schema definition of the \<<FeatureType>>, the primary geometry property shall be encoded as a type restriction for the top-level "geometry" member. The primary geometry property shall not be encoded within the "properties" member.
+--
+
+[.component,class=part]
+--
+In instance data, the value of the primary geometry property shall be encoded within the (GeoJSON) top-level "geometry" member of the JSON object that represents the \<<FeatureType>>.
 --
 ====

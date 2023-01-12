@@ -9,7 +9,7 @@
         "attBoolean": {
           "type": "boolean"
         },
-        "roleToClass2": {
+        "role2_1": {
           "$ref": "#/$defs/Class2"
         }
       }
