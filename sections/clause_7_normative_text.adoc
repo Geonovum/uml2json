@@ -763,7 +763,17 @@ include::../code/example_initialvalue.json[]
 [[jsonschema_req_core_associationclass]]
 ==== Association class
 
-There is no native represention for association classes in JSON or JSON Schema. For schemas that include association classes, a transformation of association classes as defined by GML 3.3 should be used.
+Standard UML supports the concept of association class, i.e., an association that has properties. There is no native represention for association classes in JSON or JSON Schema. Association classes therefore need to be converted to "intermediate" classes, before being serialized to JSON Schema. The conversion is illustrated in the following figures, with <<img_req_core_association_classes_original>> showing the original conceptual model, and <<img_req_core_association_classes_transformed>> showing the conversion result.
+
+[[img_req_core_association_classes_original]]
+.Model with association classes
+image::figures/association_classes_original.png[align="center"]
+
+[[img_req_core_association_classes_transformed]]
+.Association classes transformed to intermediate classes
+image::figures/association_classes_transformed.png[align="center"]
+
+include::../requirements/core/REQ018.adoc[]
 
 
 [[jsonschema_req_core_constraint]]
@@ -777,7 +787,6 @@ OCL constraints can be used to enrich a conceptual model with requirements that 
 
 The conceptual schema may need to be transformed, in order to deal with model elements:
 
-* that cannot be represented in JSON at all (e.g., association classes);
 * that cannot be represented in a certain JSON format (e.g., a Solid - a 3D geometry type - as value for the "geometry" member of a GeoJSON feature); or
 * that are not (well) supported by client software (e.g., complex attribute values for styling, processing, and filtering).
 

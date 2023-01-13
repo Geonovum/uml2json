@@ -1,0 +1,12 @@
+[requirement]
+====
+[%metadata]
+identifier:: http://www.opengis.net/spec/uml2json/1.0/req/core/association-class
+statement:: Before applying the conversion to JSON Schema, a UML association class that is a type with identity (i.e., a class that has stereotype \<<FeatureType>>, \<<Type>>, no stereotype, or a stereotype that maps to one of these cases), shall be transformed as follows (in the following description the source class of the association is called S and the target class is called T):
+
+* The association class A is transformed into a regular class with the same name, stereotype, tagged values, constraints, attributes, and relationships.
+* The association is replaced by two associations, one from S to A ("SA"), and one from A to T ("AT").
+* The characteristics of the association end (in particular role name, navigability, multiplicity, documentation) of the original association class at T are used for association ends at A of SA and at T of AT, with the exception that the multiplicity at the association end at T of association AT is set to 1.
+* The characteristics of the association end of the original association class at S are used for association ends at S of SA and at A of AT, with the exception that the multiplicity at the association end at S of association SA is set to 1.
+
+====

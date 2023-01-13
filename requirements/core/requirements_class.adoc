@@ -21,6 +21,7 @@ requirement:: http://www.opengis.net/spec/uml2json/1.0/req/core/property-multipl
 requirement:: http://www.opengis.net/spec/uml2json/1.0/req/core/property-fixed-readonly
 requirement:: http://www.opengis.net/spec/uml2json/1.0/req/core/property-derived
 requirement:: http://www.opengis.net/spec/uml2json/1.0/req/core/property-initial-value
+requirement:: http://www.opengis.net/spec/uml2json/1.0/req/core/association-class
 
 recommendation:: http://www.opengis.net/spec/uml2json/1.0/req/core/id-characteristics
 recommendation:: http://www.opengis.net/spec/uml2json/1.0/req/core/schema-publication-media-type
