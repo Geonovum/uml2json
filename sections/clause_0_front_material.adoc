@@ -1,9 +1,24 @@
 [abstract]
 == Abstract
 
-This best practice document on UML to JSON encoding rules is established as an initiative of Geonovum. The aim is to come to a standardized encoding from UML to JSON, in order to achieve technical interoperability in the chain from conceptual models to JSON implementation. In this document, JSON implementation includes plain JSON, GeoJSON and JSON-FG.
+This best practice document on UML to JSON encoding rules is initiated as an initiative of Geonovum. The aim is to come to a standardized encoding from UML to JSON, in order to achieve technical interoperability in the chain from conceptual models to JSON implementation. In this document, JSON implementation includes plain JSON, GeoJSON and JSON-FG.
+
+Application schemas in UML are used to model geospatial information for a given domain, as part of data specifications defining information and data content of a relevant universe of discourse. In the geospatial domain, UML profiles are defined by <<ref_iso19103>> and <<ref_iso19109>>. These profiles are also used in this document. Application schemas operate at the conceptual level. At the implementation or data level, JSON is one of the major data encodings used by current web applications. The UML to JSON encoding rules defined in the context of this document is a best practice. Eventually, this document may also support the development of an international standard for the conversion of UML to JSON (Schema) in the geospatial domain.
+
+To facilitate a proper JSON encoding, an extension of the ISO 19103 and 19109 UML profiles is proposed, resulting in a UML-JSON encoding profile.
+
+The encoding rules are structured in 40 requirements and a number of recommendations, subdivided into 18 core requirements, 1 requirement specific for plain JSON schema format, 5 for GeoJSON format, 5 for JSON-FG Schema format, 3 requirements for binding and referencing of elements, 2 for union constructs, 5 for code lists and 1 for encoding a dedicated entity property in JSON. The requirement classes are supported by UML examples and subsequent JSON encodings.
 
 == Preface
+
+The project leading to this document was initiated by Geonovum. In collaboration with Interactive Instruments a best practice is developed on encoding UML to JSON. The project team consisted of the following persons:
+
+Clemens Portele (Interactive Instruments)
+Johannes Echterhoff (Interactive Instruments)
+Linda van den Brink (Geonovum)
+Paul Janssen (Geonovum)
+Pieter Bresters (Geonovum)
+Wilko Quak (Geonovum).
 
 This document defines how a conceptual schema in UML, compliant to <<ref_iso19103>> and <<ref_iso19109>>, can be encoded in JSON. A number of requirements classes are defined, which contain the necessary requirements and technical details.
 
