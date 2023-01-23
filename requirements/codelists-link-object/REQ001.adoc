@@ -2,6 +2,6 @@
 ====
 [%metadata]
 identifier:: http://www.opengis.net/spec/uml2json/1.0/req/codelists-link-object/schema-ref
-statement:: The JSON Schema definition of a \<<CodeList>> shall have a "$ref" member with value "https://FIXME/schema_definitions.json#/$defs/LinkObject".
+statement:: The JSON Schema definition of a «CodeList» shall have a "$ref" member with value "https://FIXME/schema_definitions.json#/$defs/LinkObject".
 
 ====

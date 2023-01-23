@@ -3,7 +3,7 @@
 [%metadata]
 identifier:: http://www.opengis.net/spec/uml2json/1.0/req/union-property-choice/encoding
 
-part:: A \<<union>> shall be encoded as a JSON Schema definition of a JSON object, where each union option is represented as an optional member of the JSON object. 
+part:: A «union» shall be encoded as a JSON Schema definition of a JSON object, where each union option is represented as an optional member of the JSON object. 
 part:: The choice between the options defined by the union shall be encoded using "maxProperties" = "minProperties" = 1. That is, the number of members that are allowed for the JSON object is restricted to exactly one.
 part:: An `"additionalProperties": false` shall be used to prevent any undefined properties. 
  

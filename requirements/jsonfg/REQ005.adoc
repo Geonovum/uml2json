@@ -5,7 +5,7 @@ identifier:: http://www.opengis.net/spec/uml2json/1.0/req/jsonfg/primary-interva
 
 [.component,class=part]
 --
-A UML property that is owned by a \<<FeatureType>> and that has tag "jsonPrimaryInterval" with value equal to, ignoring case, one of the allowed values "start", "end", or "interval", shall not be encoded within the "properties" member.
+A UML property that is owned by a «FeatureType» and that has tag "jsonPrimaryInterval" with value equal to, ignoring case, one of the allowed values "start", "end", or "interval", shall not be encoded within the "properties" member.
 
 NOTE: The value types of UML properties that represent or contribute to the primary interval should be compatible with that use. For example, properties marked as primary interval start or end can have value type "Date", "DateTime", or "TM_Instant", whereas a property marked as primary interval can have value type "TM_Period".
 
@@ -14,16 +14,16 @@ The UML property shall be encoded as a type restriction for the top-level "time"
 
 [.component,class=part]
 --
-A \<<FeatureType>> shall satisfy the following conditions:
+A «FeatureType» shall satisfy the following conditions:
 
 * At most one of the direct properties has tag "jsonPrimaryInterval" = "interval".
 * At most one of the direct properties has tag "jsonPrimaryInterval" = "start".
 * At most one of the direct properties has tag "jsonPrimaryInterval" = "end".
-* The use of "interval" and "start"/"end" are mutually exclusive within the direct properties of the \<<FeatureType>>: If one direct property has tag "jsonPrimaryInterval" = "interval", none of the direct properties shall have tag "jsonPrimaryInterval" equal to "start" or "end". Likewise, if one direct property has tag "jsonPrimaryInterval" equal to "start" or "end", none of the direct properties shall have tag "jsonPrimaryInterval" = "interval".
+* The use of "interval" and "start"/"end" are mutually exclusive within the direct properties of the «FeatureType»: If one direct property has tag "jsonPrimaryInterval" = "interval", none of the direct properties shall have tag "jsonPrimaryInterval" equal to "start" or "end". Likewise, if one direct property has tag "jsonPrimaryInterval" equal to "start" or "end", none of the direct properties shall have tag "jsonPrimaryInterval" = "interval".
 --
 
 [.component,class=part]
 --
-In instance data, the value of properties that represent or constitute to the primary interval shall be encoded within the (JSON-FG) time/interval member of the JSON object that represents the \<<FeatureType>>.
+In instance data, the value of properties that represent or constitute to the primary interval shall be encoded within the (JSON-FG) time/interval member of the JSON object that represents the «FeatureType».
 --
 ====

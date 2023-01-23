@@ -2,7 +2,7 @@
 ====
 [%metadata]
 identifier:: http://www.opengis.net/spec/uml2json/1.0/req/core/property-initial-value
-statement:: A UML attribute that has an initial value, is owned by a type with identity or a \<<DataType>>, and whose value type is encoded as one of the simple JSON Schema types "string", "number", "integer", or "boolean", shall be encoded as follows:
+statement:: A UML attribute that has an initial value, is owned by a type with identity or a «DataType», and whose value type is encoded as one of the simple JSON Schema types "string", "number", "integer", or "boolean", shall be encoded as follows:
 
 [.component,class=part]
 --

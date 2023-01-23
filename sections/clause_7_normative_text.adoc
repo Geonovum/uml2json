@@ -19,7 +19,7 @@ The stereotypes as well as tagged values that are relevant for JSON Schema encod
 |===
 | Stereotype / keyword | Model element | Description
 |applicationSchema |Package |A conceptual schema for data required by one or more applications. Source: <<ref_iso19109>>, especially chapter 8.2. 
-|schema |Package |This stereotype is typically used in abstract schemas defined by ISO TC 211. For further details on abstract schemas, see <<ref_iso19103>>, chapter 6.2 and figure 4. An abstract schema and an application schema are both conceptual schemas, but they are on different levels of abstraction. The stereotype \<<Schema>> has been introduced for schemas that conform to ISO 19103, but do not follow the rules for application schemas from ISO 19109, but still need a stereotype on the schema package for adding tagged values.
+|schema |Package |This stereotype is typically used in abstract schemas defined by ISO TC 211. For further details on abstract schemas, see <<ref_iso19103>>, chapter 6.2 and figure 4. An abstract schema and an application schema are both conceptual schemas, but they are on different levels of abstraction. The stereotype «Schema» has been introduced for schemas that conform to ISO 19103, but do not follow the rules for application schemas from ISO 19109, but still need a stereotype on the schema package for adding tagged values.
 |featureType |Class |A feature type as defined by <<ref_iso19109>>.
 |interface - for backwards-compatibility to UML 1 schemas (that comply with earlier versions of <<ref_iso19103>>) also: type |Class |An abstract classifier with operations, attributes and associations, which can only inherit from or be inherited by other interfaces. Other classifiers may realize an interface by implementing its operations and supporting its attributes and associations (at least through derivation). Source: <<ref_iso19103>> This stereotype is typically used in conceptual schemas from ISO TC 211. It should not be used in application schemas, as these are on a different conceptual level than classifiers with this stereotype.
 |dataType |Class |A set of properties that lack identity (independent existence and the possibility of side effects). A data type is a classifier with no operations, whose primary purpose is to hold information. Source: <<ref_iso19103>>
@@ -32,7 +32,7 @@ The stereotypes as well as tagged values that are relevant for JSON Schema encod
 
 NOTE: Communities may use aliases for the stereotypes listed above.
 
-NOTE: Some conceptual schemas and application schemas do not make use of the stereotypes \<<property>>, but still attach certain tagged values to according properties in their UML model. That approach is supported by some UML modeling tools, even though tagged values typically belong to a certain stereotype. For the purposes of this specification, the stereotype \<<property>> is assumed to be applied in schemas that shall be converted from UML to JSON Schema. Nevertheless, it is allowed for schemas to omit the stereotypes, and just use the associated tagged values (see below) on according model elements. This kind of use implies the presence of an ad-hoc stereotype, which is considered to represent the \<<property>> stereotype.
+NOTE: Some conceptual schemas and application schemas do not make use of the stereotypes «property», but still attach certain tagged values to according properties in their UML model. That approach is supported by some UML modeling tools, even though tagged values typically belong to a certain stereotype. For the purposes of this specification, the stereotype «property» is assumed to be applied in schemas that shall be converted from UML to JSON Schema. Nevertheless, it is allowed for schemas to omit the stereotypes, and just use the associated tagged values (see below) on according model elements. This kind of use implies the presence of an ad-hoc stereotype, which is considered to represent the «property» stereotype.
 
 <<table_umlprofile_tagged_values>> lists the tagged values relevant for the JSON Schema encodings, together with the stereotype(s) they apply to, as well as relevant requirements class(es).
 
@@ -41,10 +41,10 @@ NOTE: Some conceptual schemas and application schemas do not make use of the ste
 [width="90%",options="header"]
 |===
 | Applicable stereotype(s) | Tagged value | Relevant requirements class(es) | Comment
-.2+| \<<applicationSchema>> and \<<schema>> | jsonDocument | xref:http://www.opengis.net/spec/uml2json/1.0/req/core[style=id%] .2+| see <<jsonschema_req_core_definitionsschema>>
+.2+| «applicationSchema» and «schema» | jsonDocument | xref:http://www.opengis.net/spec/uml2json/1.0/req/core[style=id%] .2+| see <<jsonschema_req_core_definitionsschema>>
 | jsonId  | xref:http://www.opengis.net/spec/uml2json/1.0/req/core[style=id%]
-| \<<Enumeration>> and \<<CodeList>> | literalEncodingType |xref:http://www.opengis.net/spec/uml2json/1.0/req/core[style=id%] and xref:http://www.opengis.net/spec/uml2json/1.0/req/codelists-literal[style=id%] | see <<jsonschema_req_core_types_enumeration>> and <<jsonschema_codelists_req_literal>>
-.13+| \<<property>> | inlineOrByReference | xref:http://www.opengis.net/spec/uml2json/1.0/req/by-reference-basic[style=id%] | see <<jsonschema_byreference_req_basic>>
+| «Enumeration» and «CodeList» | literalEncodingType |xref:http://www.opengis.net/spec/uml2json/1.0/req/core[style=id%] and xref:http://www.opengis.net/spec/uml2json/1.0/req/codelists-literal[style=id%] | see <<jsonschema_req_core_types_enumeration>> and <<jsonschema_codelists_req_literal>>
+.13+| «property» | inlineOrByReference | xref:http://www.opengis.net/spec/uml2json/1.0/req/by-reference-basic[style=id%] | see <<jsonschema_byreference_req_basic>>
 | jsonPrimaryGeometry | xref:http://www.opengis.net/spec/uml2json/1.0/req/geojson-formats[style=id%] | see <<jsonschema_req_geojson_formats_primary_geometry>>
 | jsonPrimaryInstant | xref:http://www.opengis.net/spec/uml2json/1.0/req/jsonfg[style=id%] .2+| see <<jsonschema_req_jsonfg_primary_time>>
 | jsonPrimaryInterval | xref:http://www.opengis.net/spec/uml2json/1.0/req/jsonfg[style=id%]  
@@ -69,7 +69,7 @@ include::../requirements/core/requirements_class.adoc[]
 [[jsonschema_req_core_definitionsschema]]
 ==== Definitions schema
 
-Schema packages have the stereotype \<<applicationSchema>>, \<<schema>>, or an alias (e.g., using a specific language, like in German: \<<anwendungsschema>>). An \<<applicationSchema>> package represents an application schema according to ISO 19109. The stereotype \<<schema>> has been introduced for packages that should be treated like application schemas, but do not contain feature types.
+Schema packages have the stereotype «applicationSchema», «schema», or an alias (e.g., using a specific language, like in German: «anwendungsschema»). An «applicationSchema» package represents an application schema according to ISO 19109. The stereotype «schema» has been introduced for packages that should be treated like application schemas, but do not contain feature types.
 
 include::../requirements/core/REQ001.adoc[]
 
@@ -366,7 +366,7 @@ This approach to converting a generalization relationship has the following rest
 [[jsonschema_req_core_types_common_base]]
 ===== Common base schema
 
-It is often useful to encode all classes that have a certain stereotype with a common base type. The generalization relationship to such a base type is often implied with the stereotype, for a given encoding. In GML, for example, the common base type for classes with stereotype \<<FeatureType>> is gml:AbstractFeature. Rather than explicitly modeling such a base type (e.g., _AnyFeature_ defined by ISO 19109), as well as explicitly modeling generalization relationships to the base type, the encoding rule typically takes care of adding that relationship to relevant schema types. Requirements class xref:http://www.opengis.net/spec/uml2json/1.0/req/core[style=id%] does not declare specific common base types. That is left to other requirements classes.
+It is often useful to encode all classes that have a certain stereotype with a common base type. The generalization relationship to such a base type is often implied with the stereotype, for a given encoding. In GML, for example, the common base type for classes with stereotype «FeatureType» is gml:AbstractFeature. Rather than explicitly modeling such a base type (e.g., _AnyFeature_ defined by ISO 19109), as well as explicitly modeling generalization relationships to the base type, the encoding rule typically takes care of adding that relationship to relevant schema types. Requirements class xref:http://www.opengis.net/spec/uml2json/1.0/req/core[style=id%] does not declare specific common base types. That is left to other requirements classes.
 
 
 [[jsonschema_req_core_types_featureandobjecttype]]
@@ -407,7 +407,7 @@ The literal encoding type is one of the types from ISO 19103, which are implemen
 |====================
 
 [[img_req_core_enumeration_example]]
-.\<<Enumeration>> example
+.«Enumeration» example
 image::figures/Enumeration_example.png[align="center"]
 
 [[example_req_core_jsonschema_enumeration]]
@@ -558,7 +558,7 @@ image::figures/basic_types_example.png[align="center"]
 
 include::../requirements/core/REQ012.adoc[]
 
-NOTE: By default, UML properties are converted to keys within the "properties" member of the JSON Schema definition for the type that owns the property. Additional requirements may override this encoding (e.g., the <<jsonschema_unions_req_type_discriminator,type discriminator encoding>> of \<<union>> properties), or augment the encoding (e.g., <<jsonschema_req_geojson_formats_nestedproperties,encoding the properties under the "properties" member of a GeoJSON-based feature>>).
+NOTE: By default, UML properties are converted to keys within the "properties" member of the JSON Schema definition for the type that owns the property. Additional requirements may override this encoding (e.g., the <<jsonschema_unions_req_type_discriminator,type discriminator encoding>> of «union» properties), or augment the encoding (e.g., <<jsonschema_req_geojson_formats_nestedproperties,encoding the properties under the "properties" member of a GeoJSON-based feature>>).
 
 The default result of converting a UML property, therefore, is a key within the "properties" key of the JSON Schema definition for the type that owns the property, with the key name being the name of the UML property, and the value being a JSON Schema with constraints and annotations that define the property (value type, multiplicity, etc).
 
@@ -896,7 +896,7 @@ NOTE: Properties of object types are encoded as first-level properties of the re
 
 include::../requirements/geojson-formats/REQ004.adoc[]
 
-NOTE: UML properties of other kinds of classes - object types, data types, and unions - are not considered by this requirement. Object types are not encoded as GeoJSON features. Data types and unions may be used by other classes, which prevents a general exclusive mapping to the GeoJSON top-level "geometry" member. Only a direct property of a \<<FeatureType>> can be mapped in this way.
+NOTE: UML properties of other kinds of classes - object types, data types, and unions - are not considered by this requirement. Object types are not encoded as GeoJSON features. Data types and unions may be used by other classes, which prevents a general exclusive mapping to the GeoJSON top-level "geometry" member. Only a direct property of a «FeatureType» can be mapped in this way.
 
 [[img_req_geojson_formats_primary_geometry_example]]
 .Example of a feature type with an attribute designated as primary geometry
@@ -1063,7 +1063,7 @@ An example of encoding feature types with a common base schema is given in <<jso
 
 include::../requirements/jsonfg/REQ003.adoc[]
 
-NOTE: UML properties of other kinds of classes - object types, data types, and unions - are not considered by this requirement. Object types are not encoded as JSON-FG features. Data types and unions may be used by other classes, which prevents a general exclusive mapping to the JSON-FG top-level "place" member. Only a direct property of a \<<FeatureType>> can be mapped in this way.
+NOTE: UML properties of other kinds of classes - object types, data types, and unions - are not considered by this requirement. Object types are not encoded as JSON-FG features. Data types and unions may be used by other classes, which prevents a general exclusive mapping to the JSON-FG top-level "place" member. Only a direct property of a «FeatureType» can be mapped in this way.
 
 [[img_req_jsonfg_primary_place_example]]
 .Example of a feature type with an attribute designated as primary place
@@ -1102,11 +1102,11 @@ image::figures/example_primary_place.png[align="center"]
 
 include::../requirements/jsonfg/REQ004.adoc[]
 
-NOTE: UML properties of other kinds of classes - object types, data types, and unions - are not considered by this requirement. Object types are not encoded as JSON-FG features. Data types and unions may be used by other classes, which prevents a general exclusive mapping to the JSON-FG top-level "time" member. Only a direct property of a \<<FeatureType>> can be mapped in this way.
+NOTE: UML properties of other kinds of classes - object types, data types, and unions - are not considered by this requirement. Object types are not encoded as JSON-FG features. Data types and unions may be used by other classes, which prevents a general exclusive mapping to the JSON-FG top-level "time" member. Only a direct property of a «FeatureType» can be mapped in this way.
 
 include::../requirements/jsonfg/REQ005.adoc[]
 
-NOTE: UML properties of other kinds of classes - object types, data types, and unions - are not considered by this requirement. Object types are not encoded as JSON-FG features. Data types and unions may be used by other classes, which prevents a general exclusive mapping to the JSON-FG top-level "time" member. Only a direct property of a \<<FeatureType>> can be mapped in this way.
+NOTE: UML properties of other kinds of classes - object types, data types, and unions - are not considered by this requirement. Object types are not encoded as JSON-FG features. Data types and unions may be used by other classes, which prevents a general exclusive mapping to the JSON-FG top-level "time" member. Only a direct property of a «FeatureType» can be mapped in this way.
 
 [[img_req_jsonfg_primary_time_example]]
 .Example of a feature type with an attribute designated as primary instant
@@ -1161,7 +1161,7 @@ Multiple options exist for realizing the by-reference encoding of property value
 
 NOTE: The conversion behavior does not support by reference encoding for value types that are data types. In general, a data type does not have identity, and therefore a data type value should always be encoded inline, not by reference. 
 
-// Likely irrelevant for the Best Practice: The XML Schema encoding rule defined by ISO 19139:2007, typically used to encode metadata schemas (as defined by ISO 19115, and extensions thereof), on the other hand, allows by reference encoding for data type values. When comparing the version of ISO 19115 from 2003/2006 against the version from 2014, it is apparent that some classes that were defined as data types in the previous version have been changed to object types, for example _CI_Citation_. This indicates that the assignment of the \<<DataType>> stereotype has been corrected, in order to reflect in the conceptual model that the type shall be a type with identity.
+// Likely irrelevant for the Best Practice: The XML Schema encoding rule defined by ISO 19139:2007, typically used to encode metadata schemas (as defined by ISO 19115, and extensions thereof), on the other hand, allows by reference encoding for data type values. When comparing the version of ISO 19115 from 2003/2006 against the version from 2014, it is apparent that some classes that were defined as data types in the previous version have been changed to object types, for example _CI_Citation_. This indicates that the assignment of the «DataType» stereotype has been corrected, in order to reflect in the conceptual model that the type shall be a type with identity.
 
 // Interestingly, there is an early activity of standardizing or harmonizing references in JSON: https://github.com/json-schema-org/referencing. However, that activity is still ongoing (as of November, 2022) and there are competing proposals.
 
@@ -1319,9 +1319,9 @@ This JSON object is valid against the schema definition of "Parcel" from <<examp
 [[jsonschema_unions_overview]]
 ==== Overview
 
-Application schemas have two ways of using types with stereotype \<<union>>.
+Application schemas have two ways of using types with stereotype «union».
 
-* According to ISO 19103:2015, a \<<union>> type consists __"of one and only one of several alternative datatypes (listed as member attributes). This is similar to a discriminated union in many programming languages"__. According to this definition, only the types of the UML attributes defined for a \<<union>> are of interest.
+* According to ISO 19103:2015, a «union» type consists __"of one and only one of several alternative datatypes (listed as member attributes). This is similar to a discriminated union in many programming languages"__. According to this definition, only the types of the UML attributes defined for a «union» are of interest.
 * In practice, unions defined in application schemas are also used differently, defining a choice between a number of options, where each option is modeled as a UML attribute. In other words, the attribute itself has meaning - not just its value type. Multiple options can have the same value type. Options can have different maximum multiplicity (especially greater than 1). The UML-to-GML application schema encoding rules support this way of using unions (see OGC 07-036r1, section E.2.4.10).
 
 The following sections document requirements classes for union encodings that support these two approaches.
@@ -1393,11 +1393,11 @@ include::../requirements/union-property-choice/REQ001.adoc[]
 The result of applying this encoding to the union from <<img_unions_req_property_choice_union_example>> is shown in <<example_unions_req_property_choice_jsonschema>>.
 
 [[img_unions_req_property_choice_union_example]]
-.\<<union>> example
+.«union» example
 image::figures/Union_example.png[align="center"]
 
 [[example_unions_req_property_choice_jsonschema]]
-.Example of a JSON Schema for a \<<union>> class, representing the property choice using "minProperties" and "maxProperites"
+.Example of a JSON Schema for a «union» class, representing the property choice using "minProperties" and "maxProperites"
 [source,json,linenumbers]
 ----
 {
@@ -1448,7 +1448,7 @@ This JSON object is invalid (because "option2" has a string value, rather than a
 
 ==== Overview
 
-This specification defines three approaches for encoding the values of properties that have a \<<CodeList>> as value type:
+This specification defines three approaches for encoding the values of properties that have a «CodeList» as value type:
 
 * using a simple literal value, e.g., a string or number that represents a code,
 * using a URI as code value, and
@@ -1467,11 +1467,11 @@ include::../requirements/codelists-basic/REQ001.adoc[]
 include::../requirements/codelists-basic/REQ002.adoc[]
 
 [[img_codelists_req_basic_jsonschema_example]]
-.Example of a \<<CodeList>> type with tagged value 'codeList'
+.Example of a «CodeList» type with tagged value 'codeList'
 image::figures/code_lists_basic.png[align="center"]
 
 [[example_codelists_req_basic_jsonschema]]
-.Example of the basic JSON Schema encoding of a \<<CodeList>> type with tagged value 'codeList'
+.Example of the basic JSON Schema encoding of a «CodeList» type with tagged value 'codeList'
 [source,json,linenumbers]
 ----
 {
@@ -1497,11 +1497,11 @@ include::../requirements/codelists-literal/REQ001.adoc[]
 The literal encoding type is one of the types from ISO 19103, which are implemented as a simple JSON Schema type - see <<table_literalencodingtypes>> in <<jsonschema_req_core_types_enumeration>>.
 
 [[img_codelists_req_literal_jsonschema_example]]
-.Example of \<<CodeList>> types
+.Example of «CodeList» types
 image::figures/code_lists_literal.png[align="center"]
 
 [[example_codelists_req_literal_jsonschema]]
-.Example of the JSON Schema encodings of \<<CodeList>> types
+.Example of the JSON Schema encodings of «CodeList» types
 [source,json,linenumbers]
 ----
 {
@@ -1526,7 +1526,7 @@ include::../requirements/codelists-uri/requirements_class.adoc[]
 include::../requirements/codelists-uri/REQ001.adoc[]
 
 [[example_codelists_req_uri_jsonschema]]
-.Example of the JSON Schema encodings of a \<<CodeList>> type with the JSON Schema "type" being a URI
+.Example of the JSON Schema encodings of a «CodeList» type with the JSON Schema "type" being a URI
 [source,json,linenumbers]
 ----
 {
