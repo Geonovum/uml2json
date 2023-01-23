@@ -2,6 +2,6 @@
 ====
 [%metadata]
 identifier:: http://www.opengis.net/spec/uml2json/1.0/req/codelists-basic/codelist-tag
-statement:: If the \<<CodeList>> has tag _codeList_ (which is defined by <<ref_iso19103>>), with a non-blank value, then a "codeList" member shall be added to the JSON Schema definition of the code list, with the tag value as value.
+statement:: If the «CodeList» has tag _codeList_ (which is defined by <<ref_iso19103>>), with a non-blank value, then a "codeList" member shall be added to the JSON Schema definition of the code list, with the tag value as value.
 
 ====

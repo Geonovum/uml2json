@@ -15,15 +15,15 @@ Source: https://www.w3.org/2001/sw/wiki/Semantic_Web_terminology#linked_data[W3C
 
 ==== feature type
 
-A _feature type_ as defined by the General Feature Model (see <<ref_iso19109>>). In an application schema, a _feature type_ is typically modeled using stereotype \<<FeatureType>>, or a stereotype that maps to that stereotype.
+A _feature type_ as defined by the General Feature Model (see <<ref_iso19109>>). In an application schema, a _feature type_ is typically modeled using stereotype «FeatureType», or a stereotype that maps to that stereotype.
 
 ==== object type
 
-An _object type_ is a standard class, instances are plain objects with identity. An _object type_ is not a _feature type_. In an application schema, an _object type_ has no stereotype, or has stereotype \<<Type>>, or has a stereotype that maps to one of these two options.
+An _object type_ is a standard class, instances are plain objects with identity. An _object type_ is not a _feature type_. In an application schema, an _object type_ has no stereotype, or has stereotype «Type», or has a stereotype that maps to one of these two options.
 
 ==== data type
 
-As defined by <<ref_iso19103>>, section 6.10, a _data type_ is a class with stereotype \<<DataType>> (or a stereotype that maps to that stereotype), which is a set of properties that lacks identity.
+As defined by <<ref_iso19103>>, section 6.10, a _data type_ is a class with stereotype «DataType» (or a stereotype that maps to that stereotype), which is a set of properties that lacks identity.
 
 ==== type with identity
 

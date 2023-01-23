@@ -14,7 +14,7 @@ Common encoding behavior is defined in the core requirements class (<<jsonschema
 ** a GeoJSON encoding (<<jsonschema_req_geojson>>), and
 ** a JSON-FG encoding (<<jsonschema_req_jsonfg>>).
 * There are two requirements classes that represent options for realizing a by-reference encoding of property values, one using URIs (<<jsonschema_byreference_encoding_req_uri>>, and one using link objects <<jsonschema_byreference_encoding_req_link_object>>).
-* Requirements classes also exist for the two ways in which \<<union>> types are used in practice: as type discriminator (<<jsonschema_unions_req_type_discriminator>>) and as property choice (<<jsonschema_unions_req_property_choice>>).
+* Requirements classes also exist for the two ways in which «union» types are used in practice: as type discriminator (<<jsonschema_unions_req_type_discriminator>>) and as property choice (<<jsonschema_unions_req_property_choice>>).
 * Code list valued properties can be represented in one of three ways, defined by requirements classes: as a literal (<<jsonschema_codelists_req_literal>>), as URI (<<jsonschema_codelists_req_uri>>), and as link object (<<jsonschema_codelists_req_link_object>>).
 * Finally, an additional requirements class supports the encoding of a JSON member for storing the name of the conceptual type that a JSON object encodes (<<jsonschema_req_entitytype>>).
 
