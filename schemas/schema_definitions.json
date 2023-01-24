@@ -1,6 +1,6 @@
 {
   "$schema": "https://json-schema.org/draft/2019-09/schema",
-  "$id": "https://FIXME/schema_definitions.json",
+  "$id": "https://register.geostandaarden.nl/jsonschema/uml2json/0.1/schema_definitions.json",
   "$defs": {
     "LinkObject": {
       "$anchor": "LinkObject",
