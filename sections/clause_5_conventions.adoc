@@ -26,8 +26,6 @@ NOTE: The JSON-FG schemas have not been published at https://beta.schemas.opengi
 
 // Using https://raw.githubusercontent.com/ (instead of, for example, beta.schemas) is a problem, since the content type of files served that way is "text/plain". JSON Schema validators typically ignore that media type, instead expecting application/json or application/schema+json. We should use different URLs.
 
-#TODO# Update schema locations once https://github.com/Geonovum/uml2json/issues/3 has been solved.
-
 
 === Stereotype Names
 
