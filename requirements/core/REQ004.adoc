@@ -6,6 +6,6 @@ statement:: If a UML property is encoded in JSON Schema, and the value type is o
 
 part:: If tagged value _unit_ is defined on the UML property, with a non-blank value, then member "type" with value "number", and member "unit", with value being the value of tag _unit_, shall be encoded in the definition.
 
-part:: Otherwise, i.e., tag _unit_ is undefined on the property, member "$ref" shall be added to the definition, with value "https://FIXME/schema_definitions.json#/$defs/Measure" (the JSON Schema for measure is defined in <<annex_uml2json_schema_definition>>).
+part:: Otherwise, i.e., tag _unit_ is undefined on the property, member "$ref" shall be added to the definition, with value "https://register.geostandaarden.nl/jsonschema/uml2json/0.1/schema_definitions.json#/$defs/Measure" (the JSON Schema for measure is defined in <<annex_uml2json_schema_definition>>).
 
 ====

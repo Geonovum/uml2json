@@ -9,7 +9,7 @@ A UML property that is owned by a \<<FeatureType>> and that has tag "jsonPrimary
 
 NOTE: The value types of UML properties that represent or contribute to the primary interval should be compatible with that use. For example, properties marked as primary interval start or end can have value type "Date", "DateTime", or "TM_Instant", whereas a property marked as primary interval can have value type "TM_Period".
 
-The UML property shall be encoded as a type restriction for the top-level "time" member. The additional restriction for the "time" member shall be encoded using "$ref" with value "https://FIXME/schema_definitions.json#/$defs/PrimaryIntervalOptional", if the minimum multiplicity of the property is 0, otherwise "https://FIXME/schema_definitions.json#/$defs/PrimaryIntervalRequired".
+The UML property shall be encoded as a type restriction for the top-level "time" member. The additional restriction for the "time" member shall be encoded using "$ref" with value "https://register.geostandaarden.nl/jsonschema/uml2json/0.1/schema_definitions.json#/$defs/PrimaryIntervalOptional", if the minimum multiplicity of the property is 0, otherwise "https://register.geostandaarden.nl/jsonschema/uml2json/0.1/schema_definitions.json#/$defs/PrimaryIntervalRequired".
 --
 
 [.component,class=part]
