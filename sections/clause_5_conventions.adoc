@@ -20,7 +20,7 @@ This document uses the following base URLs for relevant JSON Schema files:
 
 * GeoJSON: https://geojson.org/schema
 * JSON-FG: https://beta.schemas.opengis.net/json-fg
-* UML2JSON (defined by this specification): https://register.geostandaarden.nl/jsonschema/uml2json
+* UML2JSON (defined by this specification): https://register.geostandaarden.nl/jsonschema/uml2json/0.1
 
 NOTE: The JSON-FG schemas have not been published at https://beta.schemas.opengis.net/json-fg yet (as of Dec 12, 2022). The schema definition from this specification - see <<annex_uml2json_schema_definition>> - has been published at a temporary location. In both cases, the schema locations are expected to change during the OGC publication process.
 
