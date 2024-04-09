@@ -790,7 +790,7 @@ The conceptual schema may need to be transformed, in order to deal with model el
 * that cannot be represented in a certain JSON format (e.g., a Solid - a 3D geometry type - as value for the "geometry" member of a GeoJSON feature); or
 * that are not (well) supported by client software (e.g., complex attribute values for styling, processing, and filtering).
 
-No specific model transformation requirements and recommendations are defined in this document. Examples of model transformations are given in <<ref_ugas2020>> and in the https://github.com/INSPIRE-MIF/2017.2[GitHub repository of the INSPIRE action 2017.2 on alternative encodings].
+No specific model transformation requirements and recommendations are defined in this document. Examples of model transformations are given in <<ref_ugas2020>> and in the https://github.com/INSPIRE-MIF/model-transformation-rules[GitHub repository with model transformation rules by the INSPIRE community].
 
 
 [[jsonschema_req_plain]]
