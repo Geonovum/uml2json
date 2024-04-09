@@ -4,7 +4,7 @@
 identifier:: http://www.opengis.net/spec/uml2json/1.0/req/core/iso19103-measure-types
 statement:: If a UML property is encoded in JSON Schema, and the value type is one of the ISO 19103 measure types (e.g., Measure, Length, Speed, Angle, Area, or Volume), then the JSON Schema definition of the property shall be constructed as follows:
 
-part:: If tagged value _unit_ is defined on the UML property, with a non-blank value, then member "type" with value "number", and member "unit", with value being the value of tag _unit_, shall be encoded in the definition.
+part:: If tagged value _unit_ is defined on the UML property, with a non-blank value, then member "type" with value "number", and member "unit", with value being the value of tag _unit_, shall be encoded in the definition. If the multiplicity upper bound of the UML property is greater than 1, then as defined by xref:http://www.opengis.net/spec/uml2json/1.0/req/core/property-multiplicity[style=id%], "type": "number" will be moved into the "items" member; however, the "unit" member shall still be encoded in the definition schema for the UML property, and not in the "items" member.
 
 part:: Otherwise, i.e., tag _unit_ is undefined on the property, member "$ref" shall be added to the definition, with value "https://register.geostandaarden.nl/jsonschema/uml2json/0.1/schema_definitions.json#/$defs/Measure" (the JSON Schema for measure is defined in <<annex_uml2json_schema_definition>>).
 
