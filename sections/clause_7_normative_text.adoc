@@ -116,7 +116,7 @@ include::../requirements/core/REQ002.adoc[]
 .References between JSON Schemas using $ref with JSON pointers as values
 image::figures/references_between_definitions_schemas.png[align="center"]
 
-A reference to a schema definition within the same JSON Schema file should be encoded as a relative URL that consists of a fragment identifier, either using a JSON Pointer (e.g., #/$defs/XYZ) or an anchor (e.g., #XYZ).
+It is up to the encoder to use an absolute or relative URI for a reference to a schema definition within an external JSON Schema file. A reference to a schema definition within the same JSON Schema file should be encoded as a relative URL that consists of a fragment identifier, either using a JSON Pointer (e.g., #/$defs/XYZ) or an anchor (e.g., #XYZ).
 
 [[jsonschema_req_core_definitionsschema_media_types]]
 A link to a particular definition within a definitions schema requires the use of a JSON Pointer or an anchor in the fragment identifier of the link URL. <<ref_jsonpointer,JSON Pointer>>, chapter 6, explicitly states that the media type in which a JSON value is provided needs to support this kind of fragment identifier, and that this is not the case for the media type application/json. If a JSON Schema was published with this media type, then it is possible that the application ignores a fragment identifier (because the media type does not support fragment identifiers). If a JSON Schema is published with media type application/schema+json, using anchors and JSON Pointers as fragment identifiers is supported.

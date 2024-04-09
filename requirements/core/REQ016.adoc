@@ -4,6 +4,6 @@
 identifier:: http://www.opengis.net/spec/uml2json/1.0/req/core/property-inline
 statement:: The value type of a UML property shall be encoded as a JSON Schema constraint, as follows:
 part:: If the value type of a UML property is an external type, and the JSON Schema definition of that external type is a simple JSON value type, i.e., "string", "number", "integer", or "boolean", then a "type" key shall be added to the JSON Schema definition of the property, with the simple JSON value type as value;
-part:: Otherwise, a "$ref" key shall be added to the JSON Schema that constrains the property. The "$ref" value shall be a reference to the JSON Schema definition of the value type, within a particular definitions schema. The reference shall use the "$id" of that schema (see <<jsonschema_req_core_definitionsschema>>) as a basis, and adds a fragment identifier to identify the definition of the type.
+part:: Otherwise, a "$ref" key shall be added to the JSON Schema that constrains the property. The "$ref" value shall be a reference to the JSON Schema definition of the value type, within a particular definitions schema. The reference can be absolute or relative, and typically contains a fragment identifier to identify the definition of the value type.
 
 ====
