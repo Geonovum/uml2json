@@ -77,6 +77,8 @@ NOTE: When encoding the content of an application schema in a single _definition
 
 NOTE: The "$id" identifies the schema resource with its canonical URI. The URI is an identifier and not necessarily a resolvable URL. If the "$id" is a URL, there is no expectation that the JSON Schema can be downloaded at that URL. 
 
+NOTE: If the value of tag _jsonId_ is a URI with a path to a named file, then the file name given in tag _jsonDocument_ should match the file name in tag _jsonId_. It is not required to do so, because the JSON Schema file can be re-named during the publication process.
+
 include::../requirements/core/REC002.adoc[]
 
 [[example_req_core_jsonschema_definitions_schema]]
