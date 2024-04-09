@@ -201,12 +201,12 @@ include::../requirements/core/REC003.adoc[]
 |DateTime a| 
 [source,options="unnumbered"]
 ----
-^\d{4}-\d{2}-\d{2}T\d{2}:\d{2}:\d{2}(\.\d)?(Z\|((\+\|-)\d{2}:\d{2}))?$
+^\d{4}-\d{2}-\d{2}T\d{2}:\d{2}:\d{2}(\.\d)?(Z\|((\+\|-)\d{2}:\d{2}))$
 ----
 |Time a|
 [source,options="unnumbered"]
 ----
-^\d{2}:\d{2}:\d{2}(\.\d)?(Z\|((\+\|-)\d{2}:\d{2}))?$
+^\d{2}:\d{2}:\d{2}(\.\d)?(Z\|((\+\|-)\d{2}:\d{2}))$
 ----
 |URI a|
 [source,options="unnumbered"]
