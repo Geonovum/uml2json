@@ -2,7 +2,7 @@
 ====
 [%metadata]
 identifier:: http://www.opengis.net/spec/uml2json/1.0/req/codelists-link-object
-target:: JSON (Schema) Encoding
+target:: JSON (Schema) documents
 inherit:: http://www.opengis.net/spec/uml2json/1.0/req/codelists-basic
 requirement:: http://www.opengis.net/spec/uml2json/1.0/req/codelists-link-object/schema-ref
 

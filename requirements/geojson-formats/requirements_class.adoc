@@ -2,7 +2,7 @@
 ====
 [%metadata]
 identifier:: http://www.opengis.net/spec/uml2json/1.0/req/geojson-formats
-target:: JSON (Schema) Encoding
+target:: JSON (Schema) documents
 inherit:: OGC Features and Geometries JSON - Part 1: Core, requirements class "core" (http://www.opengis.net/spec/uml2json/1.0/req/core)
 inherit:: <<ref_geojson>>
 requirement:: http://www.opengis.net/spec/uml2json/1.0/req/geojson-formats/iso19107-types-for-geometry-member

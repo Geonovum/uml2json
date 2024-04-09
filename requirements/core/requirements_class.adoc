@@ -2,7 +2,7 @@
 ====
 [%metadata]
 identifier:: http://www.opengis.net/spec/uml2json/1.0/req/core
-target:: JSON (Schema) Encoding
+target:: JSON (Schema) documents
 
 requirement:: http://www.opengis.net/spec/uml2json/1.0/req/core/definitions-schema
 requirement:: http://www.opengis.net/spec/uml2json/1.0/req/core/schema-references

@@ -2,7 +2,7 @@
 ====
 [%metadata]
 identifier:: http://www.opengis.net/spec/uml2json/1.0/req/jsonfg
-target:: JSON (Schema) Encoding
+target:: JSON (Schema) documents
 inherit:: http://www.opengis.net/spec/uml2json/1.0/req/geojson-formats
 inherit:: http://www.opengis.net/spec/json-fg-1/0.1/req/core
 requirement:: http://www.opengis.net/spec/uml2json/1.0/req/jsonfg/iso19107-types-for-place-member
