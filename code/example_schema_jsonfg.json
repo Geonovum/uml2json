@@ -86,7 +86,7 @@
                 "belongsTo": {
                   "type": "array",
                   "items": {
-                    "$ref": "https://FIXME/schema_definitions.json#/$defs/LinkObject"
+                    "$ref": "https://register.geostandaarden.nl/jsonschema/uml2json/0.1/schema_definitions.json#/$defs/LinkObject"
                   },
                   "uniqueItems": true
                 }
@@ -133,7 +133,7 @@
           "type": "object",
           "properties": {
             "time": {
-              "$ref": "https://FIXME/schema_definitions.json#/$defs/PrimaryInstantRequired"
+              "$ref": "https://register.geostandaarden.nl/jsonschema/uml2json/0.1/schema_definitions.json#/$defs/PrimaryInstantRequired"
             },
             "geometry": {
               "$ref": "https://beta.schemas.opengis.net/json-fg/geometry-objects.json#/$defs/Polygon.json"
@@ -164,7 +164,7 @@
                 "hasBuilding": {
                   "type": "array",
                   "items": {
-                    "$ref": "https://FIXME/schema_definitions.json#/$defs/LinkObject"
+                    "$ref": "https://register.geostandaarden.nl/jsonschema/uml2json/0.1/schema_definitions.json#/$defs/LinkObject"
                   },
                   "uniqueItems": true
                 },
@@ -172,7 +172,7 @@
                   "type": "array",
                   "minItems": 1,
                   "items": {
-                    "$ref": "https://FIXME/schema_definitions.json#/$defs/LinkObject"
+                    "$ref": "https://register.geostandaarden.nl/jsonschema/uml2json/0.1/schema_definitions.json#/$defs/LinkObject"
                   },
                   "uniqueItems": true
                 }
@@ -210,7 +210,7 @@
                 "owns": {
                   "type": "array",
                   "items": {
-                    "$ref": "https://FIXME/schema_definitions.json#/$defs/LinkObject"
+                    "$ref": "https://register.geostandaarden.nl/jsonschema/uml2json/0.1/schema_definitions.json#/$defs/LinkObject"
                   },
                   "uniqueItems": true
                 }

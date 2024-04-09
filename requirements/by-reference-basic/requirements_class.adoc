@@ -2,7 +2,7 @@
 ====
 [%metadata]
 identifier:: http://www.opengis.net/spec/uml2json/1.0/req/by-reference-basic
-target:: JSON (Schema) Encoding
+target:: JSON (Schema) documents
 inherit:: http://www.opengis.net/spec/uml2json/1.0/req/core
 requirement:: http://www.opengis.net/spec/uml2json/1.0/req/by-reference-basic/inline-or-by-reference-tag
 

@@ -1129,7 +1129,7 @@ image::figures/example_primary_instant.png[align="center"]
           "type": "object",
           "properties": {
             "time": {
-              "$ref": "https://FIXME/schema_definitions.json#/$defs/PrimaryInstantRequired"
+              "$ref": "https://register.geostandaarden.nl/jsonschema/uml2json/0.1/schema_definitions.json#/$defs/PrimaryInstantRequired"
             },
             "geometry": {
               "$ref": "https://beta.schemas.opengis.net/json-fg/geometry-objects.json#/$defs/Polygon.json"
@@ -1272,7 +1272,7 @@ The JSON Schema encoding for the example in <<img_req_by_reference_example>>, us
           "type": "array",
           "minItems": 1,
           "items": {
-            "$ref": "https://FIXME/schema_definitions.json#/$defs/LinkObject"
+            "$ref": "https://register.geostandaarden.nl/jsonschema/uml2json/0.1/schema_definitions.json#/$defs/LinkObject"
           },
           "uniqueItems": true
         }
@@ -1288,7 +1288,7 @@ The JSON Schema encoding for the example in <<img_req_by_reference_example>>, us
         "owns": {
           "type": "array",
           "items": {
-            "$ref": "https://FIXME/schema_definitions.json#/$defs/LinkObject"
+            "$ref": "https://register.geostandaarden.nl/jsonschema/uml2json/0.1/schema_definitions.json#/$defs/LinkObject"
           },
           "uniqueItems": true
         }
