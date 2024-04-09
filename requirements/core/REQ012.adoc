@@ -2,6 +2,6 @@
 ====
 [%metadata]
 identifier:: http://www.opengis.net/spec/uml2json/1.0/req/core/properties
-statement:: A UML property of a class shall be converted to a member of a JSON object - unless the encoding rule defines a different behavior for the type that owns the property (e.g., for enumerations, unions, and code lists).
+statement:: A UML property shall be converted to a member of a JSON object - unless the encoding rule defines a different behavior for the type that owns the property (e.g., for enumerations, unions, and code lists).
 
 ====
