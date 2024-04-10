@@ -806,7 +806,7 @@ NOTE: An example of an application schema encoded in plain JSON Schema format is
 [[jsonschema_req_plain_iso19107_types]]
 ==== Implementation of ISO 19107 types
 
-include::../requirements/plain/REQ001.adoc[]
+include::../requirements/plain/REC001.adoc[]
 
 [[table_plain_iso19107_types]]
 .JSON Schema implementation of types defined by ISO 19107 for the plain JSON Schema encoding rule
@@ -827,6 +827,8 @@ include::../requirements/plain/REQ001.adoc[]
 NOTE: <<table_plain_iso19107_types>> uses geometry types defined by <<ref_iso19107>>. While this specification does not define mapping tables for newer versions of ISO 19107, application schemas may use geometry types from a newer version of ISO 19107. The mappings would then need to be adjusted accordingly (finding correct replacements for the types mentioned in the first column of the table).
 
 NOTE: For geometry typed properties whose value type is not covered in <<table_plain_iso19107_types>>, a suitable mapping needs to be defined, as explained in <<jsonschema_req_core_external_types>>.
+
+NOTE: Other geometry encodings are allowed for the plain JSON Schema format, for example a WKT string or a JSON-FG geometry. Such geometry encodings may be useful in application scenarios where tools do not (only) support GeoJSON.
 
 
 [[jsonschema_req_plain_common_base]]

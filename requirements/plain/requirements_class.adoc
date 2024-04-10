@@ -5,5 +5,6 @@ identifier:: http://www.opengis.net/spec/uml2json/1.0/req/plain
 target:: JSON (Schema) documents
 inherit:: http://www.opengis.net/spec/uml2json/1.0/req/core
 inherit:: <<ref_geojson>>
-requirement:: http://www.opengis.net/spec/uml2json/1.0/req/plain/iso19107-types
+
+recommendation:: http://www.opengis.net/spec/uml2json/1.0/req/plain/iso19107-types
 ====

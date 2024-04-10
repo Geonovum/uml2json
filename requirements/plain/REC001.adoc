@@ -1,0 +1,7 @@
+[recommendation]
+====
+[%metadata]
+identifier:: http://www.opengis.net/spec/uml2json/1.0/req/plain/iso19107-types
+statement:: If a UML property is encoded in JSON Schema, and the value type is one of the ISO 19107 geometry types listed in the first column of <<table_plain_iso19107_types>>, then it is recommended that the JSON schema definition in the second column of that table be used in the JSON Schema definition of the property.
+
+====
