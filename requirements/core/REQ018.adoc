@@ -2,7 +2,7 @@
 ====
 [%metadata]
 identifier:: http://www.opengis.net/spec/uml2json/1.0/req/core/association-class
-statement:: Before applying the conversion to JSON Schema, a UML association class that is a type with identity (i.e., a class that has stereotype «FeatureType», «Type», no stereotype, or a stereotype that maps to one of these cases), shall be transformed as follows (in the following description the source class of the association is called S and the target class is called T):
+statement:: Before applying the conversion to JSON Schema, a UML association class that is a type with identity (i.e., a class that has stereotype «FeatureType», «Interface», «Type», no stereotype, or a stereotype that maps to one of these cases), shall be transformed as follows (in the following description the source class of the association is called S and the target class is called T):
 
 * The association class A is transformed into a regular class with the same name, stereotype, tagged values, constraints, attributes, and relationships.
 * The association is replaced by two associations, one from S to A ("SA"), and one from A to T ("AT").
