@@ -882,9 +882,9 @@ NOTE: For geometry typed properties that are not mapped to the "geometry" top-le
 
 include::../requirements/geojson-formats/REQ002.adoc[]
 
-NOTE: If a feature type has multiple UML properties where "isId" = true, or if the value type of such a property is not a simple type, some community specific conversion mechanism needs to be defined, for mapping the identifier value(s) to a simple string or number, which can be used as value of the "id" member of a GeoJSON feature.
+NOTE: A UML property of a feature type which is modeled with "isId" = true, is mapped to the "id" member of a GeoJSON feature. The mapping algorithm is community-specific. If a feature type has multiple UML properties where "isId" = true, or if the value type of such a property is not a simple type, some community specific conversion mechanism needs to be defined, for mapping the identifier value(s) to a simple string or number, which can be used as value of the "id" member of a GeoJSON feature.
 
-NOTE: The UML properties with "isId" = true are encoded as any other property. That is especially useful in case multiple such properties exist in a feature type, because applications that know the conceptual schema can read these dedicated properties directly, in order to gather information about the ID of a given feature, rather than having to decode the "id" member.
+NOTE: The UML properties with "isId" = true are encoded as any other property, in addition to being mapped to the top-level "id" member. That is especially useful in case multiple such properties exist in a feature type, because applications that know the conceptual schema can read these dedicated properties directly, in order to gather information about the ID of a given feature, rather than having to decode the "id" member.
 
 
 [[jsonschema_req_geojson_formats_nestedproperties]]

@@ -2,6 +2,6 @@
 ====
 [%metadata]
 identifier:: http://www.opengis.net/spec/uml2json/1.0/req/geojson-formats/identifier
-statement:: A UML property of a feature type, wich is modeled with "isId" = true, shall be mapped to the "id" member of a GeoJSON feature. The mapping algorithm is community specific - especially if multiple such properties exist in a feature type. However, if at least one such property is present in a feature type, then the top-level "id" member of GeoJSON features that encode instances of the feature type shall have a value.
+statement:: If at least one UML property of a feature type is modeled with "isId" = true, then the top-level "id" member of GeoJSON features that encode instances of the feature type shall have a value.
 
 ====
