@@ -17,10 +17,7 @@ The file name of the _definitions schema_ shall be constructed as follows: If ta
 
 [.component,class=part]
 --
-The "$schema" keyword shall be added to the definitions schema. Its value shall be one of:
-
-* "https://json-schema.org/draft/2019-09/schema"
-* "https://json-schema.org/draft/2020-12/schema"
+The "$schema" keyword shall be added to the definitions schema. Its value shall be "https://json-schema.org/draft/2020-12/schema".
 --
 
 [.component,class=part]

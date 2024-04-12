@@ -88,7 +88,7 @@ include::../requirements/core/REC002.adoc[]
 [source,json,linenumbers]
 ----
 {
-  "$schema": "http://json-schema.org/draft/2019-09/schema",
+  "$schema": "http://json-schema.org/draft/2020-12/schema",
   "$id": "http://example.org/some-definitions-schema.json",
   "$defs": {
     "Class1": {
@@ -242,7 +242,7 @@ NOTE: Schema definitions that have an "$anchor" can be referenced using the plai
 [source,json,linenumbers]
 ----
 {
-  "$schema": "http://json-schema.org/draft/2019-09/schema",
+  "$schema": "http://json-schema.org/draft/2020-12/schema",
   "$defs": {
     "TypeA": {
       "$anchor": "TypeA",
@@ -302,7 +302,7 @@ image::figures/Generalization_example.png[align="center"]
 [source,json,linenumbers]
 ----
 {
-  "$schema": "http://json-schema.org/draft/2019-09/schema",
+  "$schema": "http://json-schema.org/draft/2020-12/schema",
   "$defs": {
     "TypeA": {
       "properties": {
@@ -419,7 +419,7 @@ image::figures/Enumeration_example.png[align="center"]
 [source,json,linenumbers]
 ----
 {
-  "$schema": "http://json-schema.org/draft/2019-09/schema",
+  "$schema": "http://json-schema.org/draft/2020-12/schema",
   "$defs": {
     "Enumeration1": {
       "type": "number",
@@ -473,7 +473,7 @@ image::figures/basic_types_example.png[align="center"]
 [source,json,linenumbers]
 ----
 {
-  "$schema": "http://json-schema.org/draft/2019-09/schema",
+  "$schema": "http://json-schema.org/draft/2020-12/schema",
   "$defs": {
     "EmailAddress": {
       "allOf": [
@@ -577,7 +577,7 @@ image::figures/Properties_example.png[align="center"]
 [source,json,linenumbers]
 ----
 {
-  "$schema": "http://json-schema.org/draft/2019-09/schema",
+  "$schema": "http://json-schema.org/draft/2020-12/schema",
   "$defs": {
     "TypeX": {
       "type": "object",
@@ -666,7 +666,7 @@ image::figures/Multiplicity_example.png[align="center"]
 [source,json,linenumbers]
 ----
 {
-  "$schema": "http://json-schema.org/draft/2019-09/schema",
+  "$schema": "http://json-schema.org/draft/2020-12/schema",
   "$defs": {
     "Type": {
       "type": "object",
@@ -913,7 +913,7 @@ image::figures/example_primary_geometry.png[align="center"]
 [source,json,linenumbers]
 ----
 {
-  "$schema": "https://json-schema.org/draft/2019-09/schema",
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
   "$defs": {    
     "Parcel": {
       "$anchor": "Parcel",
@@ -964,7 +964,7 @@ image::figures/example_common_base.png[align="center"]
 [source,json,linenumbers]
 ----
 {
-  "$schema": "https://json-schema.org/draft/2019-09/schema",
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
   "$id": "http://example.org/schema/infra.json",
   "$defs": {
     "Building": {
@@ -1063,11 +1063,19 @@ NOTE: No common base schema is defined for object types. Such types need to be t
 
 An example of encoding feature types with a common base schema is given in <<jsonschema_req_geojson_common_base>>. It can easily be adapted to match xref:http://www.opengis.net/spec/uml2json/1.0/req/jsonfg/common-base[style=id%] by exchanging "https://geojson.org/schema/Feature.json" with "https://beta.schemas.opengis.net/json-fg/feature.json".
 
+[[jsonschema_req_jsonfg_primary_geometry]]
+==== Primary geometry
+
+include::../requirements/jsonfg/REQ006.adoc[]
+
+NOTE: This allows the primary geometry value to be encoded in the top-level "place" member. There can be different scenarios where that may be relevant. For further details, see <<ref_jsonfg>>, section "7.5 Geometry".
 
 [[jsonschema_req_jsonfg_primary_place]]
 ==== Primary place
 
 include::../requirements/jsonfg/REQ003.adoc[]
+
+NOTE: In instance data, the value of such a property is typically encoded within the (JSON-FG) top-level "place" member of the JSON object that represents the «FeatureType». However, there can also be cases where the value is encoded in the top-level "geometry" member. For further details, see <<ref_jsonfg>>, section "7.5 Geometry".
 
 NOTE: UML properties of other kinds of classes - object types, data types, and unions - are not considered by this requirement. Object types are not encoded as JSON-FG features. Data types and unions may be used by other classes, which prevents a general exclusive mapping to the JSON-FG top-level "place" member. Only a direct property of a «FeatureType» can be mapped in this way.
 
@@ -1080,7 +1088,7 @@ image::figures/example_primary_place.png[align="center"]
 [source,json,linenumbers]
 ----
 {
-  "$schema": "https://json-schema.org/draft/2019-09/schema",
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
   "$defs": {
     "BuildingPart": {
       "$anchor": "BuildingPart",
@@ -1123,7 +1131,7 @@ image::figures/example_primary_instant.png[align="center"]
 [source,json,linenumbers]
 ----
 {
-  "$schema": "https://json-schema.org/draft/2019-09/schema",
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
   "$defs": {
     "Building_Core": {
       "$anchor": "Building_Core",
@@ -1202,7 +1210,7 @@ The JSON Schema encoding for the example in <<img_req_by_reference_example>>, us
 [source,json,linenumbers]
 ----
 {
-  "$schema": "https://json-schema.org/draft/2019-09/schema",
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
   "$defs": {
     "Parcel": {
       "$anchor": "Parcel",
@@ -1268,7 +1276,7 @@ The JSON Schema encoding for the example in <<img_req_by_reference_example>>, us
 [source,json,linenumbers]
 ----
 {
-  "$schema": "https://json-schema.org/draft/2019-09/schema",
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
   "$defs": {
     "Parcel": {
       "$anchor": "Parcel",
@@ -1351,7 +1359,7 @@ image::figures/type_discriminator_unions.png[align="center"]
 [source,json,linenumbers]
 ----
 {
-  "$schema": "http://json-schema.org/draft/2019-09/schema",
+  "$schema": "http://json-schema.org/draft/2020-12/schema",
   "$defs": {
     "Union_TypeDiscriminator": {
       "oneOf": [
@@ -1407,7 +1415,7 @@ image::figures/Union_example.png[align="center"]
 [source,json,linenumbers]
 ----
 {
-  "$schema": "http://json-schema.org/draft/2019-09/schema",
+  "$schema": "http://json-schema.org/draft/2020-12/schema",
   "$defs": {
     "UnionA": {
       "type": "object",
@@ -1481,7 +1489,7 @@ image::figures/code_lists_basic.png[align="center"]
 [source,json,linenumbers]
 ----
 {
-  "$schema": "http://json-schema.org/draft/2019-09/schema",
+  "$schema": "http://json-schema.org/draft/2020-12/schema",
   "$defs": {
     "SomeCodelist": {
       ...
@@ -1511,7 +1519,7 @@ image::figures/code_lists_literal.png[align="center"]
 [source,json,linenumbers]
 ----
 {
-  "$schema": "http://json-schema.org/draft/2019-09/schema",
+  "$schema": "http://json-schema.org/draft/2020-12/schema",
   "$defs": {
     "CodelistNumeric": {
       "type": "number"
@@ -1536,7 +1544,7 @@ include::../requirements/codelists-uri/REQ001.adoc[]
 [source,json,linenumbers]
 ----
 {
-  "$schema": "http://json-schema.org/draft/2019-09/schema",
+  "$schema": "http://json-schema.org/draft/2020-12/schema",
   "$defs": {
     "CodelistUriFormat": {
       "type": "string",
@@ -1577,7 +1585,7 @@ NOTE: Encoding a JSON object that represents an abstract type, with the "entityT
 [source,json,linenumbers]
 ----
 {
-  "$schema": "http://json-schema.org/draft/2019-09/schema",
+  "$schema": "http://json-schema.org/draft/2020-12/schema",
   "$defs": {
     "Person": {
       "properties": {

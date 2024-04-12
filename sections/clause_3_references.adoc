@@ -12,8 +12,6 @@ See https://www.metanorma.org/author/ogc/authoring-guide/bibliographic-reference
 * [[[ref_json,IETF RFC 8259]]]IETF RFC 8259, The JavaScript Object Notation (JSON) Data Interchange Format
 * [[[ref_geojson,IETF RFC 7946]]]IETF RFC 7946, The GeoJSON Format
 * [[[ref_jsonpointer,IETF RFC 6901]]]IETF RFC 6901, JavaScript Object Notation (JSON) Pointer
-* [[[ref_jsonschema_19,IETF I-D.draft-handrews-json-schema-02]]]Internet Engineering Task Force (IETF). Draft draft-handrews-json-schema-02: JSON Schema: A Media Type for Describing JSON Documents
-* [[[ref_jsonschema_19_validation,IETF I-D.draft-handrews-json-schema-validation-02]]]Internet Engineering Task Force (IETF). Draft draft-handrews-json-schema-validation-02: JSON Schema Validation: A Vocabulary for Structural Validation of JSON
 * [[[ref_jsonschema_20,IETF I-D.draft-bhutton-json-schema-01]]]Internet Engineering Task Force (IETF). Draft draft-bhutton-json-schema-01: JSON Schema: A Media Type for Describing JSON Documents
 * [[[ref_jsonschema_20_validation,IETF I-D.draft-bhutton-json-schema-validation-01]]]Internet Engineering Task Force (IETF). Draft draft-bhutton-json-schema-validation-01: JSON Schema Validation: A Vocabulary for Structural Validation of JSON
 * [[[ref_iso8601_2,ISO 8601-2:2019]]]ISO 8601-2:2019, Date and time — Representations for information interchange — Part 1: Extensions
@@ -23,5 +21,5 @@ See https://www.metanorma.org/author/ogc/authoring-guide/bibliographic-reference
 //* [[[ref_ogcapi_features_part1,OGC 17-069r3]]]OGC 17-069r3, OGC API - Features - Part 1: Core, Version 1.0.0
 //* [[[OGC06121r9,OGC 06-121r9]]], OGC Web Service Common Implementation Specification
 * [[[ref_ecma262v11,ECMA-262]]]ECMA-262, 11th edition specification, June 2020, https://www.ecma-international.org/ecma-262/11.0/index.html
-* [[[ref_jsonfg,OGC 21-045]]]OGC Features and Geometries JSON - Part 1: Core, draft 0.1.1, https://github.com/opengeospatial/ogc-feat-geo-json/releases/tag/v0.1.1
+* [[[ref_jsonfg,OGC 21-045]]]OGC Features and Geometries JSON - Part 1: Core, draft 0.2.2, https://github.com/opengeospatial/ogc-feat-geo-json/releases/tag/v0.2.2
 * [[[ref_modspec,OGC 08-131r3]]]The Specification Model - A Standard for Modular specifications

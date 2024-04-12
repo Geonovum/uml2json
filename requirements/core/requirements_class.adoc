@@ -4,6 +4,9 @@
 identifier:: http://www.opengis.net/spec/uml2json/1.0/req/core
 target:: JSON (Schema) documents
 
+inherit:: <<ref_jsonschema_20>>
+inherit:: <<ref_jsonschema_20_validation>>
+
 requirement:: http://www.opengis.net/spec/uml2json/1.0/req/core/definitions-schema
 requirement:: http://www.opengis.net/spec/uml2json/1.0/req/core/schema-references
 requirement:: http://www.opengis.net/spec/uml2json/1.0/req/core/iso19103-primitive-types
