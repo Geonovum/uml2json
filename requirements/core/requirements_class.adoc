@@ -27,6 +27,5 @@ requirement:: http://www.opengis.net/spec/uml2json/1.0/req/core/property-initial
 requirement:: http://www.opengis.net/spec/uml2json/1.0/req/core/association-class
 
 recommendation:: http://www.opengis.net/spec/uml2json/1.0/req/core/id-characteristics
-recommendation:: http://www.opengis.net/spec/uml2json/1.0/req/core/schema-publication-media-type
 recommendation:: http://www.opengis.net/spec/uml2json/1.0/req/core/format-and-pattern
 ====

@@ -123,7 +123,7 @@ It is up to the encoder to use an absolute or relative URI for a reference to a 
 [[jsonschema_req_core_definitionsschema_media_types]]
 A link to a particular definition within a definitions schema requires the use of a JSON Pointer or an anchor in the fragment identifier of the link URL. <<ref_jsonpointer,JSON Pointer>>, chapter 6, explicitly states that the media type in which a JSON value is provided needs to support this kind of fragment identifier, and that this is not the case for the media type application/json. If a JSON Schema was published with this media type, then it is possible that the application ignores a fragment identifier (because the media type does not support fragment identifiers). If a JSON Schema is published with media type application/schema+json, using anchors and JSON Pointers as fragment identifiers is supported.
 
-include::../requirements/core/REC001.adoc[]
+The JSON Schema should be published with media type application/schema+json - which is defined by the JSON Schema specification. The media type application/schema+json supports JSON Pointers and plain names as fragment identifiers. For further details, see https://tools.ietf.org/html/draft-handrews-json-schema-02#section-5[JSON Schema core, chapter 5].
 
 // JSON Schema 2019-09 and 2020-12 define another media type identifier (application/schema-instance+json). The "application/schema+json" media type is defined to offer a superset of the fragment identifier syntax and semantics provided by  "application/schema-instance+json". Also see https://ietf-wg-httpapi.github.io/mediatypes/draft-ietf-httpapi-rest-api-mediatypes.html
 

@@ -1,7 +1,0 @@
-[recommendation]
-====
-[%metadata]
-identifier:: http://www.opengis.net/spec/uml2json/1.0/req/core/schema-publication-media-type
-statement:: Definitions schemas should not be published under media type application/json. Instead, a JSON Schema should be published with media type application/schema+json - which is defined by the JSON Schema specification. The media type application/schema+json supports JSON Pointers and plain names as fragment identifiers. For further details, see https://tools.ietf.org/html/draft-handrews-json-schema-02#section-5[JSON Schema core, chapter 5].
-
-====
