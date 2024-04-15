@@ -1,17 +1,17 @@
 [requirement]
 ====
 [%metadata]
-identifier:: http://www.opengis.net/spec/uml2json/1.0/req/jsonfg/primary-instant
+identifier:: http://www.opengis.net/spec/uml2json/1.0/req/jsonfg/primary-temporal-information
 
 [.component,class=part]
 --
-A UML property that is owned by a «FeatureType» and that has tag "jsonPrimaryInstant" with value equal to, ignoring case, "true", shall not be encoded within the "properties" member. Instead, it shall be encoded as a type restriction for the top-level "time" member. The additional restriction for the "time" member shall be encoded using "$ref" with value "https://register.geostandaarden.nl/jsonschema/uml2json/0.1/schema_definitions.json#/$defs/PrimaryInstantOptional", if the minimum multiplicity of the property is 0, otherwise "https://register.geostandaarden.nl/jsonschema/uml2json/0.1/schema_definitions.json#/$defs/PrimaryInstantRequired".
+In the JSON Schema definition of a feature, the primary-instant, primary-interval, primary-interval-start, and primary-interval-end properties (identified following the rules in <<jsonschema_req_core_primary_tempinfo>>) shall not be encoded within the "properties" member.
 
 --
 
 [.component,class=part]
 --
-In instance data, the value of such a property shall be encoded within the (JSON-FG) time/date or time/timestamp member of the JSON object that represents the «FeatureType».
+In instance data, the value of such a property shall be encoded within the (JSON-FG) "time" member of the JSON object that represents the feature type.
 --
 
 ====

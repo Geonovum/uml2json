@@ -1,7 +1,0 @@
-[requirement]
-====
-[%metadata]
-identifier:: http://www.opengis.net/spec/uml2json/1.0/req/geojson-formats/nesting-feature-type-properties
-statement:: Properties of a feature type shall be encoded within the GeoJSON "properties" member, i.e., within a nested "properties" member.
-
-====

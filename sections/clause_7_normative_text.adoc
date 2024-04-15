@@ -32,7 +32,7 @@ The stereotypes as well as tagged values that are relevant for JSON Schema encod
 
 NOTE: Communities may use aliases for the stereotypes listed above.
 
-NOTE: For backwards-compatibility to UML 1 schemas (that comply with earlier versions of <<ref_iso19103>>) stereotype «type» can be used instead of stereotype «interface» (the model element for stereotype «type» is Class).
+NOTE: For backwards-compatibility to UML 1 schemas (that comply with earlier versions of <<ref_iso19103>>), a class with stereotype «Type» can be used instead of an interface.
 
 NOTE: Some conceptual schemas and application schemas do not make use of the stereotypes «property», but still attach certain tagged values to according properties in their UML model. That approach is supported by some UML modeling tools, even though tagged values typically belong to a certain stereotype. For the purposes of this specification, the stereotype «property» is assumed to be applied in schemas that shall be converted from UML to JSON Schema. Nevertheless, it is allowed for schemas to omit the stereotypes, and just use the associated tagged values (see below) on according model elements. This kind of use implies the presence of an ad-hoc stereotype, which is considered to represent the «property» stereotype.
 
@@ -46,11 +46,7 @@ NOTE: Some conceptual schemas and application schemas do not make use of the ste
 .2+| «applicationSchema» and «schema» | jsonDocument | xref:http://www.opengis.net/spec/uml2json/1.0/req/core[style=id%] .2+| see <<jsonschema_req_core_definitionsschema>>
 | jsonId  | xref:http://www.opengis.net/spec/uml2json/1.0/req/core[style=id%]
 | «Enumeration» and «CodeList» | literalEncodingType |xref:http://www.opengis.net/spec/uml2json/1.0/req/core[style=id%] and xref:http://www.opengis.net/spec/uml2json/1.0/req/codelists-literal[style=id%] | see <<jsonschema_req_core_types_enumeration>> and <<jsonschema_codelists_req_literal>>
-.13+| «property» | inlineOrByReference | xref:http://www.opengis.net/spec/uml2json/1.0/req/by-reference-basic[style=id%] | see <<jsonschema_byreference_req_basic>>
-| jsonPrimaryGeometry | xref:http://www.opengis.net/spec/uml2json/1.0/req/geojson-formats[style=id%] | see <<jsonschema_req_geojson_formats_primary_geometry>>
-| jsonPrimaryInstant | xref:http://www.opengis.net/spec/uml2json/1.0/req/jsonfg[style=id%] .2+| see <<jsonschema_req_jsonfg_primary_time>>
-| jsonPrimaryInterval | xref:http://www.opengis.net/spec/uml2json/1.0/req/jsonfg[style=id%]  
-| jsonPrimaryPlace | xref:http://www.opengis.net/spec/uml2json/1.0/req/jsonfg[style=id%] | see <<jsonschema_req_jsonfg_primary_place>>
+.12+| «property» | inlineOrByReference | xref:http://www.opengis.net/spec/uml2json/1.0/req/by-reference-basic[style=id%] | see <<jsonschema_byreference_req_basic>>
 | jsonFormat | xref:http://www.opengis.net/spec/uml2json/1.0/req/core[style=id%] .7+| only relevant for _basic types_, see  <<jsonschema_req_core_types_basictype>>
 | jsonPattern | xref:http://www.opengis.net/spec/uml2json/1.0/req/core[style=id%] 
 | maxLength | xref:http://www.opengis.net/spec/uml2json/1.0/req/core[style=id%] 
@@ -58,6 +54,9 @@ NOTE: Some conceptual schemas and application schemas do not make use of the ste
 | minInclusive | xref:http://www.opengis.net/spec/uml2json/1.0/req/core[style=id%] 
 | maxExclusive | xref:http://www.opengis.net/spec/uml2json/1.0/req/core[style=id%] 
 | maxInclusive | xref:http://www.opengis.net/spec/uml2json/1.0/req/core[style=id%] 
+| primaryGeometry | xref:http://www.opengis.net/spec/uml2json/1.0/req/geojson[style=id%] and xref:http://www.opengis.net/spec/uml2json/1.0/req/jsonfg[style=id%] | see <<jsonschema_req_geojson_primary_geometry>> and <<jsonschema_req_jsonfg_primary_geometry>>
+| primaryInstant | xref:http://www.opengis.net/spec/uml2json/1.0/req/jsonfg[style=id%] .2+| see <<jsonschema_req_jsonfg_primary_temporal_information>>
+| primaryInterval | xref:http://www.opengis.net/spec/uml2json/1.0/req/jsonfg[style=id%]  
 | unit | xref:http://www.opengis.net/spec/uml2json/1.0/req/core[style=id%]  | see <<jsonschema_req_core_external_types>>
 |===
 
@@ -797,12 +796,85 @@ The conceptual schema may need to be transformed, in order to deal with model el
 No specific model transformation requirements and recommendations are defined in this document. Examples of model transformations are given in <<ref_ugas2020>> and in the https://github.com/INSPIRE-MIF/model-transformation-rules[GitHub repository with model transformation rules by the INSPIRE community].
 
 
+[[jsonschema_req_core_primary_geometry]]
+==== Primary geometry
+
+<<ref_ogcapifeatures_part5_schemas>> defines the concept of _primary geometry_:
+
+[quote,OGC API - Features - Part 5: Schemas,"ref_ogcapifeatures_part5_schemas,section=4.1"]
+____
+
+*primary geometry*
+
+the geometry that the publisher considers as the most important spatial characteristic of a *feature*
+
+NOTE: A feature can be described by multiple spatial properties. For example, a radio tower can have a property with a point value that describes the location of the tower and another property with a multi-polygon value that describes the area of coverage. Some feature formats can represent only a single geometry per feature. In those cases, the primary geometry will be used when the feature is encoded in such a format.
+
+NOTE: The primary geometry of a feature can also vary depending on the zoom level. At a smaller scale, the primary geometry could be a point while a polygon could be used at a larger scale. 
+____
+
+The concept is generally applicable to feature types. Examples of data formats to which the concept applies are GeoJSON and JSON-FG. Requirements regarding the encoding of the primary geometry are defined in the according requirements classes (xref:http://www.opengis.net/spec/uml2json/1.0/req/geojson[style=id%] and xref:http://www.opengis.net/spec/uml2json/1.0/req/jsonfg[style=id%]).
+
+In order to identify the UML property that represents the primary geometry of a feature type, the following approach is used in this specification: 
+
+* If a (direct or inherited, but ignoring redefined) UML property of the feature type has tag "primaryGeometry" with value equal to and ignoring case "true", then that property is the primary geometry of the feature type.
+* Otherwise, if the set of (direct and inherited, but ignoring redefined) UML properties of the feature type only contains a single UML property with a geometric type, and that property is directly owned by the feature type, and that property does not have tag "primaryGeometry" with value equal to, ignoring case, "false", then that property is the primary geometry of the feature type.
+* Otherwise, no primary geometry is defined for the feature type.
+
+NOTE: A feature type that has multiple UML properties with tag "primaryGeometry" = true is not modeled correctly.
+
+
+[[jsonschema_req_core_primary_tempinfo]]
+==== Primary temporal information
+
+<<ref_ogcapifeatures_part5_schemas>> defines the concept of _primary temporal information_:
+
+[quote,OGC API - Features - Part 5: Schemas,"ref_ogcapifeatures_part5_schemas,section=4.1"]
+____
+
+*primary temporal information*
+the time instant or time interval that the publisher considers as the most important temporal characteristic of a *feature*
+
+NOTE: A feature can be described by multiple temporal properties. For example, an event can have a property with an instant or interval when the event occurred or will occur and another property when the event was recorded in the dataset. The primary temporal information can also be built from two properties, e.g., when the feature has two properties describing the start and end instants of an interval. 
+____
+
+The concept is generally applicable to feature types. An example of a data format to which the concept applies is JSON-FG. Requirements regarding the encoding of primary temporal information are defined in the according requirements class (xref:http://www.opengis.net/spec/uml2json/1.0/req/jsonfg[style=id%]).
+
+In order to identify the UML property that represents the primary geometry of a feature type, the following approach is used in this specification:
+
+* A UML property that is owned by the feature type and that has tag "primaryInstant" with value equal to and ignoring case "true" is the primary-instant of the feature type.
+* A UML property that is owned by the feature type and that has tag "primaryInterval" with value equal to and ignoring case:
+** "interval" is the primary-interval of the feature type.
+** "start" is the primary-interval-start of the feature type.
+** "end" is the primary-interval-end of the feature type.
+  
+NOTE: The value types of UML properties that represent or contribute to the primary interval should be compatible with that use. For example, properties marked as primary-interval-start or primary-interval-end can have value type "Date", "DateTime", or "TM_Instant", whereas a property marked as primary-interval can have value type "TM_Period".
+  
+[NOTE]
+======
+A feature type that does not satisfy the following conditions is not modeled correctly:
+
+* At most one of the (direct or inherited, but ignoring redefined) properties has tag "primaryInterval" = "interval".
+* At most one of the (direct or inherited, but ignoring redefined) properties has tag "primaryInterval" = "start".
+* At most one of the (direct or inherited, but ignoring redefined) properties has tag "primaryInterval" = "end".
+* The use of "interval" and "start"/"end" are mutually exclusive within the (direct or inherited, but ignoring redefined) properties of the feature type: 
+** If one property has tag "primaryInterval" = "interval", then no other property has tag "primaryInterval" equal to "start" or "end". 
+** Likewise, if one property has tag "primaryInterval" equal to "start" or "end", then no other property has tag "primaryInterval" = "interval".
+======
+
+
 [[jsonschema_req_plain]]
 === Requirements class: Encoding rule for a plain JSON Schema format
 
 include::../requirements/plain/requirements_class.adoc[]
 
 NOTE: An example of an application schema encoded in plain JSON Schema format is given in <<annex_example_application_schema_plain>>.
+
+
+[[jsonschema_req_plain_common_base]]
+==== Common base schema
+
+As described in the <<jsonschema_req_core_types_common_base,core requirements class>>, common base types or - for the purposes of this encoding rule - common JSON Schema definitions can be added to the schema definition of certain kinds of classes, for example, all feature types. This requirements class does not specify any such common JSON Schema definitions. As a consequence, if the types with identity defined by an application schema do not contain attributes that convey the identity of an actual object, according JSON objects cannot be identified using information from property values. Additional requirements classes, which depend on xref:http://www.opengis.net/spec/uml2json/1.0/req/plain[style=id%], may add requirements regarding a common base.
 
 
 [[jsonschema_req_plain_iso19107_types]]
@@ -832,13 +904,6 @@ NOTE: For geometry typed properties whose value type is not covered in <<table_p
 
 NOTE: Other geometry encodings are allowed for the plain JSON Schema format, for example a WKT string or a JSON-FG geometry. Such geometry encodings may be useful in application scenarios where tools do not (only) support GeoJSON.
 
-
-[[jsonschema_req_plain_common_base]]
-==== Common base schema
-
-As described in the <<jsonschema_req_core_types_common_base,core requirements class>>, common base types or - for the purposes of this encoding rule - common JSON Schema definitions can be added to the schema definition of certain kinds of classes, for example, all feature types. This requirements class does not specify any such common JSON Schema definitions. As a consequence, if the types with identity defined by an application schema do not contain attributes that convey the identity of an actual object, according JSON objects cannot be identified using information from property values. Additional requirements classes, which depend on xref:http://www.opengis.net/spec/uml2json/1.0/req/plain[style=id%], may add requirements regarding a common base.
-
-
 [[jsonschema_req_plain_identifier]]
 ==== Identifier property
 
@@ -850,37 +915,10 @@ This requirements class does not define a means to add an identifier property - 
 
 include::../requirements/geojson-formats/requirements_class.adoc[]
 
-
-[[jsonschema_req_geojson_formats_iso19107_types]]
-==== Implementation of ISO 19107 types for the "geometry" member
-
-include::../requirements/geojson-formats/REQ001.adoc[]
-
-[[table_iso19107_types_geometry_member]]
-.JSON Schema implementation of types defined by ISO 19107, for the "geometry" member in GeoJSON-based encoding rules
-[width="90%",options="header"]
-|===
-| UML class | JSON Schema reference
-|GM_Point |https://geojson.org/schema/Point.json
-|GM_Curve |https://geojson.org/schema/LineString.json
-|GM_Surface |https://geojson.org/schema/Polygon.json
-|GM_MultiPoint |https://geojson.org/schema/MultiPoint.json
-|GM_MultiCurve |https://geojson.org/schema/MultiLineString.json
-|GM_MultiSurface |https://geojson.org/schema/MultiPolygon.json
-|GM_Aggregate |https://geojson.org/schema/GeometryCollection.json
-|GM_Object |https://geojson.org/schema/Geometry.json
-
-|===
-
-NOTE: <<table_iso19107_types_geometry_member>> uses geometry types defined by <<ref_iso19107>>. While this specification does not define mapping tables for newer versions of ISO 19107, application schemas may use geometry types from a newer version of ISO 19107. The mappings would then need to be adjusted accordingly (finding correct replacements for the types mentioned in the first column of the table).
-
-NOTE: For geometry typed properties that are not mapped to the "geometry" top-level member, a suitable mapping needs to be defined, as explained in <<jsonschema_req_core_external_types>>.
-
-
 [[jsonschema_req_geojson_formats_identifier]]
 ==== Identifier property
 
-include::../requirements/geojson-formats/REQ002.adoc[]
+include::../requirements/geojson-formats/REQ001.adoc[]
 
 NOTE: A UML property of a feature type which is modeled with "isId" = true, is mapped to the "id" member of a GeoJSON feature. The mapping algorithm is community-specific. If a feature type has multiple UML properties where "isId" = true, or if the value type of such a property is not a simple type, some community specific conversion mechanism needs to be defined, for mapping the identifier value(s) to a simple string or number, which can be used as value of the "id" member of a GeoJSON feature.
 
@@ -890,50 +928,11 @@ NOTE: The UML properties with "isId" = true are encoded as any other property, i
 [[jsonschema_req_geojson_formats_nestedproperties]]
 ==== Nesting feature type properties
 
-include::../requirements/geojson-formats/REQ003.adoc[]
+include::../requirements/geojson-formats/REQ002.adoc[]
 
-NOTE: Additional requirements can override this behavior, by omitting certain UML properties or by mapping certain UML properties to first-level members of the resulting JSON object. Examples are the <<jsonschema_req_geojson_formats_primary_geometry,primary geometry property>> as well as the <<jsonschema_req_geojson_formats_identifier,identifier property>>.
+NOTE: Additional requirements can override this behavior, by omitting certain UML properties or by mapping certain UML properties to first-level members of the resulting JSON object. An example is the  <<jsonschema_req_geojson_formats_identifier,identifier property>>.
 
 NOTE: Properties of object types are encoded as first-level properties of the resulting JSON object. If object types should be encoded as feature types, then the object types would need to be transformed accordingly, before a JSON Schema encoding is created.
-
-
-[[jsonschema_req_geojson_formats_primary_geometry]]
-==== Primary geometry
-
-include::../requirements/geojson-formats/REQ004.adoc[]
-
-NOTE: UML properties of other kinds of classes - object types, data types, and unions - are not considered by this requirement. Object types are not encoded as GeoJSON features. Data types and unions may be used by other classes, which prevents a general exclusive mapping to the GeoJSON top-level "geometry" member. Only a direct property of a «FeatureType» can be mapped in this way.
-
-[[img_req_geojson_formats_primary_geometry_example]]
-.Example of a feature type with an attribute designated as primary geometry
-image::figures/example_primary_geometry.png[align="center"]
-
-[[example_req_geojson_formats_primary_geometry]]
-.Example for encoding a feature type with primary geometry
-[source,json,linenumbers]
-----
-{
-  "$schema": "https://json-schema.org/draft/2020-12/schema",
-  "$defs": {    
-    "Parcel": {
-      "$anchor": "Parcel",
-      "allOf": [
-        {
-          "$ref": "https://geojson.org/schema/Feature.json"
-        },
-        {
-          "type": "object",
-          "properties": {
-            "geometry": {
-              "$ref": "https://geojson.org/schema/Polygon.json"
-            }
-          }
-        }
-      ]
-    }
-  }
-}
-----
 
 
 [[jsonschema_req_geojson]]
@@ -1015,6 +1014,70 @@ image::figures/example_common_base.png[align="center"]
 }
 ----
 
+[[jsonschema_req_geojson_iso19107_types]]
+==== Implementation of ISO 19107 types for the "geometry" member
+
+include::../requirements/geojson/REQ002.adoc[]
+
+[[table_iso19107_types_geometry_member]]
+.JSON Schema implementation of types defined by ISO 19107, for the "geometry" member in the GeoJSON encoding rule
+[width="90%",options="header"]
+|===
+| UML class | JSON Schema reference
+|GM_Point |https://geojson.org/schema/Point.json
+|GM_Curve |https://geojson.org/schema/LineString.json
+|GM_Surface |https://geojson.org/schema/Polygon.json
+|GM_MultiPoint |https://geojson.org/schema/MultiPoint.json
+|GM_MultiCurve |https://geojson.org/schema/MultiLineString.json
+|GM_MultiSurface |https://geojson.org/schema/MultiPolygon.json
+|GM_Aggregate |https://geojson.org/schema/GeometryCollection.json
+|GM_Object |https://geojson.org/schema/Geometry.json
+
+|===
+
+NOTE: <<table_iso19107_types_geometry_member>> uses geometry types defined by <<ref_iso19107>>. While this specification does not define mapping tables for newer versions of ISO 19107, application schemas may use geometry types from a newer version of ISO 19107. The mappings would then need to be adjusted accordingly (finding correct replacements for the types mentioned in the first column of the table).
+
+NOTE: For geometry typed properties that are not mapped to the "geometry" top-level member, a suitable mapping needs to be defined, as explained in <<jsonschema_req_core_external_types>>.
+
+
+[[jsonschema_req_geojson_primary_geometry]]
+==== Primary geometry
+
+include::../requirements/geojson/REQ003.adoc[]
+
+NOTE: UML properties of other kinds of classes - object types, data types, and unions - are not considered by this requirement. Object types are not encoded as GeoJSON features. Data types and unions may be used by other classes, which prevents a general exclusive mapping to the GeoJSON top-level "geometry" member. Only a direct property of a «FeatureType» can be mapped in this way.
+
+[[img_req_geojson_primary_geometry_example]]
+.Example of a feature type with an attribute designated as primary geometry
+image::figures/example_primary_geometry.png[align="center"]
+
+[[example_req_geojson_primary_geometry]]
+.Example for encoding a feature type with primary geometry
+[source,json,linenumbers]
+----
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$defs": {    
+    "Parcel": {
+      "$anchor": "Parcel",
+      "allOf": [
+        {
+          "$ref": "https://geojson.org/schema/Feature.json"
+        },
+        {
+          "type": "object",
+          "properties": {
+            "geometry": {
+              "$ref": "https://geojson.org/schema/Polygon.json"
+            }
+          }
+        }
+      ]
+    }
+  }
+}
+----
+
 
 [[jsonschema_req_jsonfg]]
 === Requirements class: Encoding rule for a JSON-FG compliant JSON Schema format
@@ -1024,10 +1087,22 @@ include::../requirements/jsonfg/requirements_class.adoc[]
 NOTE: An example of an application schema encoded in JSON-FG compliant JSON Schema format is given in <<annex_example_application_schema_jsonfg>>.
 
 
+[[jsonschema_req_jsonfg_common_base]]
+==== Common base schema
+
+As described in the <<jsonschema_req_core_types_common_base,core requirements class>>, common base types or - for the purposes of this encoding rule - common JSON Schema definitions can be added to the schema definition of certain kinds of classes, for example, all feature types.
+
+include::../requirements/jsonfg/REQ001.adoc[]
+
+NOTE: No common base schema is defined for object types. Such types need to be transformed to feature types if they should be encoded as JSON-FG features.
+
+An example of encoding feature types with a common base schema is given in <<jsonschema_req_geojson_common_base>>. It can easily be adapted to match xref:http://www.opengis.net/spec/uml2json/1.0/req/jsonfg/common-base[style=id%] by exchanging "https://geojson.org/schema/Feature.json" with "https://beta.schemas.opengis.net/json-fg/feature.json".
+
+
 [[jsonschema_req_jsonfg_iso19107_types]]
 ==== Implementation of ISO 19107 types for the "place" member
 
-include::../requirements/jsonfg/REQ001.adoc[]
+include::../requirements/jsonfg/REQ002.adoc[]
 
 [[table_iso19107_types_place_member]]
 .JSON Schema implementation of types defined by ISO 19107, for the "place" member
@@ -1052,26 +1127,8 @@ NOTE: <<table_iso19107_types_place_member>> uses geometry types defined by <<ref
 NOTE: For geometry typed properties that are not mapped to the "geometry" top-level member, a suitable mapping needs to be defined, as explained in <<jsonschema_req_core_external_types>>.
 
 
-[[jsonschema_req_jsonfg_common_base]]
-==== Common base schema
-
-As described in the <<jsonschema_req_core_types_common_base,core requirements class>>, common base types or - for the purposes of this encoding rule - common JSON Schema definitions can be added to the schema definition of certain kinds of classes, for example, all feature types.
-
-include::../requirements/jsonfg/REQ002.adoc[]
-
-NOTE: No common base schema is defined for object types. Such types need to be transformed to feature types if they should be encoded as JSON-FG features.
-
-An example of encoding feature types with a common base schema is given in <<jsonschema_req_geojson_common_base>>. It can easily be adapted to match xref:http://www.opengis.net/spec/uml2json/1.0/req/jsonfg/common-base[style=id%] by exchanging "https://geojson.org/schema/Feature.json" with "https://beta.schemas.opengis.net/json-fg/feature.json".
-
 [[jsonschema_req_jsonfg_primary_geometry]]
 ==== Primary geometry
-
-include::../requirements/jsonfg/REQ006.adoc[]
-
-NOTE: This allows the primary geometry value to be encoded in the top-level "place" member. There can be different scenarios where that may be relevant. For further details, see <<ref_jsonfg>>, section "7.5 Geometry".
-
-[[jsonschema_req_jsonfg_primary_place]]
-==== Primary place
 
 include::../requirements/jsonfg/REQ003.adoc[]
 
@@ -1111,16 +1168,12 @@ image::figures/example_primary_place.png[align="center"]
 ----
 
 
-[[jsonschema_req_jsonfg_primary_time]]
-==== Primary time
+[[jsonschema_req_jsonfg_primary_temporal_information]]
+==== Primary temporal information
 
 include::../requirements/jsonfg/REQ004.adoc[]
 
-NOTE: UML properties of other kinds of classes - object types, data types, and unions - are not considered by this requirement. Object types are not encoded as JSON-FG features. Data types and unions may be used by other classes, which prevents a general exclusive mapping to the JSON-FG top-level "time" member. Only a direct property of a «FeatureType» can be mapped in this way.
-
-include::../requirements/jsonfg/REQ005.adoc[]
-
-NOTE: UML properties of other kinds of classes - object types, data types, and unions - are not considered by this requirement. Object types are not encoded as JSON-FG features. Data types and unions may be used by other classes, which prevents a general exclusive mapping to the JSON-FG top-level "time" member. Only a direct property of a «FeatureType» can be mapped in this way.
+NOTE: UML properties of other kinds of classes - object types, data types, and unions - are not considered by this requirement. Object types are not encoded as JSON-FG features. Data types and unions may be used by other classes, which prevents a general exclusive mapping to the JSON-FG top-level "time" member. Only a direct property of a feature type can be mapped in this way.
 
 [[img_req_jsonfg_primary_time_example]]
 .Example of a feature type with an attribute designated as primary instant
@@ -1142,9 +1195,6 @@ image::figures/example_primary_instant.png[align="center"]
         {
           "type": "object",
           "properties": {
-            "time": {
-              "$ref": "https://register.geostandaarden.nl/jsonschema/uml2json/0.1/schema_definitions.json#/$defs/PrimaryInstantRequired"
-            },
             "geometry": {
               "$ref": "https://beta.schemas.opengis.net/json-fg/geometry-objects.json#/$defs/Polygon.json"
             }

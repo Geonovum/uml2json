@@ -1,7 +1,7 @@
 [requirement]
 ====
 [%metadata]
-identifier:: http://www.opengis.net/spec/uml2json/1.0/req/geojson-formats/identifier
-statement:: If at least one UML property of a feature type is modeled with "isId" = true, then the top-level "id" member of GeoJSON features that encode instances of the feature type shall have a value.
+identifier:: http://www.opengis.net/spec/uml2json/1.0/req/geojson-formats/nesting-feature-type-properties
+statement:: Properties of a feature type shall be encoded within the GeoJSON "properties" member, i.e., within a nested "properties" member.
 
 ====

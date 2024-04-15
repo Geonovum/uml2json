@@ -1,0 +1,15 @@
+[requirement]
+====
+[%metadata]
+identifier:: http://www.opengis.net/spec/uml2json/1.0/req/geojson/primary-geometry
+
+[.component,class=part]
+--
+In the JSON Schema definition of a feature type, the primary geometry property (identified following the rules in <<jsonschema_req_core_primary_geometry>>) shall be encoded as a type restriction for the top-level "geometry" member. If the primary geometry property is optional, then the schema restriction for the "geometry" member shall define a choice - using the "oneOf" JSON Schema keyword - between a null value and the geometry schema definition for the value type of the geometry property. The primary geometry property shall not be encoded within the "properties" member.
+--
+
+[.component,class=part]
+--
+In instance data, the value of the primary geometry property shall be encoded within the (GeoJSON) top-level "geometry" member of the JSON object that represents the feature type.
+--
+====

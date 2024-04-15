@@ -3,11 +3,11 @@
 [%metadata]
 identifier:: http://www.opengis.net/spec/uml2json/1.0/req/geojson-formats
 target:: JSON (Schema) documents
+
 inherit:: http://www.opengis.net/spec/uml2json/1.0/req/core
 inherit:: <<ref_geojson>>
-requirement:: http://www.opengis.net/spec/uml2json/1.0/req/geojson-formats/iso19107-types-for-geometry-member
+
 requirement:: http://www.opengis.net/spec/uml2json/1.0/req/geojson-formats/identifier
 requirement:: http://www.opengis.net/spec/uml2json/1.0/req/geojson-formats/nesting-feature-type-properties
-requirement:: http://www.opengis.net/spec/uml2json/1.0/req/geojson-formats/primary-geometry
 
 ====

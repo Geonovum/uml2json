@@ -1,11 +1,11 @@
 [requirement]
 ====
 [%metadata]
-identifier:: http://www.opengis.net/spec/uml2json/1.0/req/jsonfg/primary-place
+identifier:: http://www.opengis.net/spec/uml2json/1.0/req/jsonfg/primary-geometry
 
 [.component,class=part]
 --
-A UML property that is owned by a «FeatureType» and that has tag "jsonPrimaryPlace" with value equal to, ignoring case, "true", shall be encoded as a type restriction for the top-level "place" member. The schema restriction for the "place" member shall define a choice - using the "oneOf" JSON Schema keyword - between a null value and the geometry schema definition for the value type of the UML property. The UML property shall not be encoded within the "properties" member.
+In the JSON Schema definition of a feature type, the primary geometry property (identified following the rules in <<jsonschema_req_core_primary_geometry>>) shall be encoded as a type restriction for the top-level "place" member. The schema restriction for the "place" member shall define a choice - using the "oneOf" JSON Schema keyword - between a null value and the geometry schema definition for the value type of the UML property. The UML property shall not be encoded within the "properties" member.
 --
 
 ====

@@ -3,6 +3,10 @@
 [%metadata]
 identifier:: http://www.opengis.net/spec/uml2json/1.0/req/geojson
 target:: JSON (Schema) documents
+
 inherit:: http://www.opengis.net/spec/uml2json/1.0/req/geojson-formats
+
 requirement:: http://www.opengis.net/spec/uml2json/1.0/req/geojson/common-base
+requirement:: http://www.opengis.net/spec/uml2json/1.0/req/geojson/iso19107-types-for-geometry-member
+requirement:: http://www.opengis.net/spec/uml2json/1.0/req/geojson/primary-geometry
 ====

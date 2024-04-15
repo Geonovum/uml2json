@@ -19,7 +19,7 @@ A _feature type_ as defined by the General Feature Model (see <<ref_iso19109>>).
 
 ==== object type
 
-An _object type_ is a standard class, instances are plain objects with identity. An _object type_ is not a _feature type_. In an application schema, an _object type_ has no stereotype, or has stereotype «Interface» or «Type», or has a stereotype that maps to one of these two options.
+An _object type_ is an interface or class. An _object type_ is not a _feature type_. In an application schema, an _object type_ is an interface, or a class with no stereotype, stereotype «Type», or a stereotype that maps to one of the two options.
 
 ==== data type
 
