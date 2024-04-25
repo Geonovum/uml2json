@@ -80,7 +80,7 @@
                   "type": "number",
                   "unit": "m"
                 },
-                "extent3d": {
+                "extent": {
                   "$ref": "https://beta.schemas.opengis.net/json-fg/geometry-objects.json#/$defs/Polyhedron"
                 },
                 "belongsTo": {
@@ -92,7 +92,7 @@
                 }
               },
               "required": [
-                "extent3d",
+                "extent",
                 "type"
               ]
             }
@@ -133,9 +133,6 @@
         {
           "type": "object",
           "properties": {
-            "geometry": {
-              "$ref": "https://geojson.org/schema/Polygon.json"
-            },
             "properties": {
               "type": "object",
               "properties": {

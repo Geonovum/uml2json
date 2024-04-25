@@ -484,9 +484,6 @@ image::figures/basic_types_example.png[align="center"]
         }
       ]
     },
-    "MyBoolean": {
-      "type": "boolean"
-    },
     "MyCharacterString": {
       "type": "string"
     },
@@ -817,7 +814,7 @@ The concept is generally applicable to feature types. Examples of data formats t
 
 In order to identify the UML property that represents the primary geometry of a feature type, the following approach is used in this specification: 
 
-* If a (direct or inherited, but ignoring redefined) UML property of the feature type has tag "primaryGeometry" with value equal to and ignoring case "true", then that property is the primary geometry of the feature type.
+* If a single (direct or inherited, but ignoring redefined) UML property of the feature type has tag "primaryGeometry" with value equal to and ignoring case "true", then that property is the primary geometry of the feature type.
 * Otherwise, if the set of (direct and inherited, but ignoring redefined) UML properties of the feature type only contains a single UML property with a geometric type, and that property is directly owned by the feature type, and that property does not have tag "primaryGeometry" with value equal to, ignoring case, "false", then that property is the primary geometry of the feature type.
 * Otherwise, no primary geometry is defined for the feature type.
 
@@ -1138,7 +1135,7 @@ NOTE: UML properties of other kinds of classes - object types, data types, and u
 
 [[img_req_jsonfg_primary_place_example]]
 .Example of a feature type with an attribute designated as primary place
-image::figures/example_primary_place.png[align="center"]
+image::figures/example_primary_geometry_2.png[align="center"]
 
 [[example_req_jsonfg_primary_place]]
 .Example for encoding a feature type with primary place
@@ -1157,7 +1154,14 @@ image::figures/example_primary_place.png[align="center"]
           "type": "object",
           "properties": {
             "place": {
-              "$ref": "https://beta.schemas.opengis.net/json-fg/geometry-objects.json#/$defs/Polyhedron.json"
+              "oneOf": [
+                {
+                  "type": "null"
+                },
+                {
+                  "$ref": "https://beta.schemas.opengis.net/json-fg/geometry-objects.json#/$defs/Polyhedron"
+                }
+              ]
             }
           }
         }
@@ -1193,12 +1197,7 @@ image::figures/example_primary_instant.png[align="center"]
           "$ref": "https://beta.schemas.opengis.net/json-fg/feature.json"
         },
         {
-          "type": "object",
-          "properties": {
-            "geometry": {
-              "$ref": "https://beta.schemas.opengis.net/json-fg/geometry-objects.json#/$defs/Polygon.json"
-            }
-          }
+          "type": "object"
         }
       ]
     }

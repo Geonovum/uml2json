@@ -5,7 +5,7 @@
 :docsubtype: encoding
 :status: draft
 :docstage: draft
-//:draft: 0.1
+//:draft: 0.2
 :edition: 1.0
 :keywords: ogcdoc, OGC document, UML, JSON, JSON Schema, encoding, GeoJSON, JSON-FG
 :committee: technical

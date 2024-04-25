@@ -5,4 +5,5 @@
 |===
 |Date |Release |Editor | Primary clauses modified |Description
 |2022-12-13 |0.1 |Johannes Echterhoff |all |initial version for internal review
+|2024-04-25 |0.2 |Johannes Echterhoff |all |solving a number of issues
 |===

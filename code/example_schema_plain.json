@@ -69,7 +69,7 @@
               "type": "number",
               "unit": "m"
             },
-            "extent3d": {
+            "extent": {
               "$ref": "https://beta.schemas.opengis.net/json-fg/geometry-objects.json#/$defs/Polyhedron"
             },
             "belongsTo": {
@@ -81,7 +81,7 @@
             }
           },
           "required": [
-            "extent3d",
+            "extent",
             "type"
           ]
         }
@@ -116,14 +116,10 @@
           "type": "string",
           "format": "date",
           "pattern": "^\\d{4}-\\d{2}-\\d{2}$"
-        },
-        "extent": {
-          "$ref": "https://geojson.org/schema/Polygon.json"
         }
       },
       "required": [
-        "dateOfConstruction",
-        "extent"
+        "dateOfConstruction"
       ]
     },
     "Parcel": {
