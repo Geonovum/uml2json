@@ -820,6 +820,8 @@ In order to identify the UML property that represents the primary geometry of a 
 
 NOTE: A feature type that has multiple UML properties with tag "primaryGeometry" = true is not modeled correctly.
 
+NOTE: Setting tagged value "primaryGeometry" = false can be useful in cases of geometric properties of classes that are (expected to be) subtyped, with the subtypes defining their own primary geometry properties. If the supertype had a geometric property without such a tagged value, the second part of the rule (for determining the primary geometry) would apply, thereby incorrectly identifying the supertype property as primary geometry. That can lead to undesired JSON Schema constraints. 
+
 
 [[jsonschema_req_core_primary_tempinfo]]
 ==== Primary temporal information
@@ -830,6 +832,7 @@ NOTE: A feature type that has multiple UML properties with tag "primaryGeometry"
 ____
 
 *primary temporal information*
+
 the time instant or time interval that the publisher considers as the most important temporal characteristic of a *feature*
 
 NOTE: A feature can be described by multiple temporal properties. For example, an event can have a property with an instant or interval when the event occurred or will occur and another property when the event was recorded in the dataset. The primary temporal information can also be built from two properties, e.g., when the feature has two properties describing the start and end instants of an interval. 
