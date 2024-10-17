@@ -28,11 +28,6 @@ Within the OGC, the https://www.ogc.org/projects/initiatives/ugas-2020[UML-to-GM
 
 This document is based on and extends the results of UGAS-2020 regarding JSON Schema encoding rules. It defines the conversion behavior in an implementation agnostic way, adhering to the requirements defined in <<ref_modspec>> for writing OGC standards. This document thus represents the next step on the way to standardizing JSON Schema encoding rules in the geospatial domain.
 
-////
-*Geonovum Declaration*
-////
-
-*IMPORTANT* This working document is developed and maintained by Geonovum. It is intended for presentation to OGC later on, and will potentially be put forward into the OGC process.
 
 ////
 *OGC Declaration*
