@@ -18,7 +18,7 @@
 :fullname_2: Clemens Portele
 :role_2: contributor
 :affiliation_2: interactive instruments GmbH
-:docnumber: YY-999
+:docnumber: 24-017r1
 :received-date: 2029-03-30
 :issued-date: 2029-03-30
 :published-date: 2029-03-30
