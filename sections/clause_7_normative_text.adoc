@@ -1109,13 +1109,13 @@ include::../requirements/jsonfg/REQ002.adoc[]
 [width="90%",options="header"]
 |===
 | UML class | JSON Schema reference
-|GM_Point |https://beta.schemas.opengis.net/json-fg/geometry-objects.json#/$defs/Point.json
+|GM_Point |https://beta.schemas.opengis.net/json-fg/geometry-objects.json#/$defs/Point
 |GM_Curve |https://beta.schemas.opengis.net/json-fg/geometry-objects.json#/$defs/LineString
-|GM_Surface |https://beta.schemas.opengis.net/json-fg/geometry-objects.json#/$defs/Polygon.json
+|GM_Surface |https://beta.schemas.opengis.net/json-fg/geometry-objects.json#/$defs/Polygon
 |GM_Solid |https://beta.schemas.opengis.net/json-fg/geometry-objects.json#/$defs/Polyhedron
-|GM_MultiPoint |https://beta.schemas.opengis.net/json-fg/geometry-objects.json#/$defs/MultiPoint.json
-|GM_MultiCurve |https://beta.schemas.opengis.net/json-fg/geometry-objects.json#/$defs/MultiLineString.json
-|GM_MultiSurface |https://beta.schemas.opengis.net/json-fg/geometry-objects.json#/$defs/MultiPolygon.json
+|GM_MultiPoint |https://beta.schemas.opengis.net/json-fg/geometry-objects.json#/$defs/MultiPoint
+|GM_MultiCurve |https://beta.schemas.opengis.net/json-fg/geometry-objects.json#/$defs/MultiLineString
+|GM_MultiSurface |https://beta.schemas.opengis.net/json-fg/geometry-objects.json#/$defs/MultiPolygon
 |GM_MultiSolid |https://beta.schemas.opengis.net/json-fg/geometry-objects.json#/$defs/MultiPolyhedron
 |GM_Aggregate |https://beta.schemas.opengis.net/json-fg/geometry-objects.json#/$defs/GeometryCollection
 |GM_Object |https://beta.schemas.opengis.net/json-fg/geometry.json
@@ -1124,7 +1124,7 @@ include::../requirements/jsonfg/REQ002.adoc[]
 
 NOTE: <<table_iso19107_types_place_member>> uses geometry types defined by <<ref_iso19107>>. While this specification does not define mapping tables for newer versions of ISO 19107, application schemas may use geometry types from a newer version of ISO 19107. The mappings would then need to be adjusted accordingly (finding correct replacements for the types mentioned in the first column of the table).
 
-NOTE: For geometry typed properties that are not mapped to the "geometry" top-level member, a suitable mapping needs to be defined, as explained in <<jsonschema_req_core_external_types>>.
+NOTE: For geometry typed properties that are not mapped to the "place" top-level member, a suitable mapping needs to be defined, as explained in <<jsonschema_req_core_external_types>>.
 
 
 [[jsonschema_req_jsonfg_primary_geometry]]
