@@ -141,7 +141,7 @@ Descriptive information of application schema elements (packages, classes, attri
 
 [NOTE]
 ======
-_Annotations_ represent one category of JSON Schema keywords (for further details, see https://tools.ietf.org/html/draft-handrews-json-schema-02#section-7[JSON Schema core, section 7]). _Annotations_ attach information that applications can use as they see fit. The other categories are _assertions_, which validate that a JSON instance satsifies constraints, and _applicators_, which apply subschemas to parts of the instance and combine their results.
+_Annotations_ represent one category of JSON Schema keywords (for further details, see https://tools.ietf.org/html/draft-handrews-json-schema-02#section-7[JSON Schema core, section 7]). _Annotations_ attach information that applications can use as they see fit. The other categories are _assertions_, which validate that a JSON instance satisfies constraints, and _applicators_, which apply subschemas to parts of the instance and combine their results.
 
 ======
 
@@ -763,7 +763,7 @@ include::../code/example_initialvalue.json[]
 [[jsonschema_req_core_associationclass]]
 ==== Association class
 
-Standard UML supports the concept of association class, i.e., an association that has properties. There is no native represention for association classes in JSON or JSON Schema. Association classes therefore need to be converted to "intermediate" classes, before being serialized to JSON Schema. The conversion is illustrated in the following figures, with <<img_req_core_association_classes_original>> showing the original conceptual model, and <<img_req_core_association_classes_transformed>> showing the conversion result.
+Standard UML supports the concept of association class, i.e., an association that has properties. There is no native representation for association classes in JSON or JSON Schema. Association classes therefore need to be converted to "intermediate" classes, before being serialized to JSON Schema. The conversion is illustrated in the following figures, with <<img_req_core_association_classes_original>> showing the original conceptual model, and <<img_req_core_association_classes_transformed>> showing the conversion result.
 
 [[img_req_core_association_classes_original]]
 .Model with association classes

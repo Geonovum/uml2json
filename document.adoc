@@ -3,7 +3,7 @@
 :abbrev: uml-to-json-encoding
 :doctype: best-practice
 :docsubtype: encoding
-:status: draft
+:status: approved
 :docstage: draft
 //:draft: 0.2
 :edition: 1.0
@@ -19,9 +19,9 @@
 :role_2: contributor
 :affiliation_2: interactive instruments GmbH
 :docnumber: 24-017r1
-:received-date: 2029-03-30
-:issued-date: 2029-03-30
-:published-date: 2029-03-30
+:received-date: 2024-10-21
+:issued-date: 2025-03-24
+:published-date: YYYY-MM-DD
 :mn-document-class: ogc
 :mn-output-extensions: xml,html,doc,pdf
 :modspec-identifier-base: http://www.opengis.net/spec/uml2json/1.0
