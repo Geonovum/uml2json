@@ -1,6 +1,6 @@
 {
   "$schema": "https://json-schema.org/draft/2020-12/schema",
-  "$id": "https://register.geostandaarden.nl/jsonschema/uml2json/0.1/schema_definitions.json",
+  "$id": "https://bp.schemas.opengis.net/24-017r1/uml2json/1.0/schema_definitions.json",
   "$defs": {
     "LinkObject": {
       "$anchor": "LinkObject",
